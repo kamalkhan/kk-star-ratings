@@ -517,7 +517,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 			</div>
 			<!-- kk-star-ratings -->
 			';
-			$markup .= parent::get_options('kksr_clear') ? '<br clear="both" />' : '';
+			$markup .= parent::get_options('kksr_clear') ? '<div class="clearfix"></div>' : '';
 			return $markup;
 		}
 		public function manual($atts)
