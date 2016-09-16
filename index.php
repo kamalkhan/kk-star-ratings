@@ -729,10 +729,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
     // For use in themes
 	if(!function_exists('kk_star_ratings'))
 	{
-		function kk_star_ratings($pid=false)
+		function kk_star_ratings($pid=false, $disable_voting=false, $disable_texts=false)
 		{
 			global $kkStarRatings_obj;
-			return $kkStarRatings_obj->kk_star_rating($pid);
+			return $kkStarRatings_obj->kk_star_rating($pid, $disable_voting, $disable_texts);
 		}
 	}
 	if(!function_exists('kk_star_ratings_get'))
