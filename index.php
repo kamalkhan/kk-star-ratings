@@ -473,7 +473,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 			$Intersection = array_intersect($Cat_ids, $Post_cat_ids);
 			return count($Intersection);
 		}
-		public function markup($id=false)
+		public function markup($id=false, $disable_voting=false, $disable_texts=false)
 		{
 			$id = !$id ? get_the_ID() : $id;
 			if($this->exclude_cat($id))
@@ -491,6 +491,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 					$disabled = parent::get_options('kksr_unique') ? true : false;
 				}
 			}
+			if($disable_voting){
+				$disabled = true;
+			}
+
 			$pos = parent::get_options('kksr_position');
 
 			$markup = '
@@ -504,16 +508,21 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 				$markup .= '<a href="#'.$ts.'"></a>';
 			}
 			$markup .='
-			    </div>
+			    </div>';
+
+			if(!$disable_texts) {
+				$markup .= '
 			    <!-- kksr-stars -->
 			    <div class="kksr-legend">';
-			if(parent::get_options('kksr_grs'))
-			{
-				$markup .= apply_filters('kksr_legend', parent::get_options('kksr_legend'), $id);
-			}
-			$markup .=
-			    '</div>
+				if (parent::get_options('kksr_grs')) {
+					$markup .= apply_filters('kksr_legend', parent::get_options('kksr_legend'), $id);
+				}
+				$markup .=
+					'</div>
 			    <!-- kksr-legend -->
+			    ';
+			}
+			$markup .'
 			</div>
 			<!-- kk-star-ratings -->
 			';
@@ -564,10 +573,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 			endif;
 			return $content;
 		}
-		public function kk_star_rating($pid=false)
+		public function kk_star_rating($pid=false, $disable_voting=false, $disable_texts=false)
 		{
 		    if(parent::get_options('kksr_enable'))
-				return $this->markup($pid);
+				return $this->markup($pid, $disable_voting, $disable_texts);
 			return '';
 		}
 		public function kk_star_ratings_get($total=5, $cat=false)
@@ -720,10 +729,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
     // For use in themes
 	if(!function_exists('kk_star_ratings'))
 	{
-		function kk_star_ratings($pid=false)
+		function kk_star_ratings($pid=false, $disable_voting=false, $disable_texts=false)
 		{
 			global $kkStarRatings_obj;
-			return $kkStarRatings_obj->kk_star_rating($pid);
+			return $kkStarRatings_obj->kk_star_rating($pid, $disable_voting, $disable_texts);
 		}
 	}
 	if(!function_exists('kk_star_ratings_get'))
