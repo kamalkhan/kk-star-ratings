@@ -657,20 +657,19 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 					$avg = $score ? round((float)(($score/$votes)*($best/5)), 2) : 0;
 					$per = $score ? round((float)((($score/$votes)/5)*100), 2) : 0;
 
-					$leg = str_replace('[total]', '<span property="ratingCount">'.$votes.'</span>', $legend);
-					$leg = str_replace('[avg]', '<span property="ratingValue">'.$avg.'</span>', $leg);
+					$leg = str_replace('[total]', '<span itemprop="ratingCount">'.$votes.'</span>', $legend);
+					$leg = str_replace('[avg]', '<span itemprop="ratingValue">'.$avg.'</span>', $leg);
 					$leg = str_replace('[per]',  $per .'%', $leg);
 					$leg = str_replace('[s]', $votes == 1 ? '' : 's', $leg);
 
-					$snippet = '<div vocab="http://schema.org/" typeof="Blog">';
-					$snippet .= '    <div property="name" class="kksr-title">' . $title . '</div>';
-					$snippet .= '    <div property="aggregateRating" typeof="AggregateRating">';
-					$snippet .=              $leg;
-					$snippet .= '            <meta property="bestRating" content="'. $best . '"/>';
-					$snippet .= '            <meta property="worstRating" content="1"/>';
-					$snippet .= '    </div>';
+					$snippet = '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">';
+					$snippet .= '    <div itemprop="name" class="kksr-title">' . $title . '</div>';
+					$snippet .=      $leg;
+					$snippet .= '    <meta itemprop="bestRating" content="'. $best . '"/>';
+					$snippet .= '    <meta itemprop="worstRating" content="1"/>';
 					$snippet .= '</div>';
-				}
+
+                }
 				else
 				{
 					$snippet = parent::get_options('kksr_init_msg');
