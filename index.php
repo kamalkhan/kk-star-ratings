@@ -666,7 +666,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 					$snippet .= '    <div itemprop="name" class="kksr-title">' . $title . '</div>';
 					$snippet .=      $leg;
 					$snippet .= '    <meta itemprop="bestRating" content="'. $best . '"/>';
-					$snippet .= '    <meta itemprop="worstRating" content="1"/>';
+					$snippet .= '    <meta itemprop="worstRating" content="1"/>'; 
 					$snippet .= '</div>';
 				}
 				else
