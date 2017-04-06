@@ -602,9 +602,9 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
 				{
 					$_avg = get_post_meta($id, '_kksr_avg', true);
 					$avg = '<strong>'.($_avg?((number_format((float)($_avg*($total_stars/5)), 2, '.', '')).'/'.$total_stars):'0').'</strong>';
-					$cast = (get_post_meta($id, '_kksr_casts', true)?get_post_meta($id, '_kksr_casts', true):'0').' votes';
+					$cast = (get_post_meta($id, '_kksr_casts', true)?get_post_meta($id, '_kksr_casts', true):'0');
 					$per = ($raw>0?ceil((($raw/$cast)/5)*100):0).'%';
-					$row = $avg . ' (' . $per . ') ' . $cast;
+					$row = $avg . ' (' . $per . ') ' . $cast . ' votes';
 				}
 				switch($Columns)
 				{
