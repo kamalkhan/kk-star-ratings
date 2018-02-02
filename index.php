@@ -446,8 +446,8 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             {
                 $nratings = $ratings + ($stars/($total_stars/5));
                 $ncasts = $casts + ($stars>0);
-                $avg = $nratings ? number_format((float)($nratings/$ncasts), 2, '.', '') : 0;
-                $per = $nratings ? number_format((float)((($nratings/$ncasts)/5)*100), 2, '.', '') : 0;
+                $avg = $nratings && $ncasts ? number_format((float)($nratings/$ncasts), 2, '.', '') : 0;
+                $per = $nratings && $ncasts ? number_format((float)((($nratings/$ncasts)/5)*100), 2, '.', '') : 0;
                 $Response[$pid]['disable'] = 'false';
                 if($stars)
                 {
