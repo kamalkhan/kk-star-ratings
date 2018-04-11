@@ -1,28 +1,17 @@
 === kk Star Ratings ===
-
-
 Contributors: bhittani
-
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CM659D9SHGKE6
-
 Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets
-
 Requires at least: 3.0
-
-Tested up to: 4.8
-
-Stable tag: 2.6
-
+Requires PHP: 5.2.4
+Tested up to: 4.9.5
+Stable tag: 2.6.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 kk Star Ratings allows blog visitors to involve and interact more effectively with your website by rating posts.
 
-
-
 == Description ==
-
-
-
-
 kk Star Ratings has been renewed from the ground up in version 2.0.
 
 This plugin displays a user defined amount of star ratings in your posts/pages.
@@ -63,18 +52,11 @@ Enhanced settings page where you can adjust quite anything you may need to. You 
 
 1. Reset the ratings for individual posts or the entire site.
 
-
-
-
 == Installation ==
-
-
 
 1. Upload the folder 'kk-star-ratings' found inside the zip to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Adjust the settings under kk Star Ratings tab in wp-admin.
-
-
 
 == Frequently Asked Questions ==
 =
@@ -109,11 +91,7 @@ I need some help or have some issues?
 
 Visit the help tab in the settings to find out what you can do.
 
-
-
 == Screenshots ==
-
-
 
 1. The general settings page
 
@@ -146,6 +124,10 @@ Visit the help tab in the settings to find out what you can do.
 
 
 == Changelog ==
+
+= 2.6.1 =
+* Fix: Possible division by zero.
+* Update: Bump wp version compatibility to 4.9.5.
 
 = 2.6 =
 * Fix: Parse legend correctly when not using google rich snippets.
