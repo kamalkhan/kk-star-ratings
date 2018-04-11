@@ -4,7 +4,7 @@
 Plugin Name: kk Star Ratings
 Plugin URI: https://github.com/kamalkhan/kk-star-ratings
 Description: Renewed from the ground up(as of v2.0), clean, animated and light weight ratings feature for your blog. With kk Star Ratings, you can <strong>allow your blog posts to be rated by your blog visitors</strong>. It also includes a <strong>widget</strong> which you can add to your sidebar to show the top rated post. Wait! There is more to it. Enjoy the extensive options you can set to customize this plugin.
-Version: 2.6
+Version: 2.6.1
 Author: Kamal Khan
 Author URI: http://bhittani.com
 License: GPLv2 or later
@@ -722,7 +722,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
         }
     }
 
-    $kkStarRatings_obj = new BhittaniPlugin_kkStarRatings('bhittani_plugin_kksr', 'kk Star Ratings', '2.5.1');
+    $kkStarRatings_obj = new BhittaniPlugin_kkStarRatings('bhittani_plugin_kksr', 'kk Star Ratings', '2.6.1');
 
     // Setup
     register_activation_hook(__FILE__, array($kkStarRatings_obj, 'activate'));
