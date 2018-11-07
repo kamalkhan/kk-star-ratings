@@ -68,6 +68,39 @@ if(!class_exists('BhittaniPlugin')) :
 		{
 			delete_option($key);
 		}
+
+		/**
+		 * Encode a variable into JSON.
+		 *
+		 * @param mixed $data    Variable (usually an array or object) to encode as JSON.
+		 * @param int   $options Optional. Default 0.
+		 * @param int   $depth   Optional. Default 512.
+		 *
+		 * @return string|false The JSON encoded string, or false if it cannot be encoded.
+		 */
+		protected function json_encode( $data, $options = 0, $depth = 512 ) {
+			return function_exists( 'wp_json_encode' )
+				? wp_json_encode( $data, $options, $depth )
+				: json_encode( $data, $options, $depth );
+		}
+
+		/**
+		 * Adds extra code to a registered script.
+		 *
+		 * @param string $handle   Name of the script to add the inline script to.
+		 * @param string $data     String containing the javascript to be added.
+		 *
+		 * @return bool True on success, false on failure.
+		 */
+		protected function add_inline_script( $handle, $data ) {
+			if ( ! function_exists( 'wp_add_inline_script' ) ) {
+				echo '<script type="text/javascript">' . $data . '</script>';
+				return true;
+			}
+
+			return wp_add_inline_script( $handle, $data, 'before' );
+		}
+
 		/** function/method
 		* Usage: helper for hooking js scripts
 		* Arg(6): slug (string), file (string), version (string)[optional, default: '0.1'], prerequisite (bool|array)[optional, default: false], parameters (bool|array)[optional, default: array('ajax')]
@@ -75,18 +108,20 @@ if(!class_exists('BhittaniPlugin')) :
 		*/
 		protected function enqueue_js($slug, $file, $ver = false, $prerequisite=false, $params=false, $footer = false, $json = false)
 		{
+			$handle = $this->id.($slug?('_'.$slug):'');
+			wp_register_script($handle, $file, is_array($prerequisite)?$prerequisite:array('jquery'), $ver ? $ver : $this->ver, $footer);
+
 			if(is_array($params) && $json)
 			{
-				?>
-				<script type="text/javascript">
-					var <?php echo str_replace('-','_',$this->id).'_'.$slug; ?> = <?php echo json_encode( $params ); ?>;
-				</script>
-				<?php
+				$this->add_inline_script(
+					$handle,
+					sprintf( "\tvar %s = %s;", str_replace('-','_',$handle), $this->json_encode( $params ) )
+				);
 			}	
-			wp_enqueue_script($this->id.($slug?('_'.$slug):''), $file, is_array($prerequisite)?$prerequisite:array('jquery'), $ver ? $ver : $this->ver, $footer);
+			wp_enqueue_script( $handle );
 			
 			if(is_array($params) && !$json) 
-				wp_localize_script($this->id.($slug?('_'.$slug):''), str_replace('-','_',$this->id).'_'.$slug, $params);
+				wp_localize_script($handle, str_replace('-','_',$handle), $params);
 		}
 		/** function/method
 		* Usage: helper for hooking css scripts
