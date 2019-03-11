@@ -701,7 +701,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
         }
         public function grs_legend($legend, $id, $best, $score, $votes, $avg, $per)
         {
-            if(!parent::get_options('kksr_grs'))
+            if(!parent::get_options('kksr_grs') || !$score)
             {
                 return $legend;
             }
