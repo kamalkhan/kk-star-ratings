@@ -1,10 +1,10 @@
 === kk Star Ratings ===
 Contributors: bhittani
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CM659D9SHGKE6
+Donate link: https://github.com/kamalkhan/kk-star-ratings
 Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets
 Requires at least: 3.0
 Requires PHP: 5.2.4
-Tested up to: 4.9.5
+Tested up to: 5.1
 Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

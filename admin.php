@@ -1,22 +1,6 @@
 <div class="bhittani-framework">
     <?php if(isset($sidebar)) : ?>
 	<div class="bf-wrap-small _right">
-
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CM659D9SHGKE6" target="_blank"
-            style="background-color: #B24747;
-            border: 1px solid #883232;
-            border-radius: 3px;
-            color: #fff;
-            padding: .75em;
-            display: block;
-            width: 140px;
-            text-align: center;
-            font-size: 14px;">
-            Donate to this plugin
-        </a>
-
-        <br>
-
         <!-- Place this tag where you want the button to render. -->
         <a class="github-button" href="https://github.com/kamalkhan/kk-star-ratings" data-icon="octicon-star" data-style="mega" data-count-href="/kamalkhan/kk-star-ratings/stargazers" data-count-api="/repos/kamalkhan/kk-star-ratings#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star kamalkhan/kk-star-ratings on GitHub">
             kk Star Ratings
@@ -26,24 +10,8 @@
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
         <a href="http://bit.ly/awesome-live-chat" title="Awesome Live Chat" target="_blank">
-            <img alt="Awesome Live Chat - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:9931156,&quot;name&quot;:&quot;Awesome Live Chat&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/wordpress&quot;,&quot;position&quot;:5,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="WordPress" data-item-cost="25" data-item-id="9931156" data-item-name="Awesome Live Chat" data-preview-height="" data-preview-url="https://preview-cc.s3.envato.com/files/116826712/jumbotron.jpg" data-preview-width="" height="80" src="https://thumb-cc.s3.envato.com/files/116826711/thumbnail.jpg" title="" width="80" data-tooltip="Awesome Live Chat">
+            <img alt="Awesome Live Chat - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:9931156,&quot;name&quot;:&quot;Awesome Live Chat&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/wordpress&quot;,&quot;position&quot;:5,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="WordPress" data-item-cost="25" data-item-id="9931156" data-item-name="Awesome Live Chat" data-preview-height="" data-preview-url="https://previews-codecanyon.imgix.net/files/248803484/jumbotron.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=9c2351b764d8c9a4f65796908b480b35" data-preview-width="" height="80" src="https://s3.envato.com/files/248803483/thumbnail.jpg" title="" width="80" data-tooltip="Awesome Live Chat">
         </a>
-        <a href="http://bit.ly/awesome-live-chat-os-x" title="Awesome Live Chat Desk OS X" target="_blank">
-            <img alt="Awesome Live Chat Desk OS X - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:10106623,&quot;name&quot;:&quot;Awesome Live Chat Desk OS X&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/apps/mac&quot;,&quot;position&quot;:3,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="Apps / Mac" data-item-cost="10" data-item-id="10106623" data-item-name="Awesome Live Chat Desk OS X" data-preview-height="" data-preview-url="https://preview-cc.s3.envato.com/files/118693278/jumbotron-osx.png" data-preview-width="" height="80" src="https://thumb-cc.s3.envato.com/files/118693274/thumbnail.png" title="" width="80" data-tooltip="Awesome Live Chat Desk OS X">
-        </a>
-        <a href="http://bit.ly/awesome-live-chat-pc" title="Awesome Live Chat Desk PC" target="_blank">
-            <img alt="Awesome Live Chat Desk PC - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:10398931,&quot;name&quot;:&quot;Awesome Live Chat Desk PC&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/apps/windows&quot;,&quot;position&quot;:2,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="Apps / Windows" data-item-cost="11" data-item-id="10398931" data-item-name="Awesome Live Chat Desk PC" data-preview-height="" data-preview-url="https://preview-cc.s3.envato.com/files/122225936/jumbotron-pc.png" data-preview-width="" height="80" src="https://thumb-cc.s3.envato.com/files/122225933/thumbnail.png" title="" width="80" data-tooltip="Awesome Live Chat Desk PC">
-        </a>
-        <a href="http://bit.ly/awesome-live-chat-desk-linux" title="Awesome Live Chat Desk Linux" target="_blank">
-            <img alt="Awesome Live Chat Desk Linux - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:11996346,&quot;name&quot;:&quot;Awesome Live Chat Desk Linux&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/html5/miscellaneous&quot;,&quot;position&quot;:1,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="HTML5 / Miscellaneous" data-item-cost="11" data-item-id="11996346" data-item-name="Awesome Live Chat Desk Linux" data-preview-height="" data-preview-url="https://preview-cc.s3.envato.com/files/140022646/jumbotron-linux.png" data-preview-width="" height="80" src="https://thumb-cc.s3.envato.com/files/140022645/thumbnail.png" title="" width="80" data-tooltip="Awesome Live Chat Desk Linux">
-        </a>
-        <?php
-        /*
-        <a href="http://bit.ly/awesome-live-chat-server" title="Awesome Live Chat Server" target="_blank">
-            <img alt="Awesome Live Chat Server - CodeCanyon Item for Sale" border="0" class="landscape-image-magnifier preload no_preview" data-google-analytics-payload="{&quot;id&quot;:10010235,&quot;name&quot;:&quot;Awesome Live Chat Server&quot;,&quot;brand&quot;:&quot;KamalKhan&quot;,&quot;category&quot;:&quot;codecanyon.net/category/javascript/miscellaneous&quot;,&quot;position&quot;:4,&quot;list&quot;:&quot;Author portfolio&quot;}" data-item-author="KamalKhan" data-item-category="JavaScript / Miscellaneous" data-item-cost="14" data-item-id="10010235" data-item-name="Awesome Live Chat Server" data-preview-height="" data-preview-url="https://preview-cc.s3.envato.com/files/117666866/jumbotron.png" data-preview-width="" height="80" src="https://thumb-cc.s3.envato.com/files/117666864/thumbnail.png" title="" width="80" data-tooltip="Awesome Live Chat Server">
-        </a>
-        */
-        ?>
     </div>
     <!-- bf-wrap-small -->
     <?php endif; ?>
