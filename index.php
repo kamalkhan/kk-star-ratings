@@ -214,7 +214,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
                 $Options['kksr_js_fuelspeed'] = 400;
                 $Options['kksr_js_thankyou'] = 'Thank you for your vote';
                 $Options['kksr_js_error'] = 'An error occurred';
-                $Options['kksr_tooltip'] = 1;
+                $Options['kksr_tooltip'] = 0;
                 $Opt_tooltips = array();
                 $Opt_tooltips[0]['color'] = 'red';
                 $Opt_tooltips[0]['tip'] = 'Poor';
