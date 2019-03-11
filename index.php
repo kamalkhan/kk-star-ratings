@@ -419,6 +419,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             header('Content-type: application/json; charset=utf-8');
             check_ajax_referer($this->id);
 
+            if (empty($_POST['id'])) {
+                die();
+            }
+
             $Response = array();
 
             $total_stars = is_numeric(parent::get_options('kksr_stars')) ? parent::get_options('kksr_stars') : 5;
