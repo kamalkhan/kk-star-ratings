@@ -426,7 +426,8 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             $stars = is_numeric($_POST['stars']) && ((int)$_POST['stars']>0) && ((int)$_POST['stars']<=$total_stars)
                     ? $_POST['stars']:
                     0;
-            $ip = $_SERVER['REMOTE_ADDR'];
+            // GDPR: Create SHA256 hash of ip address before storing it
+            $ip = hash('sha256', $_SERVER['REMOTE_ADDR']);
 
             $Ids = explode(',', $_POST['id']);
 
@@ -512,7 +513,8 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             if(get_post_meta($id, '_kksr_ips', true))
             {
                 $Ips = unserialize(base64_decode(get_post_meta($id, '_kksr_ips', true)));
-                $ip = $_SERVER['REMOTE_ADDR'];
+                // GDPR: Create SHA256 hash of ip address before storing it
+                $ip = hash('sha256', $_SERVER['REMOTE_ADDR']);
                 if(in_array($ip, $Ips))
                 {
                     $disabled = parent::get_options('kksr_unique') ? true : false;
