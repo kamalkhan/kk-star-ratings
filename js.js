@@ -62,38 +62,65 @@
 	{
 		if(!obj.hasClass('disabled'))
 		{
-			var legend = $('.kksr-legend', obj).html(),
-				fuel = $('.kksr-fuel', obj).css('width');
-			$('.kksr-stars a', obj).hover( function(){
-				var stars = $(this).attr('href').split('#')[1];
-				if($.fn.kkstarratings.options.tooltip!=0)
-				{
-					if($.fn.kkstarratings.options.tooltips[stars-1]!=null)
-					{
-						$('.kksr-legend', obj).html('<span style="color:'+$.fn.kkstarratings.options.tooltips[stars-1].color+'">'+$.fn.kkstarratings.options.tooltips[stars-1].tip+'</span>');
-					}
-					else
-					{
-						$('.kksr-legend', obj).html(legend);
-					}
+			// Disable hover() on mobile, otherwise the first click event is captured by hover() and a user has to click a second time to rate.
+			var isMobile = {
+				Android: function() {
+					return navigator.userAgent.match(/Android/i);
+				},
+				BlackBerry: function() {
+					return navigator.userAgent.match(/BlackBerry/i);
+				},
+				iOS: function() {
+					return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				},
+				Opera: function() {
+					return navigator.userAgent.match(/Opera Mini/i);
+				},
+				Windows: function() {
+					return navigator.userAgent.match(/IEMobile/i);
+				},
+				any: function() {
+						return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 				}
-				$('.kksr-fuel', obj).stop(true,true).css('width', '0%');
-				$('.kksr-stars a', obj).each(function(index, element) {
-					var a = $(this),
-						s = a.attr('href').split('#')[1];
-					if(parseInt(s)<=parseInt(stars))
+			};
+			if (!isMobile.any()) {
+				var legend = $('.kksr-legend', obj).html(),
+					fuel = $('.kksr-fuel', obj).css('width');
+				$('.kksr-stars a', obj).hover( function(){
+					var stars = $(this).attr('href').split('#')[1];
+					if($.fn.kkstarratings.options.tooltip!=0)
 					{
-						$('.kksr-stars a', obj).stop(true, true);
-						a.hide().addClass('kksr-star').addClass('orange').fadeIn('fast');
+						if($.fn.kkstarratings.options.tooltips[stars-1]!=null)
+						{
+							$('.kksr-legend', obj).html('<span style="color:'+$.fn.kkstarratings.options.tooltips[stars-1].color+'">'+$.fn.kkstarratings.options.tooltips[stars-1].tip+'</span>');
+						}
+						else
+						{
+							$('.kksr-legend', obj).html(legend);
+						}
 					}
+					$('.kksr-fuel', obj).stop(true,true).css('width', '0%');
+					$('.kksr-stars a', obj).each(function(index, element) {
+						var a = $(this),
+							s = a.attr('href').split('#')[1];
+						if(parseInt(s)<=parseInt(stars))
+						{
+							$('.kksr-stars a', obj).stop(true, true);
+							a.hide().addClass('kksr-star').addClass('orange').fadeIn('fast');
+						}
+					});
+				}, function(){
+					$('.kksr-stars a', obj).removeClass('kksr-star').removeClass('orange');
+					if($.fn.kkstarratings.options.tooltip!=0) $('.kksr-legend', obj).html(legend);
+					$('.kksr-fuel', obj).stop(true,true).animate({'width':fuel}, $.fn.kkstarratings.options.fuelspeed);
+				}).unbind('click').click( function(){
+					return $.fn.kkstarratings.click(obj, $(this).attr('href').split('#')[1]);
 				});
-			}, function(){
-				$('.kksr-stars a', obj).removeClass('kksr-star').removeClass('orange');
-				if($.fn.kkstarratings.options.tooltip!=0) $('.kksr-legend', obj).html(legend);
-				$('.kksr-fuel', obj).stop(true,true).animate({'width':fuel}, $.fn.kkstarratings.options.fuelspeed);
-			}).unbind('click').click( function(){
-				return $.fn.kkstarratings.click(obj, $(this).attr('href').split('#')[1]);
-			});
+			} else {
+				$('.kksr-stars a', obj).unbind('click').click( function(){
+					return $.fn.kkstarratings.click(obj, $(this).attr('href').split('#')[1]);
+				});
+			}
 		}
 		else
 		{
