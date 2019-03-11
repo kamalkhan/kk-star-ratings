@@ -62,6 +62,28 @@
 	{
 		if(!obj.hasClass('disabled'))
 		{
+			// Disable hover() on mobile, otherwise the first click event is captured by hover() and a user has to click a second time to rate.
+			var isMobile = {
+				Android: function() {
+					return navigator.userAgent.match(/Android/i);
+				},
+				BlackBerry: function() {
+					return navigator.userAgent.match(/BlackBerry/i);
+				},
+				iOS: function() {
+					return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				},
+				Opera: function() {
+					return navigator.userAgent.match(/Opera Mini/i);
+				},
+				Windows: function() {
+					return navigator.userAgent.match(/IEMobile/i);
+				},
+				any: function() {
+						return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+				}
+			};
+			if (!isMobile.any()) {
 			var legend = $('.kksr-legend', obj).html(),
 				fuel = $('.kksr-fuel', obj).css('width');
 			$('.kksr-stars a', obj).hover( function(){
@@ -94,6 +116,11 @@
 			}).unbind('click').click( function(){
 				return $.fn.kkstarratings.click(obj, $(this).attr('href').split('#')[1]);
 			});
+			} else {
+			$('.kksr-stars a', obj).unbind('click').click( function(){
+				return $.fn.kkstarratings.click(obj, $(this).attr('href').split('#')[1]);
+			});
+			}
 		}
 		else
 		{
