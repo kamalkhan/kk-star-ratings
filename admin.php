@@ -168,6 +168,12 @@
 				'field' => 'kksr_legend',
 				'value' => get_option('kksr_legend')
 			));
+      BhittaniPlugin_AdminMarkup::input(array(
+				'title' => 'Plural Suffix for number of Votes',
+				'description' => 'Adjust the Suffix for <code>[s]</code> placeholder. (e.G. "15 votes" [English] or "15 Bewertungen" [German].)',
+				'field' => 'kksr_suffix_votes',
+				'value' => get_option('kksr_suffix_votes')
+			));
 		    BhittaniPlugin_AdminMarkup::select(array(
 				'title' => 'Position',
 				'description' => 'Choose the position of the ratings',

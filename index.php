@@ -63,6 +63,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             $Params['ajaxurl'] = admin_url('admin-ajax.php');
             $Params['func'] = 'kksr_ajax';
             $Params['msg'] = parent::get_options('kksr_init_msg');
+            $Params['suffix_votes'] = parent::get_options('kksr_suffix_votes');
             $Params['fuelspeed'] = (int) parent::get_options('kksr_js_fuelspeed');
             $Params['thankyou'] = parent::get_options('kksr_js_thankyou');
             $Params['error_msg'] = parent::get_options('kksr_js_error');
@@ -212,6 +213,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
                 $Options['kksr_stars_yellow'] = 0;
                 $Options['kksr_stars_orange'] = 0;
                 $Options['kksr_js_fuelspeed'] = 400;
+                $Options['kksr_sufix_votes'] = 's';
                 $Options['kksr_js_thankyou'] = 'Thank you for your vote';
                 $Options['kksr_js_error'] = 'An error occurred';
                 $Options['kksr_tooltip'] = 0;
@@ -697,10 +699,12 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
                 return parent::get_options('kksr_init_msg');
             }
 
+            $pluralSuffix = parent::get_options('kksr_suffix_votes');
+
             $leg = str_replace('[total]', '<span itemprop="ratingCount">'.$votes.'</span>', $legend);
             $leg = str_replace('[avg]', '<span itemprop="ratingValue">'.$avg.'</span>', $leg);
             $leg = str_replace('[per]',  $per .'%', $leg);
-            $leg = str_replace('[s]', $votes == 1 ? '' : 's', $leg);
+            $leg = str_replace('[s]', $votes == 1 ? '' : $pluralSuffix, $leg);
             $leg = str_replace('[best]', $best, $leg);
 
             return $leg;
