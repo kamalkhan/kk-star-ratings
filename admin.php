@@ -161,7 +161,7 @@
 									<code>[total]</code>=total ratings <br />
 									<code>[avg]</code>=average <br />
 									<code>[per]</code>=percentage <br />
-									<code>[s]</code>=for plural vs singular of votes occurred <br />
+									<code>[suffix]</code>=for plural vs singular of votes occurred <br />
 									<strong>NOTE</strong> <br />
 									<code>[total]</code> and <code>[avg]</code> is mandatory for Google Rich Snippets to work
 								',
@@ -170,7 +170,7 @@
 			));
       BhittaniPlugin_AdminMarkup::input(array(
 				'title' => 'Plural Suffix for number of Votes',
-				'description' => 'Adjust the Suffix for <code>[s]</code> placeholder. (e.G. "15 votes" [English] or "15 Bewertungen" [German].)',
+				'description' => 'Adjust the Suffix for <code>[suffix]</code> placeholder. (e.G. "15 votes" [English] or "15 Bewertungen" [German].)',
 				'field' => 'kksr_suffix_votes',
 				'value' => get_option('kksr_suffix_votes')
 			));
