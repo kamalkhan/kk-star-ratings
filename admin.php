@@ -1,10 +1,15 @@
 <div class="bhittani-framework">
     <?php if(isset($sidebar)) : ?>
 	<div class="bf-wrap-small _right">
-        <!-- Place this tag where you want the button to render. -->
-        <a class="github-button" href="https://github.com/kamalkhan/kk-star-ratings" data-icon="octicon-star" data-style="mega" data-count-href="/kamalkhan/kk-star-ratings/stargazers" data-count-api="/repos/kamalkhan/kk-star-ratings#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star kamalkhan/kk-star-ratings on GitHub">
+        <!-- Patreon button -->
+        <a href="https://www.patreon.com/bePatron?u=19773871" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+        <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+        <br><br>
+        <!-- Github star -->
+        <a class="github-button" href="https://github.com/kamalkhan/kk-star-ratings" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star kamalkhan/kk-star-ratings on GitHub">
             kk Star Ratings
         </a>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
         <br><br>
         <!-- Place this tag right after the last button or just before your close body tag. -->
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
