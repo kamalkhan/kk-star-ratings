@@ -1,2 +1,11 @@
-/deploy.sh
-/svn
+.DS_Store
+Thumbs.db
+phpunit.xml
+wp-cli.local.yml
+coverage.xml
+/node_modules
+/vendor
+/tests/_wp_
+*.sql
+*.tar.gz
+*.zip

@@ -1,0 +1,71 @@
+sudo: false
+dist: trusty
+
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.2
+      env: WP_VERSION=latest
+    - php: 7.1
+      env: WP_VERSION=latest
+    - php: 7.0
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=4.5
+    - php: 5.6
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=trunk
+    - php: 5.6
+      env: CS_CHECK=phpcs
+    - php: 5.6
+      env: COVERAGE=codacy
+    - php: 5.5
+      env: WP_VERSION=latest
+
+before_script:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+  - composer install --ignore-platform-reqs
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      composer install-test-suite
+    fi
+
+script:
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      composer test
+      WP_MULTISITE=1 composer test
+    fi
+  - |
+    if [[ "$CS_CHECK" == "phpcs" ]] ; then
+      composer cs-check
+    fi
+
+after_success:
+  - |
+    if [[ "$COVERAGE" == "codacy" && "$CODACY_PROJECT_TOKEN" != "" ]]; then
+      composer require codacy/coverage --dev
+      composer coverage-clover
+      php vendor/bin/codacycoverage clover coverage.xml
+    fi
