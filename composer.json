@@ -32,9 +32,7 @@
     "config": {
         "sort-packages": true,
         "preferred-install": "dist",
-        "platform": {
-            "php": "5.5.9"
-        }
+        "platform": { "php": "5.5.9" }
     },
     "require": {
         "php": ">=5.5.9,<8.0-DEV"
@@ -49,12 +47,9 @@
     "scripts": {
         "install-test-suite": "bin/install-test-suite.sh tests/_wp_",
         "test": "phpunit --colors=always",
-        "coverage-clover": "phpunit --colors=always --coverage-clover coverage.xml",
-        "cs-check": "php-cs-fixer fix --dry-run --using-cache=no",
-        "cs-fix": "php-cs-fixer fix --using-cache=no",
-        "check": [
-            "@cs-check",
-            "@test"
-        ]
+        "coverage": "phpunit --colors=always --coverage-clover coverage.xml",
+        "check": "php-cs-fixer fix --dry-run --using-cache=no",
+        "fix": "php-cs-fixer fix --using-cache=no",
+        "ci": ["@check", "@test"]
     }
 }

@@ -1,0 +1,170 @@
+.kk-star-ratings {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.kk-star-ratings.kksr-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.kk-star-ratings .kksr-stars {
+    position: relative;
+    display: table;
+    line-height: 0;
+}
+
+.kk-star-ratings .kksr-stars .kksr-active-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.kk-star-ratings .kksr-stars:hover .kksr-active-stars {
+    display: none;
+}
+
+.kk-star-ratings .kksr-stars .kksr-star {
+    cursor: pointer;
+    display: table-cell;
+    padding-right: 4px;
+}
+
+.kk-star-ratings .kksr-stars .kksr-star svg {
+    pointer-events: none;
+    /* -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; */
+}
+
+.kk-star-ratings .kksr-stars .kksr-active-stars .kksr-star svg {
+    fill: lightseagreen;
+    stroke: lightseagreen;
+}
+.kk-star-ratings .kksr-stars .kksr-star svg,
+.kk-star-ratings .kksr-stars .kksr-star:hover ~ .kksr-star svg {
+    fill: #bebebe;
+    stroke: #bebebe;
+    /* transform: rotate(0deg); */
+}
+.kk-star-ratings .kksr-stars:hover .kksr-star svg {
+    fill: orange;
+    stroke: orange;
+    /* transform: rotate(71deg); */
+}
+
+/* .kk-star-ratings .kksr-stars .kksr-star.kksr-star-active svg {
+    fill: lightseagreen;
+    stroke: lightseagreen;
+} */
+.kk-star-ratings .kksr-stars .kksr-star.kksr-star-active:hover ~ .kksr-star.kksr-star-active svg {
+    fill: #bebebe;
+    stroke: #bebebe;
+}
+.kk-star-ratings .kksr-stars:hover .kksr-star.kksr-star-active svg {
+    fill: orange;
+    stroke: orange;
+}
+
+/* Legend */
+
+.kk-star-ratings .kksr-legend {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: monospace;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: lightseagreen;
+    border: 2px solid lightseagreen;
+    background-color: white;
+}
+.kk-star-ratings .kksr-legend:before {
+	left: -14px;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: transparent;
+    border-right-color: lightseagreen;
+	border-width: 6px;
+	margin-top: -6px;
+}
+.kk-star-ratings .kksr-legend:after {
+	left: -13px;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: transparent;
+    /* border-right-color: rgba(105, 105, 105, .1); */
+    border-right-color: white;
+	border-width: 7px;
+	margin-top: -7px;
+}
+.kk-star-ratings .kksr-legend .kksr-legend-score {
+    display: inline-block;
+    padding: 0 0 0 8px;
+    font-weight: bold;
+}
+.kk-star-ratings .kksr-legend .kksr-legend-meta {
+    display: inline-block;
+    padding: 0 8px;
+    color: white;
+    /* border-left: 1px solid lightseagreen; */
+    background-color: lightseagreen;
+    /* color: rgba(105, 105, 105, 0.5); */
+}
+
+/* RTL */
+
+.kk-star-ratings.kksr-rtl {
+    direction: rtl;
+}
+
+/* RTL - stars */
+
+.kk-star-ratings.kksr-rtl .kksr-stars .kksr-star {
+    padding-left: 4px;
+    padding-right: 0;
+}
+
+.kk-star-ratings.kksr-rtl .kksr-stars .kksr-active-stars {
+    top: 0;
+    right: 0;
+}
+
+/* RTL - legend */
+
+.kk-star-ratings.kksr-rtl .kksr-legend {
+    margin-left: 0;
+    margin-right: 10px;
+}
+.kk-star-ratings.kksr-rtl .kksr-legend:before {
+    right: -14px;
+    border-right-color: transparent;
+    border-left-color: lightseagreen;
+}
+.kk-star-ratings.kksr-rtl .kksr-legend:after {
+    right: -13px;
+    border-right-color: transparent;
+    border-left-color: white;
+}
+.kk-star-ratings.kksr-rtl .kksr-legend .kksr-legend-score {
+    padding: 0 8px 0 0;
+}

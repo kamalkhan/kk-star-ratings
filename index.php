@@ -23,7 +23,12 @@ define('KKSR_VERSION', '3.0.0');
 define('KKSR_SLUG', 'kk-star-ratings');
 define('KKSR_LABEL', 'kk Star Ratings');
 define('KKSR_NAMESPACE', 'Bhittani\StarRating\\');
-define('KKSR_PATH', plugin_dir_path(__FILE__));
-define('KKSR_SRC_PATH', KKSR_PATH . 'src/');
-define('KKSR_PUBLIC_PATH', KKSR_PATH . 'public/');
-define('KKSR_URI', plugin_dir_url(__FILE__) . 'public/');
+define('KKSR_PATH', plugin_dir_path(KKSR_FILE));
+define('KKSR_PATH_SRC', KKSR_PATH . 'src/');
+define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
+define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
+define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
+
+require_once KKSR_PATH_SRC . 'functions.php';
+require_once KKSR_PATH_SRC . 'enqueue.php';
+require_once KKSR_PATH_SRC . 'markup.php';
