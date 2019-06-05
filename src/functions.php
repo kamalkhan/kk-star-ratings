@@ -23,3 +23,37 @@ function calculatePercentage($total, $count, $from = 5, $to = 5)
 
     return $count ? round($total / $count / $to * 100, 2, PHP_ROUND_HALF_DOWN) : 0;
 }
+
+// Admin
+
+function getAdminTabs()
+{
+    return [
+        'general' => __('General', KKSR_SLUG),
+        'grs' => __('GRS', KKSR_SLUG),
+        'skin' => __('Skin', KKSR_SLUG),
+        'dev' => __('Developers', KKSR_SLUG),
+        'support' => __('Support', KKSR_SLUG),
+    ];
+}
+
+function getDefaultAdminTab()
+{
+    return 'general';
+}
+
+function getActiveAdminTab()
+{
+    $tabs = getAdminTabs();
+    $active = getDefaultAdminTab();
+
+    if (isset($_GET['tab'])) {
+        $tab = $_GET['tab'];
+
+        if (isset($tabs[$tab])) {
+            $active = $tab;
+        }
+    }
+
+    return $active;
+}

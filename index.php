@@ -32,3 +32,4 @@ define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
 require_once KKSR_PATH_SRC . 'functions.php';
 require_once KKSR_PATH_SRC . 'enqueue.php';
 require_once KKSR_PATH_SRC . 'markup.php';
+require_once KKSR_PATH_SRC . 'admin.php';

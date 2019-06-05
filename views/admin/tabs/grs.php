@@ -1,0 +1,1 @@
+Google Rich Snippets
