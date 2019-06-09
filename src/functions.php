@@ -44,16 +44,26 @@ function getDefaultAdminTab()
 
 function getActiveAdminTab()
 {
-    $tabs = getAdminTabs();
-    $active = getDefaultAdminTab();
+    $defaultTab = getDefaultAdminTab();
 
-    if (isset($_GET['tab'])) {
-        $tab = $_GET['tab'];
-
-        if (isset($tabs[$tab])) {
-            $active = $tab;
-        }
+    if (! isset($_GET['tab'])) {
+        return $defaultTab;
     }
 
-    return $active;
+    $tab = $_GET['tab'];
+
+    if (empty($tab)) {
+        return $defaultTab;
+    }
+
+    $tabs = getAdminTabs();
+
+    if (isset($tabs[$tab])) {
+        return $tab;
+    }
+}
+
+function isActiveAdminTab($tab)
+{
+    return $tab == getActiveAdminTab();
 }
