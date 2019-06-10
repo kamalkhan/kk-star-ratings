@@ -39,7 +39,7 @@ return [
         'id' => 'kksr_strategies',
         'title' => __('Strategies', 'kk-star-ratings'),
         'name' => 'kksr_strategies',
-        'help' => __('Pick your desired voting strategies.', 'kk-star-ratings'),
+        'help' => __('Select the voting strategies.', 'kk-star-ratings'),
         'fields' => [
             [
                 'field' => 'checkbox',
