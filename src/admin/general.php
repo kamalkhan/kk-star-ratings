@@ -13,7 +13,7 @@ return [
         'name' => 'kksr_enable',
         'value' => true,
         'checked' => (bool) get_option('kksr_enable'),
-        'help' => __('Globally enable/disable the plugin.', 'kk-star-ratings'),
+        'help' => __('Globally activate/deactivate the star ratings.', 'kk-star-ratings'),
     ],
 
     // Locations
