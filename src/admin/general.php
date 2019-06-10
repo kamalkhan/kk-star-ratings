@@ -1,5 +1,6 @@
 <?php
 
+$position = get_option('kksr_position', 'top-left');
 $locations = get_option('kksr_locations', []);
 $strategies = get_option('kksr_strategies', []);
 
@@ -82,6 +83,59 @@ return [
                 'name' => 'kksr_strategies[ip]',
                 'value' => true,
                 'checked' => isset($strategies['ip']),
+            ],
+        ],
+    ],
+
+    // Position
+
+    [
+        'id' => 'kksr_position',
+        'title' => __('Default Position', 'kk-star-ratings'),
+        'name' => 'kksr_position',
+        'help' => __('Choose a default position.', 'kk-star-ratings'),
+        'fields' => [
+            [
+                'field' => 'radio',
+                'label' => __('Top Left', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'top-left',
+                'checked' => $position == 'top-left',
+            ],
+            [
+                'field' => 'radio',
+                'label' => __('Top Center', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'top-center',
+                'checked' => $position == 'top-center',
+            ],
+            [
+                'field' => 'radio',
+                'label' => __('Top Right', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'top-right',
+                'checked' => $position == 'top-right',
+            ],
+            [
+                'field' => 'radio',
+                'label' => __('Bottom Left', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'bottom-left',
+                'checked' => $position == 'bottom-left',
+            ],
+            [
+                'field' => 'radio',
+                'label' => __('Bottom Center', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'bottom-center',
+                'checked' => $position == 'bottom-center',
+            ],
+            [
+                'field' => 'radio',
+                'label' => __('Bottom Right', 'kk-star-ratings'),
+                'name' => 'kksr_position',
+                'value' => 'bottom-right',
+                'checked' => $position == 'bottom-right',
             ],
         ],
     ],
