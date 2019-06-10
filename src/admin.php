@@ -77,9 +77,24 @@ add_action('admin_init', KKSR_NAMESPACE . 'adminFields'); function adminFields()
     extract($args);
 
     ob_start();
-    include KKSR_PATH_VIEWS . 'admin/fields/' . $args['field'] . '.php';
+
+    if (isset($fields)) {
+        $br = '<br><br>';
+
+        for ($i = 0; $i < count($fields); $i++) {
+            echo $i != 0 ? $br : '';
+            fieldCallback($fields[$i]);
+        }
+        if (isset($help)) {
+            echo $br;
+        }
+    } else {
+        include KKSR_PATH_VIEWS . 'admin/fields/' . $args['field'] . '.php';
+    }
+
     if (isset($help)) {
         echo '<p class="description">'.$help.'</p>';
     }
+
     echo ob_get_clean();
 }
