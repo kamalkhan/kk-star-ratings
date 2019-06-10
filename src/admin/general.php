@@ -79,10 +79,10 @@ return [
             ],
             [
                 'field' => 'checkbox',
-                'label' => __('Unique votings based on IP Address', 'kk-star-ratings'),
-                'name' => 'kksr_strategies[ip]',
+                'label' => __('Unique votes (based on IP Address)', 'kk-star-ratings'),
+                'name' => 'kksr_strategies[unique]',
                 'value' => true,
-                'checked' => isset($strategies['ip']),
+                'checked' => isset($strategies['unique']),
             ],
         ],
     ],
