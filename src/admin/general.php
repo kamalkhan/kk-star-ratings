@@ -1,6 +1,7 @@
 <?php
 
 $locations = get_option('kksr_locations', []);
+$strategies = get_option('kksr_strategies', []);
 
 return [
     [
@@ -50,6 +51,38 @@ return [
                 'value' => true,
                 'checked' => isset($locations['pages']),
             ]
+        ],
+    ],
+
+    // Strategies
+
+    [
+        'id' => 'kksr_strategies',
+        'title' => __('Strategies', KKSR_SLUG),
+        'name' => 'kksr_strategies',
+        'help' => __('Pick your desired voting strategies.', KKSR_SLUG),
+        'fields' => [
+            [
+                'field' => 'checkbox',
+                'label' => __('Allow voting in archives', KKSR_SLUG),
+                'name' => 'kksr_strategies[archives]',
+                'value' => true,
+                'checked' => isset($strategies['archives']),
+            ],
+            [
+                'field' => 'checkbox',
+                'label' => __('Allow guests to vote', KKSR_SLUG),
+                'name' => 'kksr_strategies[guests]',
+                'value' => true,
+                'checked' => isset($strategies['guests']),
+            ],
+            [
+                'field' => 'checkbox',
+                'label' => __('Unique votings based on IP Address', KKSR_SLUG),
+                'name' => 'kksr_strategies[ip]',
+                'value' => true,
+                'checked' => isset($strategies['ip']),
+            ],
         ],
     ],
 
