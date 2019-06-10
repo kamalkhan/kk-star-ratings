@@ -30,8 +30,8 @@ function getAdminTabs()
 {
     return [
         'general' => __('General', 'kk-star-ratings'),
-        'grs' => __('GRS', 'kk-star-ratings'),
-        'skin' => __('Skin', 'kk-star-ratings'),
+        'grs' => __('Rich Snippets', 'kk-star-ratings'),
+        'skin' => __('Appearance', 'kk-star-ratings'),
         'dev' => __('Developers', 'kk-star-ratings'),
         'support' => __('Support', 'kk-star-ratings'),
     ];
