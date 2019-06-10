@@ -1,7 +1,7 @@
 <?php
 
 $position = get_option('kksr_position', 'top-left');
-$locations = get_option('kksr_locations', []);
+$excludedLocations = get_option('kksr_exclude_locations', []);
 $strategies = get_option('kksr_strategies', []);
 // TODO: Make sure this is an array. For previous versions, this was stored as csv.
 $excludedCategories = get_option('kksr_exclude_categories', []);
@@ -31,45 +31,6 @@ return [
         'value' => true,
         'checked' => (bool) get_option('kksr_enable'),
         'help' => __('Globally activate/deactivate the star ratings.', 'kk-star-ratings'),
-    ],
-
-    // Locations
-
-    [
-        'id' => 'kksr_locations',
-        'title' => __('Locations', 'kk-star-ratings'),
-        'name' => 'kksr_locations',
-        'help' => __('Where do you want to show the star ratings.', 'kk-star-ratings'),
-        'fields' => [
-            [
-                'field' => 'checkbox',
-                'label' => __('Home page', 'kk-star-ratings'),
-                'name' => 'kksr_locations[home]',
-                'value' => true,
-                'checked' => isset($locations['home']),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Archives', 'kk-star-ratings'),
-                'name' => 'kksr_locations[archives]',
-                'value' => true,
-                'checked' => isset($locations['archives']),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Posts', 'kk-star-ratings'),
-                'name' => 'kksr_locations[posts]',
-                'value' => true,
-                'checked' => isset($locations['posts']),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Pages', 'kk-star-ratings'),
-                'name' => 'kksr_locations[pages]',
-                'value' => true,
-                'checked' => isset($locations['pages']),
-            ]
-        ],
     ],
 
     // Strategies
@@ -154,6 +115,45 @@ return [
                 'value' => 'bottom-right',
                 'checked' => $position == 'bottom-right',
             ],
+        ],
+    ],
+
+    // Locations
+
+    [
+        'id' => 'kksr_exclude_locations',
+        'title' => __('Disable Locations', 'kk-star-ratings'),
+        'name' => 'kksr_exclude_locations',
+        'help' => __('Select the locations where the star ratings should be excluded.', 'kk-star-ratings'),
+        'fields' => [
+            [
+                'field' => 'checkbox',
+                'label' => __('Home page', 'kk-star-ratings'),
+                'name' => 'kksr_exclude_locations[home]',
+                'value' => true,
+                'checked' => isset($excludedLocations['home']),
+            ],
+            [
+                'field' => 'checkbox',
+                'label' => __('Archives', 'kk-star-ratings'),
+                'name' => 'kksr_exclude_locations[archives]',
+                'value' => true,
+                'checked' => isset($excludedLocations['archives']),
+            ],
+            [
+                'field' => 'checkbox',
+                'label' => __('Posts', 'kk-star-ratings'),
+                'name' => 'kksr_exclude_locations[posts]',
+                'value' => true,
+                'checked' => isset($excludedLocations['posts']),
+            ],
+            [
+                'field' => 'checkbox',
+                'label' => __('Pages', 'kk-star-ratings'),
+                'name' => 'kksr_exclude_locations[pages]',
+                'value' => true,
+                'checked' => isset($excludedLocations['pages']),
+            ]
         ],
     ],
 
