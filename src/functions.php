@@ -29,11 +29,11 @@ function calculatePercentage($total, $count, $from = 5, $to = 5)
 function getAdminTabs()
 {
     return [
-        'general' => __('General', KKSR_SLUG),
-        'grs' => __('GRS', KKSR_SLUG),
-        'skin' => __('Skin', KKSR_SLUG),
-        'dev' => __('Developers', KKSR_SLUG),
-        'support' => __('Support', KKSR_SLUG),
+        'general' => __('General', 'kk-star-ratings'),
+        'grs' => __('GRS', 'kk-star-ratings'),
+        'skin' => __('Skin', 'kk-star-ratings'),
+        'dev' => __('Developers', 'kk-star-ratings'),
+        'support' => __('Support', 'kk-star-ratings'),
     ];
 }
 
