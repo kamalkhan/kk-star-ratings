@@ -3,6 +3,23 @@
 $position = get_option('kksr_position', 'top-left');
 $locations = get_option('kksr_locations', []);
 $strategies = get_option('kksr_strategies', []);
+// TODO: Make sure this is an array. For previous versions, this was stored as csv.
+$excludedCategories = get_option('kksr_exclude_categories', []);
+
+$categories = get_terms([
+    'taxonomy' => 'category',
+    'hide_empty' => false,
+    'parent' => 0,
+]);
+
+$categoriesOptions = [];
+foreach ($categories as $category) {
+    $categoriesOptions[] = [
+        'label' => $category->name,
+        'value' => $category->term_id,
+        'selected' => in_array($category->term_id, (array) $excludedCategories),
+    ];
+}
 
 return [
     [
@@ -138,6 +155,18 @@ return [
                 'checked' => $position == 'bottom-right',
             ],
         ],
+    ],
+
+    // Categories
+
+    [
+        'field' => 'select',
+        'id' => 'kksr_exclude_categories',
+        'title' => __('Disable Categories', 'kk-star-ratings'),
+        'name' => 'kksr_exclude_categories',
+        'multiple' => true,
+        'options' => $categoriesOptions,
+        'help' => __('Exclude star ratings from posts belonging to the selected categories.<br>Use <strong>cmd/ctrl + click</strong> to select/deselect multiple categories.', 'kk-star-ratings'),
     ],
 
 ];
