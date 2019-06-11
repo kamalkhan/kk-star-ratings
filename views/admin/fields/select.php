@@ -1,4 +1,5 @@
-<select name="<?php echo $name; ?>" style="min-width: 15rem; padding: .5rem;"
+<select name="<?php echo $name; ?><?php echo (isset($multiple) && $multiple) ? '[]' : ''; ?>"
+    style="min-width: 15rem; padding: .5rem;"
     <?php echo isset($id) ? ('id="'.$id.'"') : ''; ?>
     <?php echo isset($multiple) ? ('multiple="multiple"') : ''; ?>>
     <?php foreach ($options as $option) : ?>
