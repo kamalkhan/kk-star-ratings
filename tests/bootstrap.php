@@ -23,10 +23,10 @@ if (!file_exists($pluginFile)) {
 }
 
 // Setup the database.
-if (file_exists($sqliteDb = $testDir . '/src/wp-content/database/.ht.sqlite')) {
-    unlink($sqliteDb);
-    touch($sqliteDb);
-}
+// if (file_exists($sqliteDb = $testDir . '/src/wp-content/database/.ht.sqlite')) {
+//     unlink($sqliteDb);
+//     touch($sqliteDb);
+// }
 
 // Get access to tests_add_filter() function.
 require_once $testDir . '/includes/functions.php';

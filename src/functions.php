@@ -2,6 +2,71 @@
 
 namespace Bhittani\StarRating;
 
+function getOptions(array $merge = [])
+{
+    return array_merge_recursive([
+        'kksr_ver' => get_option('kksr_ver', KKSR_VERSION),
+        'kksr_stars' => (int) get_option('kksr_stars', 5),
+        'kksr_enable' => (bool) get_option('kksr_enable', true),
+        'kksr_strategies' => (array) get_option('kksr_strategies', []),
+        'kksr_position' => get_option('kksr_position', 'top-left'),
+        'kksr_exclude_locations' => (array) get_option('kksr_exclude_locations', []),
+        'kksr_exclude_categories' => (array) get_option('kksr_exclude_categories', []),
+    ], $merge);
+}
+
+function saveOptions(array $options)
+{
+    foreach ($options as $key => $value) {
+        update_option($key, $value);
+    }
+
+    return $options;
+}
+
+function upgradeOptions(array $merge = [])
+{
+    saveOptions(array_merge_recursive([
+        'kksr_strategies' => get_option('kksr_strategies', array_filter([
+            get_option('kksr_unique', true) ? 'unique' : null,
+            get_option('kksr_disable_in_archives', true) ? null : 'archives',
+        ])),
+        'kksr_exclude_locations' => get_option('kksr_exclude_locations', array_filter([
+            get_option('kksr_show_in_home', true) ? null : 'home',
+            get_option('kksr_show_in_posts', true) ? null : 'posts',
+            get_option('kksr_show_in_pages', true) ? null : 'pages',
+            get_option('kksr_show_in_archives', true) ? null : 'archives',
+        ])),
+        'kksr_exclude_categories' => is_array($exludedCategories = get_option('kksr_exclude_categories', []))
+            ? $exludedCategories : array_map('trim', explode(',', $exludedCategories)),
+    ], $merge));
+}
+
+function upgradeRatings()
+{
+    global $wpdb;
+    $postMetaTable = $wpdb->prefix . 'postmeta';
+
+    $rows = $wpdb->get_results("
+        SELECT a.ID, b.meta_value as ratings
+        FROM {$wpdb->posts} a, {$postMetaTable} b
+        WHERE a.ID=b.post_id AND b.meta_key='_kksr_ratings'
+    ");
+
+    $stars = get_option('kksr_stars', 5);
+
+    foreach ($rows as $row) {
+        update_post_meta(
+            $row->ID,
+            '_kksr_ratings',
+            toNormalizedRatings($row->ratings, $stars)
+        );
+    }
+}
+
+
+// Calculations
+
 function toNormalizedRatings($ratings, $from = 5, $to = 5)
 {
     $to = (int) $to;

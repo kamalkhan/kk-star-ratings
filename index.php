@@ -19,6 +19,7 @@ if (! defined('ABSPATH')) {
 }
 
 define('KKSR_FILE', __FILE__);
+define('KKSR_PLUGIN', plugin_basename(KKSR_FILE));
 define('KKSR_VERSION', '3.0.0');
 define('KKSR_SLUG', 'kk-star-ratings');
 define('KKSR_LABEL', 'kk Star Ratings');
@@ -30,6 +31,7 @@ define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
 define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
 
 require_once KKSR_PATH_SRC . 'functions.php';
+require_once KKSR_PATH_SRC . 'activate.php';
 require_once KKSR_PATH_SRC . 'enqueue.php';
 require_once KKSR_PATH_SRC . 'markup.php';
 require_once KKSR_PATH_SRC . 'admin.php';

@@ -2,9 +2,7 @@
 
 namespace Bhittani\StarRating;
 
-use WP_UnitTestCase;
-
-class MathTest extends WP_UnitTestCase
+class MathTest extends TestCase
 {
     /** @test*/
     function it_normalizes_the_ratings_to_a_base()
