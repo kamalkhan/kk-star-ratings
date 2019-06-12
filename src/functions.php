@@ -4,11 +4,17 @@ namespace Bhittani\StarRating;
 
 function toNormalizedRatings($ratings, $from = 5, $to = 5)
 {
-    return $ratings / ($from / $to);
+    $to = (int) $to;
+    $from = (int) $from;
+    $ratings = (float) $ratings;
+
+    return $ratings / $from * $to; // $ratings / ($from / $to);
 }
 
 function calculateScore($total, $count, $from = 5, $to = 5)
 {
+    $to = (int) $to;
+    $from = (int) $from;
     $count = (float) $count;
     $total = (float) $total;
 
@@ -18,6 +24,8 @@ function calculateScore($total, $count, $from = 5, $to = 5)
 // We will neglect $from but here for consistency!
 function calculatePercentage($total, $count, $from = 5, $to = 5)
 {
+    $to = (int) $to;
+    $from = (int) $from;
     $count = (float) $count;
     $total = (float) $total;
 

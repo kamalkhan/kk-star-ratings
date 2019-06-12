@@ -9,7 +9,7 @@ class MathTest extends WP_UnitTestCase
     /** @test*/
     function it_normalizes_the_ratings_to_a_base()
     {
-        $this->assertSame(3, toNormalizedRatings(3));
+        $this->assertSame(3.0, toNormalizedRatings(3));
         $this->assertSame(1.5, toNormalizedRatings(3, 10));
         $this->assertSame(2.1, toNormalizedRatings(3, 10, 7));
         $this->assertSame(2.5, toNormalizedRatings(5, 10));
@@ -70,7 +70,7 @@ class MathTest extends WP_UnitTestCase
             foreach ($t[2] as $r) {
                 $ratings += toNormalizedRatings($r[0], $r[1]);
             }
-            $this->assertSame(24, $ratings);
+            $this->assertSame(24.0, $ratings);
             $this->assertSame($t[0][1], calculateScore($ratings, count($t[2]), $t[0][0]));
             $this->assertSame($t[0][2], calculatePercentage($ratings, count($t[2])));
             $this->assertSame($t[1][1], calculateScore($ratings, count($t[2]), $t[1][0]));
