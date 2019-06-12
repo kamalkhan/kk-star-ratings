@@ -42,8 +42,8 @@ function upgradeOptions(array $merge = [])
         ])),
         'kksr_exclude_locations' => get_option('kksr_exclude_locations', array_filter([
             get_option('kksr_show_in_home', true) ? null : 'home',
-            get_option('kksr_show_in_posts', true) ? null : 'posts',
-            get_option('kksr_show_in_pages', true) ? null : 'pages',
+            get_option('kksr_show_in_posts', true) ? null : 'post',
+            get_option('kksr_show_in_pages', true) ? null : 'page',
             get_option('kksr_show_in_archives', true) ? null : 'archives',
         ])),
         'kksr_exclude_categories' => is_array($exludedCategories = get_option('kksr_exclude_categories', []))
