@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of bhittani/kk-star-ratings.
+ *
+ * (c) Kamal Khan <shout@bhittani.com>
+ *
+ * This source file is subject to the GPL v2 license that
+ * is bundled with this source code in the file LICENSE.
+ */
+
 namespace Bhittani\StarRating;
 
 function getOptions(array $merge = [])
@@ -45,7 +54,7 @@ function upgradeOptions(array $merge = [])
 function upgradeRatings()
 {
     global $wpdb;
-    $postMetaTable = $wpdb->prefix . 'postmeta';
+    $postMetaTable = $wpdb->prefix.'postmeta';
 
     $rows = $wpdb->get_results("
         SELECT a.ID, b.meta_value as ratings
@@ -63,7 +72,6 @@ function upgradeRatings()
         );
     }
 }
-
 
 // Calculations
 
