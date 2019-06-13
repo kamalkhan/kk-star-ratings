@@ -96,7 +96,7 @@ function isValidPost($p = null)
         && ! in_array($type, get_option('kksr_exclude_locations', []));
 }
 
-function isRequired()
+function isValidRequest()
 {
     return (bool) (
         // home or front page AND home is not an excluded location.
