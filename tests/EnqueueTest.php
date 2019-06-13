@@ -248,6 +248,25 @@ class EnqueueTest extends TestCase
     }
 
     /** @test*/
+    function it_does_not_enqueue_assets_in_custom_post_types_if_it_belongs_to_an_excluded_category()
+    {
+        global $wp_query, $post;
+        $wp_query->is_singular = true;
+        $post = static::factory()->post->create_and_get();
+        $wp_query->queried_object = $post;
+        $this->assertTrue(is_singular());
+
+        wp_set_post_categories($post->ID);
+
+        update_option('kksr_exclude_categories', [1]);
+
+        do_action('wp_enqueue_scripts');
+
+        $this->assertFalse(wp_style_is(KKSR_SLUG));
+        $this->assertFalse(wp_script_is(KKSR_SLUG));
+    }
+
+    /** @test*/
     function it_does_not_leak_assets()
     {
         $this->assertFalse(wp_style_is(KKSR_SLUG));

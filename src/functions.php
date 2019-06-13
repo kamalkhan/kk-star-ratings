@@ -83,7 +83,15 @@ function isValidPost($p = null)
         return $status == 'enable';
     }
 
+    $categories = array_map(function ($category) {
+        return $category->term_id;
+    }, get_the_category($p->ID));
+
+    $categoriesDiff = array_diff($categories, get_option('kksr_exclude_categories', []));
+
     return ($type = get_post_type($p))
+        // post does not belong to an excluded category.
+        && count($categories) == count($categoriesDiff)
         // post type is not an excluded location.
         && ! in_array($type, get_option('kksr_exclude_locations', []));
 }
@@ -95,7 +103,7 @@ function isRequired()
         (! in_array('home', get_option('kksr_exclude_locations', [])) && (is_front_page() || is_home()))
         // archives AND archives is not an excluded location.
         || (! in_array('archives', get_option('kksr_exclude_locations', [])) && is_archive())
-        // singular AND (exclusively enabled OR post type is not an excluded location).
+        // singular AND (exclusively enabled OR (post does not belong to an excluded category AND post type is not an excluded location)).
         || (is_singular() && isValidPost())
     );
 }
