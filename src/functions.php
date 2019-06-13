@@ -73,6 +73,33 @@ function upgradeRatings()
     }
 }
 
+function isValidPost($p = null)
+{
+    global $post;
+    $p = $p ?: $post;
+
+    if ($status = get_post_meta($p->ID, '_kksr_status', true)) {
+        // Exclusive status.
+        return $status == 'enable';
+    }
+
+    return ($type = get_post_type($p))
+        // post type is not an excluded location.
+        && ! in_array($type, get_option('kksr_exclude_locations', []));
+}
+
+function isRequired()
+{
+    return (bool) (
+        // home or front page AND home is not an excluded location.
+        (! in_array('home', get_option('kksr_exclude_locations', [])) && (is_front_page() || is_home()))
+        // archives AND archives is not an excluded location.
+        || (! in_array('archives', get_option('kksr_exclude_locations', [])) && is_archive())
+        // singular AND (exclusively enabled OR post type is not an excluded location).
+        || (is_singular() && isValidPost())
+    );
+}
+
 // Calculations
 
 function toNormalizedRatings($ratings, $from = 5, $to = 5)
