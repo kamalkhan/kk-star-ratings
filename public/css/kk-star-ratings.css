@@ -42,37 +42,33 @@
 
 .kk-star-ratings .kksr-stars .kksr-star svg {
     pointer-events: none;
-    /* -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out; */
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .kk-star-ratings .kksr-stars .kksr-active-stars .kksr-star svg {
-    fill: lightseagreen;
-    stroke: lightseagreen;
+    fill: rgb(245, 220, 168);
+    stroke: rgb(226, 182, 87);
 }
 .kk-star-ratings .kksr-stars .kksr-star svg,
 .kk-star-ratings .kksr-stars .kksr-star:hover ~ .kksr-star svg {
-    fill: #bebebe;
-    stroke: #bebebe;
-    /* transform: rotate(0deg); */
+    fill: rgb(241, 241, 241);
+    stroke: #d8d8d8;
+    transform: rotate(0deg);
 }
 .kk-star-ratings .kksr-stars:hover .kksr-star svg {
-    fill: orange;
-    stroke: orange;
-    /* transform: rotate(71deg); */
+    fill: rgb(228, 247, 157);
+    stroke: rgb(192, 206, 133);
+    transform: rotate(71deg);
 }
 
-/* .kk-star-ratings .kksr-stars .kksr-star.kksr-star-active svg {
-    fill: lightseagreen;
-    stroke: lightseagreen;
-} */
 .kk-star-ratings .kksr-stars .kksr-star.kksr-star-active:hover ~ .kksr-star.kksr-star-active svg {
-    fill: #bebebe;
-    stroke: #bebebe;
+    fill: rgb(241, 241, 241);
+    stroke: #d8d8d8;
 }
 .kk-star-ratings .kksr-stars:hover .kksr-star.kksr-star-active svg {
-    fill: orange;
-    stroke: orange;
+    fill: rgb(247, 247, 157);
+    stroke: rgb(192, 206, 133);
 }
 
 /* Legend */
@@ -84,8 +80,8 @@
     font-family: monospace;
     margin-left: 10px;
     border-radius: 4px;
-    color: lightseagreen;
-    border: 2px solid lightseagreen;
+    color: rgb(226, 182, 87);
+    border: 2px solid rgb(226, 182, 87);
     background-color: white;
 }
 .kk-star-ratings .kksr-legend:before {
@@ -98,7 +94,7 @@
 	position: absolute;
 	pointer-events: none;
 	border-color: transparent;
-    border-right-color: lightseagreen;
+    border-right-color: rgb(226, 182, 87);
 	border-width: 6px;
 	margin-top: -6px;
 }
@@ -112,7 +108,6 @@
 	position: absolute;
 	pointer-events: none;
 	border-color: transparent;
-    /* border-right-color: rgba(105, 105, 105, .1); */
     border-right-color: white;
 	border-width: 7px;
 	margin-top: -7px;
@@ -125,10 +120,8 @@
 .kk-star-ratings .kksr-legend .kksr-legend-meta {
     display: inline-block;
     padding: 0 8px;
-    color: white;
-    /* border-left: 1px solid lightseagreen; */
-    background-color: lightseagreen;
-    /* color: rgba(105, 105, 105, 0.5); */
+    color: #fff;
+    background-color: rgb(226, 182, 87);
 }
 
 /* RTL */
@@ -158,7 +151,7 @@
 .kk-star-ratings.kksr-rtl .kksr-legend:before {
     right: -14px;
     border-right-color: transparent;
-    border-left-color: lightseagreen;
+    border-left-color: rgb(226, 182, 87);
 }
 .kk-star-ratings.kksr-rtl .kksr-legend:after {
     right: -13px;
