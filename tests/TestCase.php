@@ -24,4 +24,62 @@ class TestCase extends WP_UnitTestCase
 
         parent::tearDown();
     }
+
+    function atHome()
+    {
+        global $wp_query;
+        $wp_query->is_home = true;
+
+        return $this;
+    }
+
+    function onFrontPage()
+    {
+        global $wp_query;
+        $wp_query->is_page = true;
+        $post = static::factory()->post->create_and_get();
+        $wp_query->queried_object = $post;
+        update_option('show_on_front', 'page');
+        update_option('page_on_front', $post->ID);
+
+        return $this;
+    }
+
+    function inArchives()
+    {
+        global $wp_query;
+        $wp_query->is_archive = true;
+
+        return $this;
+    }
+
+    function onPost($postOrType = null, $type = 'post')
+    {
+        global $wp_query, $post;
+        $p = is_string($postOrType) ? null : $postOrType;
+        $type = is_string($postOrType) ? $postOrType : $type;
+        $definitions = is_string($postOrType)
+            ? ['post_type' => $postOrType] : ($type == 'post' ? null : ['post_type' => $type]);
+        $wp_query->is_singular = true;
+        $post = $p ?: static::factory()->post->create_and_get(null, $definitions);
+        $wp_query->queried_object = $post;
+        if ($type == 'post') {
+            $wp_query->is_single = true;
+        }
+        if ($type == 'page') {
+            $wp_query->is_page = true;
+        }
+
+        return $post;
+    }
+
+    function onPage($page = null)
+    {
+        return $this->onPost($page, 'page');
+    }
+
+    function onCustomPostType($type = 'custom')
+    {
+        return $this->onPost($type);
+    }
 }
