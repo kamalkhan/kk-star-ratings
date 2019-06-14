@@ -267,6 +267,21 @@ class EnqueueTest extends TestCase
     }
 
     /** @test*/
+    function it_does_not_enqueue_assets_if_globally_disabled()
+    {
+        global $wp_query;
+        $wp_query->is_home = true;
+        $this->assertTrue(is_home());
+
+        update_option('kksr_enable', 0);
+
+        do_action('wp_enqueue_scripts');
+
+        $this->assertFalse(wp_style_is(KKSR_SLUG));
+        $this->assertFalse(wp_script_is(KKSR_SLUG));
+    }
+
+    /** @test*/
     function it_does_not_leak_assets()
     {
         $this->assertFalse(wp_style_is(KKSR_SLUG));

@@ -98,6 +98,11 @@ function isValidPost($p = null)
 
 function isValidRequest()
 {
+    if (! get_option('kksr_enable', true)) {
+        // Not globally enabled.
+        return false;
+    }
+
     return (bool) (
         // home or front page AND home is not an excluded location.
         (! in_array('home', get_option('kksr_exclude_locations', [])) && (is_front_page() || is_home()))
