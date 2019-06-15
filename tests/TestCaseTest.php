@@ -57,4 +57,24 @@ class TestCaseTest extends TestCase
         $this->assertTrue(is_singular('custom'));
         $this->assertEquals('custom', get_post_type($custom));
     }
+
+    /** @test */
+    function onArchivePost($postOrType = null, $type = 'post')
+    {
+        parent::onArchivePost();
+
+        $this->assertFalse(is_single());
+        $this->assertFalse(is_singular());
+        $this->assertTrue(is_archive());
+    }
+
+    /** @test */
+    function onHomePost($postOrType = null, $type = 'post')
+    {
+        parent::onHomePost();
+
+        $this->assertFalse(is_single());
+        $this->assertFalse(is_singular());
+        $this->assertTrue(is_home());
+    }
 }

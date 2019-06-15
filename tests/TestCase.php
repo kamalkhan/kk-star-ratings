@@ -82,4 +82,32 @@ class TestCase extends WP_UnitTestCase
     {
         return $this->onPost($type);
     }
+
+    function onArchivePost($postOrType = null, $type = 'post')
+    {
+        $this->inArchives();
+
+        $post = $this->onPost($postOrType, $type);
+
+        global $wp_query;
+        $wp_query->is_page = false;
+        $wp_query->is_single = false;
+        $wp_query->is_singular = false;
+
+        return $post;
+    }
+
+    function onHomePost($postOrType = null, $type = 'post')
+    {
+        $this->atHome();
+
+        $post = $this->onPost($postOrType, $type);
+
+        global $wp_query;
+        $wp_query->is_page = false;
+        $wp_query->is_single = false;
+        $wp_query->is_singular = false;
+
+        return $post;
+    }
 }

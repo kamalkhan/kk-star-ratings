@@ -75,6 +75,11 @@ function upgradeRatings()
 
 function isValidPost($p = null)
 {
+    if (! get_option('kksr_enable', true)) {
+        // Not globally enabled.
+        return false;
+    }
+
     global $post;
     $p = $p ?: $post;
 

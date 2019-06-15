@@ -5,7 +5,7 @@
             <?php echo $starsMarkup; ?>
         </div>
     </div>
-    <div class="kksr-legend" style="line-height: <?php echo $size; ?>px; font-size: <?php echo $size/1.5; ?>px">
+    <div class="kksr-legend" style="<?php echo $count ? '' : 'display: none; ' ?>line-height: <?php echo $size; ?>px; font-size: <?php echo $size/1.5; ?>px">
         <span class="kksr-legend-score"><?php echo $score; ?></span>
         <span class="kksr-legend-meta"><?php echo $count; ?></span>
     </div>
