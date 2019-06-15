@@ -18,6 +18,78 @@ class MarkupTest extends TestCase
     }
 
     /** @test */
+    function it_can_be_placed_at_the_top_left()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'top-left');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'left'], $post);
+    }
+
+    /** @test */
+    function it_can_be_placed_at_the_top_right()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'top-right');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'right'], $post);
+    }
+
+    /** @test */
+    function it_can_be_placed_at_the_top_center()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'top-center');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'center'], $post);
+    }
+
+    /** @test */
+    function it_can_be_placed_at_the_bottom_left()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'bottom-left');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'left'], $post);
+    }
+
+    /** @test */
+    function it_can_be_placed_at_the_bottom_right()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'bottom-right');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'right'], $post);
+    }
+
+    /** @test */
+    function it_can_be_placed_at_the_bottom_center()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_position', 'bottom-center');
+
+        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'center'], $post);
+    }
+
+    /** @test */
     function it_does_not_show_the_markup_in_posts_that_are_explicitly_disabled()
     {
         $post = static::factory()->post->create_and_get(['post_content' => 'content']);
@@ -111,7 +183,9 @@ class MarkupTest extends TestCase
             'count' => 0,
             'total' => 0,
             'stars' => 5,
-            'isRtl' => false,
+            // 'isRtl' => false,
+            'placement' => 'top',
+            'alignment' => 'left',
         ], $payload);
 
         $payload['percent'] = isset($payload['percent'])
@@ -121,7 +195,7 @@ class MarkupTest extends TestCase
             ? $payload['score'] : calculateScore($payload['total'], $payload['count'], $payload['stars']);
 
         $payload['width'] = isset($payload['width'])
-            ? $payload['width'] : $payload['score'] * $payload['size'] + ((int) $payload['score'] * 4);
+            ? $payload['width'] : calculateWidth($payload['score'], $payload['size']);
 
         extract($payload);
 
@@ -147,7 +221,7 @@ class MarkupTest extends TestCase
 
         $content = $content ?: ('<p>'.get_the_content().'</p>'.PHP_EOL);
 
-        $expectation = $content.$markup;
+        $expectation = $placement === 'bottom' ? ($content.$markup) : ($markup.$content);
 
         $this->assertEquals($expectation, $assertion);
 

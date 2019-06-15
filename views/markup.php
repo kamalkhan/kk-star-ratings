@@ -1,6 +1,9 @@
-<div data-id="<?php echo $id; ?>" class="kk-star-ratings<?php echo $isRtl ? ' kksr-rtl' : ''; ?>">
+<div data-id="<?php echo $id; ?>"
+    class="kk-star-ratings kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
     <div class="kksr-stars">
-        <?php echo $starsMarkup; ?>
+        <div class="kksr-inactive-stars">
+            <?php echo $starsMarkup; ?>
+        </div>
         <div class="kksr-active-stars" style="width: <?php echo $width; ?>px;">
             <?php echo $starsMarkup; ?>
         </div>

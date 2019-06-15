@@ -150,6 +150,32 @@ function calculatePercentage($total, $count, $from = 5, $to = 5)
     return $count ? round($total / $count / $to * 100, 2, PHP_ROUND_HALF_DOWN) : 0;
 }
 
+function calculateWidth($score, $size = null, $pad = 4)
+{
+    $score = (float) $score;
+    $size = $size ?: get_option('kksr_size', 5);
+
+    return $score * $size + ((int) $score * $pad);
+}
+
+function extractPosition($position = null)
+{
+    $position = $position ?: get_option('kksr_position', 'top-left');
+
+    $placement = 'top';
+    $alignment = 'left';
+
+    if (strpos($position, 'top-') === 0) {
+        $placement = 'top';
+        $alignment = substr($position, 4);
+    } elseif (strpos($position, 'bottom-') === 0) {
+        $placement = 'bottom';
+        $alignment = substr($position, 7);
+    }
+
+    return [$placement, $alignment];
+}
+
 // Admin
 
 function getAdminTabs()
