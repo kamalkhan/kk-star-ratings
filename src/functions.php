@@ -56,13 +56,15 @@ function upgradeRatings()
     global $wpdb;
     $postMetaTable = $wpdb->prefix.'postmeta';
 
+    // Normalize ratings.
+
+    $stars = get_option('kksr_stars', 5);
+
     $rows = $wpdb->get_results("
         SELECT a.ID, b.meta_value as ratings
         FROM {$wpdb->posts} a, {$postMetaTable} b
         WHERE a.ID=b.post_id AND b.meta_key='_kksr_ratings'
     ");
-
-    $stars = get_option('kksr_stars', 5);
 
     foreach ($rows as $row) {
         update_post_meta(
@@ -71,6 +73,24 @@ function upgradeRatings()
             toNormalizedRatings($row->ratings, $stars)
         );
     }
+
+    // Casts => Count.
+
+    $rows = $wpdb->get_results("
+        SELECT a.ID, b.meta_value as casts
+        FROM {$wpdb->posts} a, {$postMetaTable} b
+        WHERE a.ID=b.post_id AND b.meta_key='_kksr_casts'
+    ");
+
+    foreach ($rows as $row) {
+        update_post_meta($row->ID, '_kksr_count', $row->casts);
+    }
+
+    $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_casts']);
+
+    // Truncate IP addresses.
+
+    $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_ips']);
 }
 
 function isValidPost($p = null)
@@ -153,9 +173,9 @@ function calculatePercentage($total, $count, $from = 5, $to = 5)
 function calculateWidth($score, $size = null, $pad = 4)
 {
     $score = (float) $score;
-    $size = $size ?: get_option('kksr_size', 5);
+    $size = (int) ($size ?: get_option('kksr_size', 24));
 
-    return $score * $size + ((int) $score * $pad);
+    return $score * $size + $score * $pad;
 }
 
 function extractPosition($position = null)
@@ -174,6 +194,33 @@ function extractPosition($position = null)
     }
 
     return [$placement, $alignment];
+}
+
+function vote($idOrPost, $rating)
+{
+    $stars = (int) get_option('kksr_stars', 5);
+    $rating = apply_filters('kksr_rating', (float) $rating);
+    $id = is_object($idOrPost) ? $idOrPost->ID : $idOrPost;
+
+    if ($rating < 0 || $rating > $stars) {
+        throw new \Exception(sprintf(
+            __('You can only rate between 0 and %s.', 'kk-star-ratings'),
+            $stars
+        ));
+    }
+
+    $ratings = (float) get_post_meta($id, '_kksr_ratings', true);
+    $ratings += toNormalizedRatings($rating, $stars);
+
+    $count = (int) get_post_meta($id, '_kksr_count', true);
+    $count += 1;
+
+    update_post_meta($id, '_kksr_ratings', $ratings);
+    update_post_meta($id, '_kksr_count', $count);
+
+    do_action('kksr_vote', $id, $rating);
+
+    return [$ratings, $count];
 }
 
 // Admin

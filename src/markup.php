@@ -31,18 +31,18 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content)
     $width = calculateWidth($score, $size);
 
     ob_start();
-    include KKSR_PATH_VIEWS.'star.php';
-    $starMarkup = ob_get_clean();
-
-    $starsMarkup = '';
-
-    for ($i = 1; $i <= $stars; ++$i) {
-        $starsMarkup .= $starMarkup;
-    }
-
-    ob_start();
     include KKSR_PATH_VIEWS.'markup.php';
     $markup = ob_get_clean();
 
     return $placement === 'bottom' ? ($content.$markup) : ($markup.$content);
+}
+
+add_filter('kksr_score', KKSR_NAMESPACE.'scoreFilter'); function scoreFilter($score)
+{
+    return number_format($score, 1);
+}
+
+add_filter('kksr_count', KKSR_NAMESPACE.'countFilter', 10); function countFilter($count)
+{
+    return str_pad($count, 2, 0, STR_PAD_LEFT);
 }

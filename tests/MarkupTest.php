@@ -200,16 +200,6 @@ class MarkupTest extends TestCase
         extract($payload);
 
         ob_start();
-        include KKSR_PATH_VIEWS.'star.php';
-        $starMarkup = ob_get_clean();
-
-        $starsMarkup = '';
-
-        for ($i = 1; $i <= $stars; ++$i) {
-            $starsMarkup .= $starMarkup;
-        }
-
-        ob_start();
         include KKSR_PATH_VIEWS.'markup.php';
         $markup = ob_get_clean();
 

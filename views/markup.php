@@ -2,14 +2,25 @@
     class="kk-star-ratings kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
     <div class="kksr-stars">
         <div class="kksr-inactive-stars">
-            <?php echo $starsMarkup; ?>
+            <?php
+                ob_start();
+                $active = false;
+                include KKSR_PATH_VIEWS.'stars.php';
+                echo apply_filters('kksr_stars', apply_filters('kksr_stars_inactive', ob_get_clean(), $size, $stars), $size, $stars);
+            ?>
         </div>
-        <div class="kksr-active-stars" style="width: <?php echo $width; ?>px;">
-            <?php echo $starsMarkup; ?>
+        <div class="kksr-active-stars" style="width: <?php echo apply_filters('kksr_width', $width); ?>px;">
+            <?php
+                ob_start();
+                $active = true;
+                include KKSR_PATH_VIEWS.'stars.php';
+                echo apply_filters('kksr_stars', apply_filters('kksr_stars_active', ob_get_clean(), $size, $stars), $size, $stars);
+            ?>
         </div>
     </div>
-    <div class="kksr-legend" style="<?php echo $count ? '' : 'display: none; ' ?>line-height: <?php echo $size; ?>px; font-size: <?php echo $size/1.5; ?>px">
-        <span class="kksr-legend-score"><?php echo $score; ?></span>
-        <span class="kksr-legend-meta"><?php echo $count; ?></span>
-    </div>
+    <?php
+        ob_start();
+        include KKSR_PATH_VIEWS.'legend.php';
+        echo apply_filters('kksr_legend', ob_get_clean(), $score, $count);
+    ?>
 </div>

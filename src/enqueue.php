@@ -33,5 +33,14 @@ add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts()
             KKSR_VERSION,
             true
         );
+
+        wp_localize_script(
+            KKSR_SLUG,
+            str_replace('-', '_', KKSR_SLUG),
+            [
+                'nonce' => wp_create_nonce(KKSR_SLUG),
+                'endpoint' => admin_url('admin-ajax.php'),
+            ]
+        );
     }
 }
