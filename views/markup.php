@@ -1,5 +1,5 @@
 <div data-id="<?php echo $id; ?>"
-    class="kk-star-ratings kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
+    class="kk-star-ratings <?php echo (isset($disabled) && $disabled) ? 'kksr-disable' : ''; ?> kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
     <div class="kksr-stars">
         <div class="kksr-inactive-stars">
             <?php

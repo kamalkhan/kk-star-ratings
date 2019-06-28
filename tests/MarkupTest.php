@@ -4,6 +4,13 @@ namespace Bhittani\StarRating;
 
 class MarkupTest extends TestCase
 {
+    function setUp()
+    {
+        parent::setUp();
+
+        update_option('kksr_strategies', ['guests']);
+    }
+
     /** @test */
     function it_shows_the_markup_in_posts()
     {
@@ -87,6 +94,65 @@ class MarkupTest extends TestCase
         update_option('kksr_position', 'bottom-center');
 
         $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'center'], $post);
+    }
+
+    /** @test */
+    function it_is_disabled_for_duplicate_ip_if_unique_ips_are_enforced()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_strategies', ['guests', 'unique']);
+        update_post_meta($post->ID, '_kksr_ips', md5($_SERVER['REMOTE_ADDR']));
+
+        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
+    }
+
+    /** @test */
+    function it_is_enabled_for_guests_if_voting_for_guests_is_allowed()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_strategies', ['guests']);
+
+        $this->assertMarkup(['id' => $post->ID, 'disabled' => false], $post);
+    }
+
+    /** @test */
+    function it_is_disabled_for_guests_if_voting_for_guests_is_not_allowed()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_strategies', []);
+
+        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
+    }
+
+    /** @test */
+    function it_is_enabled_in_archives_if_voting_in_archives_is_allowed()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onArchivePost($post);
+
+        update_option('kksr_strategies', ['guests', 'archives']);
+
+        $this->assertMarkup(['id' => $post->ID, 'disabled' => false], $post);
+    }
+
+    /** @test */
+    function it_is_disabled_in_archives_if_voting_in_archives_is_not_allowed()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onArchivePost($post);
+
+        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
     }
 
     /** @test */
@@ -184,6 +250,7 @@ class MarkupTest extends TestCase
             'total' => 0,
             'stars' => 5,
             // 'isRtl' => false,
+            'disabled' => false,
             'placement' => 'top',
             'alignment' => 'left',
         ], $payload);

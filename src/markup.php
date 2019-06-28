@@ -29,6 +29,7 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content)
     $score = calculateScore($total, $count, $stars);
     $percent = calculatePercentage($total, $count);
     $width = calculateWidth($score, $size);
+    $disabled = ! canVote($post);
 
     ob_start();
     include KKSR_PATH_VIEWS.'markup.php';

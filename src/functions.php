@@ -93,6 +93,37 @@ function upgradeRatings()
     $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_ips']);
 }
 
+function canVote($p = null)
+{
+    global $post;
+    $p = $p ?: $post;
+
+    $filterTag = 'kksr_can_vote';
+    $strategies = get_option('kksr_strategies', []);
+
+    // Archives and voting in archives is not allowed.
+    if (is_archive() && ! in_array('archives', $strategies)) {
+        return apply_filters($filterTag, false, $p);
+    }
+
+    // Not authenticated and guests are not allowed to vote.
+    if (! is_user_logged_in() && ! in_array('guests', $strategies)) {
+        return apply_filters($filterTag, false, $p);
+    }
+
+    // Unique ips are enforced.
+    if (in_array('unique', $strategies)) {
+        $ips = get_post_meta($p->ID, '_kksr_ips');
+
+        // Not a unique IP address.
+        if (in_array(md5($_SERVER['REMOTE_ADDR']), $ips)) {
+            return apply_filters($filterTag, false, $p);
+        }
+    }
+
+    return apply_filters($filterTag, true, $p);
+}
+
 function isValidPost($p = null)
 {
     if (! get_option('kksr_enable', true)) {
