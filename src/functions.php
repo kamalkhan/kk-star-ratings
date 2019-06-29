@@ -14,6 +14,7 @@ namespace Bhittani\StarRating;
 function getOptions(array $merge = [])
 {
     return array_merge_recursive([
+        // General
         'kksr_ver' => get_option('kksr_ver', KKSR_VERSION),
         'kksr_stars' => (int) get_option('kksr_stars', 5),
         'kksr_enable' => (bool) get_option('kksr_enable', true),
@@ -21,6 +22,10 @@ function getOptions(array $merge = [])
         'kksr_position' => get_option('kksr_position', 'top-left'),
         'kksr_exclude_locations' => (array) get_option('kksr_exclude_locations', []),
         'kksr_exclude_categories' => (array) get_option('kksr_exclude_categories', []),
+        // Rich Snippets
+        'kksr_grs' => (bool) get_option('kksr_grs', true),
+        'kksr_sd_type' => get_option('kksr_sd_type', 'CreativeWork'),
+        'kksr_sd_context' => get_option('kksr_sd_context', 'https://schema.org/'),
     ], $merge);
 }
 
@@ -36,6 +41,7 @@ function saveOptions(array $options)
 function upgradeOptions(array $merge = [])
 {
     saveOptions(array_merge_recursive([
+        // General
         'kksr_strategies' => get_option('kksr_strategies', array_filter([
             get_option('kksr_unique', true) ? 'unique' : null,
             get_option('kksr_disable_in_archives', true) ? null : 'archives',
@@ -48,6 +54,8 @@ function upgradeOptions(array $merge = [])
         ])),
         'kksr_exclude_categories' => is_array($exludedCategories = get_option('kksr_exclude_categories', []))
             ? $exludedCategories : array_map('trim', explode(',', $exludedCategories)),
+        // Rich Snippets
+        // ...
     ], $merge));
 }
 
