@@ -9,6 +9,8 @@
  * is bundled with this source code in the file LICENSE.
  */
 
+namespace Bhittani\StarRating;
+
 $enabled = (bool) getOption('enable');
 $position = getOption('position');
 $excludedLocations = getOption('exclude_locations');
@@ -27,6 +29,20 @@ foreach ($categories as $category) {
         'label' => $category->name,
         'value' => $category->term_id,
         'selected' => in_array($category->term_id, (array) $excludedCategories),
+    ];
+}
+
+$excludedPostTypes = [];
+
+$postTypes = get_post_types(['publicly_queryable' => true, '_builtin' => false], 'objects');
+
+foreach ($postTypes as $postType) {
+    $excludedPostTypes[] = [
+        'field' => 'checkbox',
+        'label' => $postType->labels->name,
+        'name' => 'kksr_exclude_locations[]',
+        'value' => $postType->name,
+        'checked' => in_array($postType->name, $excludedLocations),
     ];
 }
 
@@ -140,7 +156,7 @@ return [
         'filter' => function ($values) {
             return (array) $values;
         },
-        'fields' => [
+        'fields' => array_merge([
             [
                 'field' => 'checkbox',
                 'label' => __('Home page', 'kk-star-ratings'),
@@ -159,17 +175,17 @@ return [
                 'field' => 'checkbox',
                 'label' => __('Posts', 'kk-star-ratings'),
                 'name' => 'kksr_exclude_locations[]',
-                'value' => 'posts',
-                'checked' => in_array('posts', $excludedLocations),
+                'value' => 'post',
+                'checked' => in_array('post', $excludedLocations),
             ],
             [
                 'field' => 'checkbox',
                 'label' => __('Pages', 'kk-star-ratings'),
                 'name' => 'kksr_exclude_locations[]',
-                'value' => 'pages',
-                'checked' => in_array('pages', $excludedLocations),
+                'value' => 'page',
+                'checked' => in_array('page', $excludedLocations),
             ],
-        ],
+        ], $excludedPostTypes),
     ],
 
     // Categories
