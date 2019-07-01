@@ -21,8 +21,8 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content)
 
     $id = $post->ID;
     $isRtl = is_rtl();
-    $size = (int) get_option('kksr_size', 24);
-    $stars = (int) get_option('kksr_stars', 5);
+    $size = (int) getOption('size');
+    $stars = (int) getOption('stars');
     list($placement, $alignment) = extractPosition();
     $total = get_post_meta($id, '_kksr_ratings', true);
     $count = (int) get_post_meta($id, '_kksr_count', true);

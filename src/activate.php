@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 register_activation_hook(KKSR_FILE, KKSR_NAMESPACE.'activate'); function activate()
 {
-    $previousVersion = get_option('kksr_ver');
+    $previousVersion = getOption('ver', false);
 
     if ($previousVersion && version_compare($previousVersion, '3.0.0', '<')) {
         // We are upgrading, lets normalize the previous options.
@@ -22,18 +22,20 @@ register_activation_hook(KKSR_FILE, KKSR_NAMESPACE.'activate'); function activat
         upgradeRatings();
     }
 
-    if (! $previousVersion) {
-        // We have never used any version of this plugin.
-        // Save the default options.
-        saveOptions(getOptions(['kksr_strategies' => ['unique']]));
-    }
+    // if (! $previousVersion) {
+    //     // We have never used any version of this plugin.
+    //     // Save the default options.
+    //     saveOptions(getDefaultOptions());
+    // } else if (version_compare($previousVersion, '3.0.0', '<')) {
+    //     // We were using a legacy version of the plugin.
+    //     // Synchronize the options.
+    //     saveOptions(getOptions());
+    // }
 
-    if (version_compare($previousVersion, '3.0.0', '<')) {
-        // We were using a legacy version of the plugin.
-        // Merge the new options.
+    if (! $previousVersion || version_compare($previousVersion, '3.0.0', '<')) {
         saveOptions(getOptions());
     }
 
     // Save the new version.
-    saveOptions(['kksr_ver' => KKSR_VERSION]);
+    saveOption('ver', KKSR_VERSION);
 }

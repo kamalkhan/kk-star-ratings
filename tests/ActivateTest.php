@@ -10,7 +10,7 @@ class ActivateTest extends TestCase
             'kksr_ver' => KKSR_VERSION,
             'kksr_stars' => 5,
             'kksr_enable' => true,
-            'kksr_strategies' => ['unique'],
+            'kksr_strategies' => ['guests', 'unique'],
             'kksr_position' => 'top-left',
             'kksr_exclude_locations' => [],
             'kksr_exclude_categories' => [],

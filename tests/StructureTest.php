@@ -79,7 +79,7 @@ class StructureTest extends TestCase
     /** @test*/
     function it_does_not_embed_structured_data_when_grs_is_not_active()
     {
-        update_option('kksr_grs', false);
+        update_option('kksr_grs', 0);
 
         $post = $this->onPost();
 

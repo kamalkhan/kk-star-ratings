@@ -23,7 +23,7 @@ add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
     }
 
     // Are guests allowed?
-    if (! is_user_logged_in() && ! in_array('guests', get_option('kksr_strategies', []))) {
+    if (! is_user_logged_in() && ! in_array('guests', getOption('strategies'))) {
         status_header(401);
 
         return wp_die(json_encode(['error' => __('Unauthorized.', 'kk-star-ratings')]));
@@ -41,7 +41,7 @@ add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
     $ips = get_post_meta($id, '_kksr_ips');
 
     // Is the IP address unique?
-    if (in_array('unique', get_option('kksr_strategies', []))
+    if (in_array('unique', getOption('strategies'))
         && in_array($ip, $ips)
     ) {
         status_header(403);
@@ -73,7 +73,7 @@ add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
 
     $disable = false;
     $count = apply_filters('kksr_count', $count);
-    $score = apply_filters('kksr_score', calculateScore($ratings, $count, get_option('kksr_stars', 5)));
+    $score = apply_filters('kksr_score', calculateScore($ratings, $count, getOption('stars')));
     $percentage = apply_filters('kksr_percentage', calculatePercentage($ratings, $count));
     $width = apply_filters('kksr_width', calculateWidth($score));
 

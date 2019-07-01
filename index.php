@@ -21,6 +21,7 @@ if (! defined('ABSPATH')) {
 define('KKSR_FILE', __FILE__);
 define('KKSR_PLUGIN', plugin_basename(KKSR_FILE));
 define('KKSR_VERSION', '3.0.0');
+define('KKSR_PREFIX', 'kksr_');
 define('KKSR_SLUG', 'kk-star-ratings');
 define('KKSR_LABEL', 'kk Star Ratings');
 define('KKSR_NAMESPACE', 'Bhittani\StarRating\\');
@@ -29,6 +30,22 @@ define('KKSR_PATH_SRC', KKSR_PATH . 'src/');
 define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
 define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
 define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
+define('KKSR_OPTIONS', [
+    // General
+    'stars' => 5,
+    'enable' => true,
+    'ver' => KKSR_VERSION,
+    'position' => 'top-left',
+    'exclude_locations' => [],
+    'exclude_categories' => [],
+    'strategies' => ['guests', 'unique'],
+    // Rich Snippets
+    'grs' => true,
+    'sd_type' => 'CreativeWork',
+    'sd_context' => 'https://schema.org/',
+    // Appearance
+    'size' => 24,
+]);
 
 require_once KKSR_PATH_SRC . 'functions.php';
 require_once KKSR_PATH_SRC . 'activate.php';

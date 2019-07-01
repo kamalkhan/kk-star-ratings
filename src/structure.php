@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData()
 {
-    if (! get_option('kksr_grs', 0)) {
+    if (! getOption('grs')) {
         return;
     }
 
@@ -30,11 +30,11 @@ add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData(
         return;
     }
 
-    $stars = (int) get_option('kksr_stars', 5);
+    $stars = (int) getOption('stars');
     $total = get_post_meta($id, '_kksr_ratings', true);
     $score = calculateScore($total, $count, $stars);
-    $type = get_option('kksr_sd_type', 'CreativeWork');
-    $context = get_option('kksr_sd_context', 'https://schema.org/');
+    $type = getOption('sd_type');
+    $context = getOption('sd_context');
     $name = get_the_title($id);
 
     include KKSR_PATH_VIEWS.'structured-data.php';

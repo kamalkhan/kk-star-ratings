@@ -9,11 +9,11 @@
  * is bundled with this source code in the file LICENSE.
  */
 
-$position = get_option('kksr_position', 'top-left');
-$excludedLocations = get_option('kksr_exclude_locations', []);
-$strategies = get_option('kksr_strategies', []);
-// TODO: Make sure this is an array. For previous versions, this was stored as csv.
-$excludedCategories = get_option('kksr_exclude_categories', []);
+$enabled = (bool) getOption('enable');
+$position = getOption('position');
+$excludedLocations = getOption('exclude_locations');
+$strategies = getOption('strategies');
+$excludedCategories = getOption('exclude_categories');
 
 $categories = get_terms([
     'taxonomy' => 'category',
@@ -38,7 +38,7 @@ return [
         'label' => __('Active', 'kk-star-ratings'),
         'name' => 'kksr_enable',
         'value' => true,
-        'checked' => (bool) get_option('kksr_enable'),
+        'checked' => $enabled,
         'help' => __('Globally activate/deactivate the star ratings.', 'kk-star-ratings'),
     ],
 

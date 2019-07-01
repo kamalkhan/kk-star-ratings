@@ -11,28 +11,63 @@
 
 namespace Bhittani\StarRating;
 
-function getOptions(array $merge = [])
+function stripPrefix($key)
 {
-    return array_merge_recursive([
-        // General
-        'kksr_ver' => get_option('kksr_ver', KKSR_VERSION),
-        'kksr_stars' => (int) get_option('kksr_stars', 5),
-        'kksr_enable' => (bool) get_option('kksr_enable', true),
-        'kksr_strategies' => (array) get_option('kksr_strategies', []),
-        'kksr_position' => get_option('kksr_position', 'top-left'),
-        'kksr_exclude_locations' => (array) get_option('kksr_exclude_locations', []),
-        'kksr_exclude_categories' => (array) get_option('kksr_exclude_categories', []),
-        // Rich Snippets
-        'kksr_grs' => (bool) get_option('kksr_grs', true),
-        'kksr_sd_type' => get_option('kksr_sd_type', 'CreativeWork'),
-        'kksr_sd_context' => get_option('kksr_sd_context', 'https://schema.org/'),
-    ], $merge);
+    return strpos($key, KKSR_PREFIX) === 0 ? substr($key, 5) : $key;
+}
+
+function prefix($key)
+{
+    return KKSR_PREFIX.stripPrefix($key);
+}
+
+function getDefaultOption($key, $fallback = null)
+{
+    $options = KKSR_OPTIONS;
+
+    return array_key_exists($key, $options) ? $options[$key] : $fallback;
+}
+
+function getDefaultOptions($key = null, $fallback = null)
+{
+    return is_null($key) ? KKSR_OPTIONS : getDefaultOption($key, $fallback);
+}
+
+function getOption($key, $default = null)
+{
+    if (($value = get_option(prefix($key))) !== false) {
+        return $value;
+    }
+
+    return is_null($default) ? getDefaultOption($key) : $default;
+}
+
+function getOptions($key = null, $default = null)
+{
+    if (! is_null($key)) {
+        return getOption($key, $default);
+    }
+
+    $options = [];
+
+    foreach (array_keys(KKSR_OPTIONS) as $key) {
+        $options[$key] = getOption($key);
+    }
+
+    return $options;
+}
+
+function saveOption($key, $value)
+{
+    update_option(prefix($key), $value);
+
+    return $value;
 }
 
 function saveOptions(array $options)
 {
     foreach ($options as $key => $value) {
-        update_option($key, $value);
+        saveOption($key, $value);
     }
 
     return $options;
@@ -42,17 +77,18 @@ function upgradeOptions(array $merge = [])
 {
     saveOptions(array_merge_recursive([
         // General
-        'kksr_strategies' => get_option('kksr_strategies', array_filter([
-            get_option('kksr_unique', true) ? 'unique' : null,
-            get_option('kksr_disable_in_archives', true) ? null : 'archives',
+        'strategies' => getOption('strategies', array_filter([
+            'guests',
+            getOption('unique', true) ? 'unique' : null,
+            getOption('disable_in_archives', true) ? null : 'archives',
         ])),
-        'kksr_exclude_locations' => get_option('kksr_exclude_locations', array_filter([
-            get_option('kksr_show_in_home', true) ? null : 'home',
-            get_option('kksr_show_in_posts', true) ? null : 'post',
-            get_option('kksr_show_in_pages', true) ? null : 'page',
-            get_option('kksr_show_in_archives', true) ? null : 'archives',
+        'exclude_locations' => getOption('exclude_locations', array_filter([
+            getOption('show_in_home', true) ? null : 'home',
+            getOption('show_in_posts', true) ? null : 'post',
+            getOption('show_in_pages', true) ? null : 'page',
+            getOption('show_in_archives', true) ? null : 'archives',
         ])),
-        'kksr_exclude_categories' => is_array($exludedCategories = get_option('kksr_exclude_categories', []))
+        'exclude_categories' => is_array($exludedCategories = getOption('exclude_categories', []))
             ? $exludedCategories : array_map('trim', explode(',', $exludedCategories)),
         // Rich Snippets
         // ...
@@ -66,7 +102,7 @@ function upgradeRatings()
 
     // Normalize ratings.
 
-    $stars = get_option('kksr_stars', 5);
+    $stars = getOption('stars');
 
     $rows = $wpdb->get_results("
         SELECT a.ID, b.meta_value as ratings
@@ -107,7 +143,7 @@ function canVote($p = null)
     $p = $p ?: $post;
 
     $filterTag = 'kksr_can_vote';
-    $strategies = get_option('kksr_strategies', []);
+    $strategies = getOption('strategies');
 
     // Archives and voting in archives is not allowed.
     if (is_archive() && ! in_array('archives', $strategies)) {
@@ -134,7 +170,7 @@ function canVote($p = null)
 
 function isValidPost($p = null)
 {
-    if (! get_option('kksr_enable', true)) {
+    if (! getOption('enable')) {
         // Not globally enabled.
         return false;
     }
@@ -151,27 +187,27 @@ function isValidPost($p = null)
         return $category->term_id;
     }, get_the_category($p->ID));
 
-    $categoriesDiff = array_diff($categories, get_option('kksr_exclude_categories', []));
+    $categoriesDiff = array_diff($categories, getOption('exclude_categories'));
 
     return ($type = get_post_type($p))
         // post does not belong to an excluded category.
         && count($categories) == count($categoriesDiff)
         // post type is not an excluded location.
-        && ! in_array($type, get_option('kksr_exclude_locations', []));
+        && ! in_array($type, getOption('exclude_locations'));
 }
 
 function isValidRequest()
 {
-    if (! get_option('kksr_enable', true)) {
+    if (! getOption('enable')) {
         // Not globally enabled.
         return false;
     }
 
     return (bool) (
         // home or front page AND home is not an excluded location.
-        (! in_array('home', get_option('kksr_exclude_locations', [])) && (is_front_page() || is_home()))
+        (! in_array('home', getOption('exclude_locations')) && (is_front_page() || is_home()))
         // archives AND archives is not an excluded location.
-        || (! in_array('archives', get_option('kksr_exclude_locations', [])) && is_archive())
+        || (! in_array('archives', getOption('exclude_locations')) && is_archive())
         // singular AND (exclusively enabled OR (post does not belong to an excluded category AND post type is not an excluded location)).
         || (is_singular() && isValidPost())
     );
@@ -212,14 +248,14 @@ function calculatePercentage($total, $count, $from = 5, $to = 5)
 function calculateWidth($score, $size = null, $pad = 4)
 {
     $score = (float) $score;
-    $size = (int) ($size ?: get_option('kksr_size', 24));
+    $size = (int) ($size ?: getOption('size'));
 
     return $score * $size + $score * $pad;
 }
 
 function extractPosition($position = null)
 {
-    $position = $position ?: get_option('kksr_position', 'top-left');
+    $position = $position ?: getOption('position');
 
     $placement = 'top';
     $alignment = 'left';
@@ -237,7 +273,7 @@ function extractPosition($position = null)
 
 function vote($idOrPost, $rating)
 {
-    $stars = (int) get_option('kksr_stars', 5);
+    $stars = (int) getOption('stars');
     $rating = apply_filters('kksr_rating', (float) $rating);
     $id = is_object($idOrPost) ? $idOrPost->ID : $idOrPost;
 

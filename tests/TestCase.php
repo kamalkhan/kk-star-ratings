@@ -9,7 +9,7 @@ class TestCase extends WP_UnitTestCase
     static function wpTearDownAfterClass()
     {
         foreach (array_keys(getOptions()) as $key) {
-            delete_option($key);
+            delete_option('kksr_'.$key);
         }
 
         wp_scripts()->dequeue(KKSR_SLUG);
