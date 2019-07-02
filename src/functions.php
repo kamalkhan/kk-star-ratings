@@ -25,21 +25,29 @@ function getDefaultOption($key, $fallback = null)
 {
     $options = KKSR_OPTIONS;
 
-    return array_key_exists($key, $options) ? $options[$key] : $fallback;
+    $value = array_key_exists($key, $options) ? $options[$key] : $fallback;
+
+    $value = apply_filters(prefix('default_option:'.$key), $value);
+
+    return apply_filters(prefix('default_option'), $value, $key);
 }
 
 function getDefaultOptions($key = null, $fallback = null)
 {
-    return is_null($key) ? KKSR_OPTIONS : getDefaultOption($key, $fallback);
+    return is_null($key)
+        ? apply_filters(prefix('default_options'), KKSR_OPTIONS)
+        : getDefaultOption($key, $fallback);
 }
 
 function getOption($key, $default = null)
 {
-    if (($value = get_option(prefix($key))) !== false) {
-        return $value;
+    if (($value = get_option(prefix($key))) === false) {
+        $value = is_null($default) ? getDefaultOption($key) : $default;
     }
 
-    return is_null($default) ? getDefaultOption($key) : $default;
+    $value = apply_filters(prefix('_option:'.$key), $value);
+
+    return apply_filters(prefix('_option'), $value, $key);
 }
 
 function getOptions($key = null, $default = null)
@@ -54,7 +62,7 @@ function getOptions($key = null, $default = null)
         $options[$key] = getOption($key);
     }
 
-    return $options;
+    return apply_filters(prefix('options'), $options);
 }
 
 function saveOption($key, $value)
@@ -113,7 +121,7 @@ function upgradeRatings()
     foreach ($rows as $row) {
         update_post_meta(
             $row->ID,
-            '_kksr_ratings',
+            '_'.prefix('ratings'),
             toNormalizedRatings($row->ratings, $stars)
         );
     }
@@ -127,7 +135,7 @@ function upgradeRatings()
     ");
 
     foreach ($rows as $row) {
-        update_post_meta($row->ID, '_kksr_count', $row->casts);
+        update_post_meta($row->ID, '_'.prefix('count'), $row->casts);
     }
 
     $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_casts']);
@@ -142,7 +150,7 @@ function canVote($p = null)
     global $post;
     $p = $p ?: $post;
 
-    $filterTag = 'kksr_can_vote';
+    $filterTag = prefix('can_vote');
     $strategies = getOption('strategies');
 
     // Archives and voting in archives is not allowed.
@@ -157,7 +165,7 @@ function canVote($p = null)
 
     // Unique ips are enforced.
     if (in_array('unique', $strategies)) {
-        $ips = get_post_meta($p->ID, '_kksr_ips');
+        $ips = get_post_meta($p->ID, '_'.prefix('ips'));
 
         // Not a unique IP address.
         if (in_array(md5($_SERVER['REMOTE_ADDR']), $ips)) {
@@ -170,17 +178,19 @@ function canVote($p = null)
 
 function isValidPost($p = null)
 {
-    if (! getOption('enable')) {
-        // Not globally enabled.
-        return false;
-    }
-
     global $post;
     $p = $p ?: $post;
 
-    if ($status = get_post_meta($p->ID, '_kksr_status', true)) {
+    $filterTag = prefix('is_valid_post');
+
+    if (! getOption('enable')) {
+        // Not globally enabled.
+        return apply_filters($filterTag, false, $p);
+    }
+
+    if ($status = get_post_meta($p->ID, '_'.prefix('status'), true)) {
         // Exclusive status.
-        return $status == 'enable';
+        return apply_filters($filterTag, $status == 'enable', $p);
     }
 
     $categories = array_map(function ($category) {
@@ -189,28 +199,33 @@ function isValidPost($p = null)
 
     $categoriesDiff = array_diff($categories, getOption('exclude_categories'));
 
-    return ($type = get_post_type($p))
+    $bool = ($type = get_post_type($p))
         // post does not belong to an excluded category.
         && count($categories) == count($categoriesDiff)
         // post type is not an excluded location.
         && ! in_array($type, getOption('exclude_locations'));
+
+    return apply_filters($filterTag, $bool, $p);
 }
 
 function isValidRequest()
 {
+    $filterTag = prefix('is_valid_request');
+
     if (! getOption('enable')) {
         // Not globally enabled.
-        return false;
+        return apply_filters($filterTag, false);
     }
 
-    return (bool) (
+    $bool =
         // home or front page AND home is not an excluded location.
         (! in_array('home', getOption('exclude_locations')) && (is_front_page() || is_home()))
         // archives AND archives is not an excluded location.
         || (! in_array('archives', getOption('exclude_locations')) && is_archive())
         // singular AND (exclusively enabled OR (post does not belong to an excluded category AND post type is not an excluded location)).
-        || (is_singular() && isValidPost())
-    );
+        || (is_singular() && isValidPost());
+
+    return apply_filters($filterTag, $bool);
 }
 
 // Calculations
@@ -274,7 +289,7 @@ function extractPosition($position = null)
 function vote($idOrPost, $rating)
 {
     $stars = (int) getOption('stars');
-    $rating = apply_filters('kksr_rating', (float) $rating);
+    $rating = apply_filters(prefix('rating'), (float) $rating);
     $id = is_object($idOrPost) ? $idOrPost->ID : $idOrPost;
 
     if ($rating < 0 || $rating > $stars) {
@@ -284,16 +299,16 @@ function vote($idOrPost, $rating)
         ));
     }
 
-    $ratings = (float) get_post_meta($id, '_kksr_ratings', true);
+    $ratings = (float) get_post_meta($id, '_'.prefix('ratings'), true);
     $ratings += toNormalizedRatings($rating, $stars);
 
-    $count = (int) get_post_meta($id, '_kksr_count', true);
+    $count = (int) get_post_meta($id, '_'.prefix('count'), true);
     $count += 1;
 
-    update_post_meta($id, '_kksr_ratings', $ratings);
-    update_post_meta($id, '_kksr_count', $count);
+    update_post_meta($id, '_'.prefix('ratings'), $ratings);
+    update_post_meta($id, '_'.prefix('count'), $count);
 
-    do_action('kksr_vote', $id, $rating);
+    do_action(prefix('vote'), $id, $rating);
 
     return [$ratings, $count];
 }
