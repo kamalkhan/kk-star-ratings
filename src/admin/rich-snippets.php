@@ -9,33 +9,35 @@
  * is bundled with this source code in the file LICENSE.
  */
 
+namespace Bhittani\StarRating;
+
 return [
     [
         'field' => 'checkbox',
-        'id' => 'kksr_grs',
+        'id' => prefix('grs'),
         'title' => __('Status', 'kk-star-ratings'),
         'label' => __('Active', 'kk-star-ratings'),
-        'name' => 'kksr_grs',
+        'name' => prefix('grs'),
         'value' => true,
-        'checked' => (bool) get_option('kksr_grs'),
+        'checked' => (bool) getOption('grs'),
         'help' => __('Activate/deactivate rich snippets.', 'kk-star-ratings'),
     ],
 
     [
         'field' => 'text',
-        'id' => 'kksr_sd_context',
+        'id' => prefix('sd_context'),
         'title' => __('Context', 'kk-star-ratings'),
-        'name' => 'kksr_sd_context',
-        'value' => get_option('kksr_sd_context'),
+        'name' => prefix('sd_context'),
+        'value' => getOption('sd_context'),
         'help' => __('Structured data context.', 'kk-star-ratings'),
     ],
 
     [
         'field' => 'text',
-        'id' => 'kksr_sd_type',
+        'id' => prefix('sd_type'),
         'title' => __('Type', 'kk-star-ratings'),
-        'name' => 'kksr_sd_type',
-        'value' => get_option('kksr_sd_type'),
+        'name' => prefix('sd_type'),
+        'value' => getOption('sd_type'),
         'help' => __('Structured data type.', 'kk-star-ratings'),
     ],
 ];

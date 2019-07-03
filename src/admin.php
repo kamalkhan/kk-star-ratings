@@ -23,12 +23,17 @@ add_action('admin_menu', KKSR_NAMESPACE.'admin'); function admin()
     );
 } function adminCallback()
 {
+    $label = KKSR_LABEL;
+    $version = KKSR_VERSION;
+
     ob_start();
     include KKSR_PATH_VIEWS.'admin/index.php';
-    echo ob_get_clean();
+    $html = ob_get_clean();
+
+    echo apply_filters(prefix('settings'), $html);
 }
 
-add_action('kksr_settings_tab', KKSR_NAMESPACE.'adminTabs'); function adminTabs()
+add_action(prefix('setting_tabs'), KKSR_NAMESPACE.'adminTabs'); function adminTabs()
 {
     $tabs = getAdminTabs();
     $active = getActiveAdminTab();
@@ -38,7 +43,7 @@ add_action('kksr_settings_tab', KKSR_NAMESPACE.'adminTabs'); function adminTabs(
     echo ob_get_clean();
 }
 
-add_action('kksr_settings_content', KKSR_NAMESPACE.'adminContents'); function adminContents()
+add_action(prefix('setting_contents'), KKSR_NAMESPACE.'adminContents'); function adminContents()
 {
     if (! ($active = getActiveAdminTab())) {
         return;
@@ -69,9 +74,22 @@ add_action('admin_init', KKSR_NAMESPACE.'adminFields'); function adminFields()
         $fields = array_merge($fields, (array) require $file);
     }
 
-    $fields = apply_filters('kksr_settings_'.$active.'_fields', $fields);
+    $fields = apply_filters(prefix('setting_fields'), $fields, $active);
+    $fields = apply_filters(prefix('setting_fields:'.$active), $fields);
 
     foreach ($fields as $field) {
+        $field = apply_filters(prefix('setting_field'), $field);
+
+        if (isset($field['field'])) {
+            $field = apply_filters(prefix('setting_field:'.$field['field']), $field);
+        } elseif (isset($field['fields'])) {
+            foreach ($field['fields'] as &$childField) {
+                $childField = apply_filters(prefix('setting_field:'.$childField['field']), $childField);
+            }
+        }
+
+        $field = apply_filters(prefix('setting_input:'.$field['name']), $field);
+
         register_setting(
             KKSR_SLUG,
             $field['name'],
@@ -103,13 +121,27 @@ add_action('admin_init', KKSR_NAMESPACE.'adminFields'); function adminFields()
         if (isset($help)) {
             echo $br;
         }
-    } else {
-        include KKSR_PATH_VIEWS.'admin/fields/'.$args['field'].'.php';
+    } elseif (isset($args['field'])
+        && file_exists($file = KKSR_PATH_VIEWS.'admin/fields/'.$args['field'].'.php')
+    ) {
+        include $file;
     }
 
     if (isset($help)) {
         echo '<p class="description">'.$help.'</p>';
     }
 
-    echo ob_get_clean();
+    $html = ob_get_clean();
+
+    $html = apply_filters(prefix('setting_field_html'), $html, $args);
+
+    if (isset($args['field'])) {
+        $html = apply_filters(prefix('setting_field_html:'.$args['field']), $html, $args);
+    }
+
+    if (isset($args['name'])) {
+        $html = apply_filters(prefix('setting_input_html:'.$args['name']), $html, $args);
+    }
+
+    echo $html;
 }
