@@ -317,42 +317,46 @@ function vote($idOrPost, $rating)
 
 function getAdminTabs()
 {
-    return [
+    return apply_filters(prefix('admin_tabs'), [
         'general' => __('General', 'kk-star-ratings'),
         'rich-snippets' => __('Rich Snippets', 'kk-star-ratings'),
         'appearance' => __('Appearance', 'kk-star-ratings'),
         'developers' => __('Developers', 'kk-star-ratings'),
         'support' => __('Support', 'kk-star-ratings'),
-    ];
+    ]);
 }
 
 function getDefaultAdminTab()
 {
-    return 'general';
+    return apply_filters(prefix('default_admin_tab'), 'general');
 }
 
 function getActiveAdminTab()
 {
+    $filterTag = prefix('active_admin_tab');
+
     $defaultTab = getDefaultAdminTab();
 
     if (! isset($_GET['tab'])) {
-        return $defaultTab;
+        return apply_filters($filterTag, $defaultTab);
     }
 
     $tab = $_GET['tab'];
 
     if (empty($tab)) {
-        return $defaultTab;
+        return apply_filters($filterTag, $defaultTab);
     }
 
     $tabs = getAdminTabs();
 
     if (isset($tabs[$tab])) {
-        return $tab;
+        return apply_filters($filterTag, $tab);
     }
+
+    return apply_filters($filterTag, null);
 }
 
 function isActiveAdminTab($tab)
 {
-    return $tab == getActiveAdminTab();
+    return apply_filters(prefix('is_active_admin_tab'), $tab == getActiveAdminTab());
 }
