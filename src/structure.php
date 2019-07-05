@@ -37,5 +37,9 @@ add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData(
     $context = getOption('sd_context');
     $name = get_the_title($id);
 
+    ob_start();
     include KKSR_PATH_VIEWS.'structured-data.php';
+    $html = ob_get_clean();
+
+    echo apply_filters(prefix('structured_data'), $html, $post);
 }
