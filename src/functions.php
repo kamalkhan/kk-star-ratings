@@ -45,9 +45,9 @@ function getOption($key, $default = null)
         $value = is_null($default) ? getDefaultOption($key) : $default;
     }
 
-    $value = apply_filters(prefix('_option:'.$key), $value);
+    $value = apply_filters(prefix('option:'.$key), $value);
 
-    return apply_filters(prefix('_option'), $value, $key);
+    return apply_filters(prefix('option'), $value, $key);
 }
 
 function getOptions($key = null, $default = null)
