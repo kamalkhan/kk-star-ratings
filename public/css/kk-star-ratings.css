@@ -24,6 +24,13 @@
     justify-content: center;
 }
 
+.kk-star-ratings.kksr-right {
+    -webkit-box-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: flex-end;
+    justify-content: flex-end;
+}
+
 .kk-star-ratings .kksr-stars {
     position: relative;
     display: table;
@@ -116,10 +123,10 @@
 }
 
 /* Size */
-.kk-star-ratings .kksr-stars .kksr-star svg {
+/* .kk-star-ratings .kksr-stars .kksr-star svg {
     width: 24px;
     height: 24px;
-}
+} */
 
 /* Colors */
 
@@ -156,6 +163,13 @@
 
 .kk-star-ratings.kksr-rtl {
     direction: rtl;
+}
+
+.kk-star-ratings.kksr-rtl.kksr-right {
+    -webkit-box-pack: flex-start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: flex-start;
+    justify-content: flex-start;
 }
 
 /* RTL - stars */
