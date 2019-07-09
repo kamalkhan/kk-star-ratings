@@ -75,88 +75,57 @@
 /* Legend */
 
 .kk-star-ratings .kksr-legend {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
+    color: #333;
+    margin-right: 8px;
     font-family: monospace;
-    margin-left: 2rem;
-    border-radius: 4px;
-}
-
-.kk-star-ratings .kksr-legend:before {
-	left: -14px;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: transparent;
-	border-width: 6px;
-	margin-top: -6px;
-}
-
-.kk-star-ratings .kksr-legend:after {
-	left: -13px;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: transparent;
-	border-width: 7px;
-	margin-top: -7px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .kk-star-ratings .kksr-legend .kksr-legend-score {
-    display: inline-block;
-    padding: 0 0 0 8px;
+    padding: 2px 12px;
+    border-radius: 10rem;
+    color: #fff;
     font-weight: bold;
+    background-color: #333;
 }
 
 .kk-star-ratings .kksr-legend .kksr-legend-meta {
-    display: inline-block;
-    padding: 0 8px;
+    margin-left: 8px;
 }
 
 /* Size */
-/* .kk-star-ratings .kksr-stars .kksr-star svg {
+.kk-star-ratings .kksr-stars .kksr-star svg {
     width: 24px;
     height: 24px;
-} */
+}
 
 /* Colors */
 
 .kk-star-ratings .kksr-stars .kksr-star svg,
 .kk-star-ratings:not(.kksr-disable) .kksr-stars .kksr-star:hover ~ .kksr-star svg {
-    fill: rgb(241, 241, 241);
-    stroke: #d8d8d8;
+    fill: #fff;
+    stroke: #333;
 }
 .kk-star-ratings .kksr-stars .kksr-active-stars .kksr-star svg {
-    fill: rgb(236, 209, 120);
-    stroke: rgb(226, 182, 87);
+    fill: #ddd;
+    stroke: #333;
 }
 .kk-star-ratings:not(.kksr-disable) .kksr-stars:hover .kksr-star svg {
-    fill: rgb(202, 228, 110);
-    stroke: rgb(174, 201, 65);
+    fill: #f2fa6f;
+    stroke: #333;
 }
 .kk-star-ratings .kksr-legend {
-    color: rgb(226, 182, 87);
-    border: 2px solid rgb(226, 182, 87);
-    background-color: white;
+    color: #333;
 }
-.kk-star-ratings .kksr-legend:before {
-    border-right-color: rgb(226, 182, 87);
-}
-.kk-star-ratings .kksr-legend:after {
-    border-right-color: white;
-}
-.kk-star-ratings .kksr-legend .kksr-legend-meta {
-    color: #fff;
-    background-color: rgb(226, 182, 87);
+.kk-star-ratings .kksr-legend .kksr-legend-score {
+    background-color: #333;
 }
 
 /* RTL */
@@ -184,8 +153,6 @@
     right: 0;
 }
 
-/* RTL - legend */
-
 .kk-star-ratings.kksr-rtl .kksr-stars .kksr-inactive-stars .kksr-star,
 .kk-star-ratings.kksr-rtl .kksr-stars .kksr-active-stars .kksr-star {
     padding-left: 4px;
@@ -195,28 +162,14 @@
 .kk-star-ratings.kksr-rtl .kksr-stars .kksr-active-stars .kksr-star:last-child {
     padding-left: 0;
 }
+
+/* RTL - legend */
+
 .kk-star-ratings.kksr-rtl .kksr-legend {
+    margin-left: 8px;
+    margin-right: 0;
+}
+.kk-star-ratings.kksr-rtl .kksr-legend .kksr-legend-meta {
     margin-left: 0;
-    margin-right: 2rem;
-}
-.kk-star-ratings.kksr-rtl .kksr-legend:before {
-    right: -14px;
-    border-right-color: transparent;
-}
-.kk-star-ratings.kksr-rtl .kksr-legend:after {
-    right: -13px;
-    border-right-color: transparent;
-}
-.kk-star-ratings.kksr-rtl .kksr-legend .kksr-legend-score {
-    padding: 0 8px 0 0;
-}
-
-
-/* RTL - colors */
-
-.kk-star-ratings.kksr-rtl .kksr-legend:before {
-    border-left-color: rgb(226, 182, 87);
-}
-.kk-star-ratings.kksr-rtl .kksr-legend:after {
-    border-left-color: white;
+    margin-right: 8px;
 }

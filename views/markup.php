@@ -1,5 +1,10 @@
 <div data-id="<?php echo $id; ?>"
     class="kk-star-ratings <?php echo (isset($disabled) && $disabled) ? 'kksr-disable' : ''; ?> kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
+    <?php
+        ob_start();
+        include KKSR_PATH_VIEWS.'legend.php';
+        echo apply_filters('kksr_legend', ob_get_clean(), $score, $count);
+    ?>
     <div class="kksr-stars">
         <div class="kksr-inactive-stars">
             <?php
@@ -18,9 +23,4 @@
             ?>
         </div>
     </div>
-    <?php
-        ob_start();
-        include KKSR_PATH_VIEWS.'legend.php';
-        echo apply_filters('kksr_legend', ob_get_clean(), $score, $count);
-    ?>
 </div>
