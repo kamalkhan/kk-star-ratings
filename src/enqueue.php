@@ -44,3 +44,35 @@ add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts()
         );
     }
 }
+
+add_action('wp_head', KKSR_NAMESPACE.'stylesheet'); function stylesheet()
+{
+    if (! isValidRequest()) {
+        return;
+    }
+
+    $size = getOption('size');
+
+    $colors = [
+        'default' => [
+            'fill' => getOption('fill_color_star'),
+            'stroke' => getOption('stroke_color_star'),
+        ],
+        'active' => [
+            'fill' => getOption('fill_color_active_star'),
+            'stroke' => getOption('stroke_color_active_star'),
+        ],
+        'hover' => [
+            'fill' => getOption('fill_color_hover_star'),
+            'stroke' => getOption('stroke_color_hover_star'),
+        ],
+    ];
+
+    ob_start();
+    include KKSR_PATH_PUBLIC.'css/kk-star-ratings.css.php';
+    $stylesheet = ob_get_clean();
+
+    echo '<style type="text/css">';
+    echo apply_filters(prefix('stylesheet'), $stylesheet);
+    echo '</style>';
+}

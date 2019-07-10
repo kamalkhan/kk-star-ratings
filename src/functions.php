@@ -320,6 +320,7 @@ function getAdminTabs()
     return apply_filters(prefix('admin_tabs'), [
         'general' => __('General', 'kk-star-ratings'),
         'rich-snippets' => __('Rich Snippets', 'kk-star-ratings'),
+        'appearance' => __('Appearance', 'kk-star-ratings'),
     ]);
 }
 
