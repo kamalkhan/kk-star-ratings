@@ -21,7 +21,7 @@ class MarkupTest extends TestCase
 
         $this->onPost($post);
 
-        $this->assertMarkup(['id' => $post->ID, 'total' => 10, 'count' => 3], $post);
+        $this->assertMarkup($post, ['total' => 10, 'count' => 3]);
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'top-left');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'left'], $post);
+        $this->assertMarkup($post, ['placement' => 'top', 'alignment' => 'left']);
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'top-right');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'right'], $post);
+        $this->assertMarkup($post, ['placement' => 'top', 'alignment' => 'right']);
     }
 
     /** @test */
@@ -57,7 +57,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'top-center');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'top', 'alignment' => 'center'], $post);
+        $this->assertMarkup($post, ['placement' => 'top', 'alignment' => 'center']);
     }
 
     /** @test */
@@ -69,7 +69,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'bottom-left');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'left'], $post);
+        $this->assertMarkup($post, ['placement' => 'bottom', 'alignment' => 'left']);
     }
 
     /** @test */
@@ -81,7 +81,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'bottom-right');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'right'], $post);
+        $this->assertMarkup($post, ['placement' => 'bottom', 'alignment' => 'right']);
     }
 
     /** @test */
@@ -93,7 +93,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_position', 'bottom-center');
 
-        $this->assertMarkup(['id' => $post->ID, 'placement' => 'bottom', 'alignment' => 'center'], $post);
+        $this->assertMarkup($post, ['placement' => 'bottom', 'alignment' => 'center']);
     }
 
     /** @test */
@@ -106,7 +106,7 @@ class MarkupTest extends TestCase
         update_option('kksr_strategies', ['guests', 'unique']);
         update_post_meta($post->ID, '_kksr_ips', md5($_SERVER['REMOTE_ADDR']));
 
-        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
+        $this->assertMarkup($post, ['disabled' => true]);
     }
 
     /** @test */
@@ -118,7 +118,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_strategies', ['guests']);
 
-        $this->assertMarkup(['id' => $post->ID, 'disabled' => false], $post);
+        $this->assertMarkup($post, ['disabled' => false]);
     }
 
     /** @test */
@@ -130,7 +130,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_strategies', []);
 
-        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
+        $this->assertMarkup($post, ['disabled' => true]);
     }
 
     /** @test */
@@ -142,7 +142,7 @@ class MarkupTest extends TestCase
 
         update_option('kksr_strategies', ['guests', 'archives']);
 
-        $this->assertMarkup(['id' => $post->ID, 'disabled' => false], $post);
+        $this->assertMarkup($post, ['disabled' => false]);
     }
 
     /** @test */
@@ -152,7 +152,21 @@ class MarkupTest extends TestCase
 
         $this->onArchivePost($post);
 
-        $this->assertMarkup(['id' => $post->ID, 'disabled' => true], $post);
+        $this->assertMarkup($post, ['disabled' => true]);
+    }
+
+    /** @test */
+    function it_ignores_the_markup_in_posts_that_contain_the_shortcode()
+    {
+        remove_shortcode('kkstarratings');
+
+        $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings]']);
+
+        $this->onPost($post);
+
+        $this->assertContents($post);
+
+        add_shortcode('kkstarratings', KKSR_NAMESPACE.'shortcode');
     }
 
     /** @test */
@@ -238,13 +252,14 @@ class MarkupTest extends TestCase
         return $this;
     }
 
-    function assertMarkup(array $payload = [], $post, $content = null, $assertion = null)
+    static function assertMarkup($post, array $payload = [], $content = null, $assertion = null)
     {
         global $page, $pages;
         $page = 1;
         $pages = [$post->post_content];
 
         $payload = array_merge([
+            'id' => $post->ID,
             'size' => 24,
             'count' => 0,
             'total' => 0,
@@ -276,12 +291,12 @@ class MarkupTest extends TestCase
             $assertion = ob_get_clean();
         }
 
-        $content = $content ?: ('<p>'.get_the_content().'</p>'.PHP_EOL);
+        if (is_null($content)) {
+            $content = '<p>'.get_the_content().'</p>'.PHP_EOL;
+        }
 
         $expectation = $placement === 'bottom' ? ($content.$markup) : ($markup.$content);
 
-        $this->assertEquals($expectation, $assertion);
-
-        return $this;
+        static::assertEquals($expectation, $assertion);
     }
 }

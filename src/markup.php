@@ -11,15 +11,21 @@
 
 namespace Bhittani\StarRating;
 
-add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content)
+add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content, $force = false, $p = null)
 {
-    if (! (isValidRequest() && isValidPost())) {
+    if (! $force && ! (isValidRequest() && isValidPost())) {
+        return $content;
+    }
+
+    if (stripos($content, '['.KKSR_SHORTCODE.']') !== false) {
         return $content;
     }
 
     global $post;
+    $p = $p ?: $post;
+    $p = is_object($p) ? $p : get_post($p);
 
-    $id = $post->ID;
+    $id = $p->ID;
     $isRtl = is_rtl();
     $size = (int) getOption('size');
     $stars = (int) getOption('stars');
@@ -29,7 +35,7 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content)
     $score = calculateScore($total, $count, $stars);
     $percent = calculatePercentage($total, $count);
     $width = calculateWidth($score, $size);
-    $disabled = ! canVote($post);
+    $disabled = ! canVote($p);
 
     ob_start();
     include KKSR_PATH_VIEWS.'markup.php';
