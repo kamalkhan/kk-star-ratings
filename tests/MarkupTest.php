@@ -156,17 +156,15 @@ class MarkupTest extends TestCase
     }
 
     /** @test */
-    function it_ignores_the_markup_in_posts_that_contain_the_shortcode()
+    function it_renders_in_posts_that_contain_the_shortcode_but_post_type_is_excluded()
     {
-        remove_shortcode('kkstarratings');
+        update_option('kksr_exclude_locations', ['post']);
 
         $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings]']);
 
         $this->onPost($post);
 
-        $this->assertContents($post);
-
-        add_shortcode('kkstarratings', KKSR_NAMESPACE.'shortcode');
+        $this->assertMarkup($post, [], PHP_EOL);
     }
 
     /** @test */

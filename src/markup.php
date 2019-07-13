@@ -17,7 +17,7 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content, $f
         return $content;
     }
 
-    if (stripos($content, '['.KKSR_SHORTCODE.']') !== false) {
+    if (! $force && has_shortcode($content, KKSR_SHORTCODE)) {
         return $content;
     }
 

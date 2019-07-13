@@ -193,6 +193,11 @@ function isValidPost($p = null)
         return apply_filters($filterTag, $status == 'enable', $p);
     }
 
+    if (has_shortcode($p->post_content, KKSR_SHORTCODE)) {
+        // Has shortcode.
+        return apply_filters($filterTag, true, $p);
+    }
+
     $categories = array_map(function ($category) {
         return $category->term_id;
     }, get_the_category($p->ID));
