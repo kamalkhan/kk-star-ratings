@@ -21,7 +21,7 @@ class MarkupTest extends TestCase
 
         $this->onPost($post);
 
-        $this->assertMarkup($post, ['total' => 10, 'count' => 3]);
+        $this->assertMarkup($post, ['ratings' => 10, 'count' => 3]);
     }
 
     /** @test */
@@ -260,7 +260,7 @@ class MarkupTest extends TestCase
             'id' => $post->ID,
             'size' => 24,
             'count' => 0,
-            'total' => 0,
+            'ratings' => 0,
             'stars' => 5,
             // 'isRtl' => false,
             'disabled' => false,
@@ -269,10 +269,10 @@ class MarkupTest extends TestCase
         ], $payload);
 
         $payload['percent'] = isset($payload['percent'])
-            ? $payload['percent'] : calculatePercentage($payload['total'], $payload['count']);
+            ? $payload['percent'] : calculatePercentage($payload['ratings'], $payload['count']);
 
         $payload['score'] = isset($payload['score'])
-            ? $payload['score'] : calculateScore($payload['total'], $payload['count'], $payload['stars']);
+            ? $payload['score'] : calculateScore($payload['ratings'], $payload['count'], $payload['stars']);
 
         $payload['width'] = isset($payload['width'])
             ? $payload['width'] : calculateWidth($payload['score'], $payload['size']);

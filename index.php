@@ -62,3 +62,4 @@ require_once KKSR_PATH_SRC . 'admin.php';
 require_once KKSR_PATH_SRC . 'ajax.php';
 require_once KKSR_PATH_SRC . 'structure.php';
 require_once KKSR_PATH_SRC . 'shortcode.php';
+require_once KKSR_PATH_SRC . 'legacy.php';
