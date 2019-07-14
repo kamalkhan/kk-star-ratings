@@ -110,4 +110,26 @@ class ActivateTest extends TestCase
         $this->assertEquals(2.5, get_post_meta($postId1, '_kksr_ratings', true));
         $this->assertEquals(5, get_post_meta($postId2, '_kksr_ratings', true));
     }
+
+    /** @test */
+    function it_updates_casts_meta_key_to_count_if_the_plugin_version_was_older_than_three()
+    {
+        $postId1 = static::factory()->post->create();
+        $postId2 = static::factory()->post->create();
+
+        update_option('kksr_ver', '2.6.5');
+        update_post_meta($postId1, '_kksr_casts', 5);
+        update_post_meta($postId2, '_kksr_casts', 10);
+
+        $this->assertEmpty(get_post_meta($postId1, '_kksr_count', true));
+        $this->assertEmpty(get_post_meta($postId2, '_kksr_count', true));
+
+        activate();
+
+        $this->assertEmpty(get_post_meta($postId1, '_kksr_casts', true));
+        $this->assertEmpty(get_post_meta($postId2, '_kksr_casts', true));
+
+        $this->assertEquals(5, get_post_meta($postId1, '_kksr_count', true));
+        $this->assertEquals(10, get_post_meta($postId2, '_kksr_count', true));
+    }
 }
