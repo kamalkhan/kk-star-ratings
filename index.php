@@ -32,9 +32,9 @@ define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
 define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
 define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
 define('KKSR_OPTIONS', [
+    'ver' => KKSR_VERSION,
     // General
     'enable' => true,
-    'ver' => KKSR_VERSION,
     'position' => 'top-left',
     'exclude_locations' => [],
     'exclude_categories' => [],
