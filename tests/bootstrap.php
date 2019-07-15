@@ -14,7 +14,7 @@ if (!file_exists($testDir . '/includes/functions.php')) {
 $pluginFile = __DIR__ . '/../' . ltrim(getenv('WP_PLUGIN_FILE'), '/');
 
 if (!file_exists($pluginFile)) {
-    $pluginFile = __DIR__ . '/../' . dirname(__DIR__ . '/../');
+    $pluginFile = __DIR__ . '/../' . dirname(__DIR__ . '/../') . '.php';
 
     if (!file_exists($pluginFile)) {
         echo "Could not find {$pluginFile} file." . PHP_EOL;
