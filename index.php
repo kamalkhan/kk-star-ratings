@@ -316,7 +316,7 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
                 //     'link' => 'https://github.com/kamalkhan/kk-star-ratings'
                 // ),
                 // array(
-                // 	'title' => 'Changelog',
+                //  'title' => 'Changelog',
                 //     'link' => '#'
                 // )
             );
@@ -471,6 +471,10 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
                     update_post_meta($pid, '_kksr_avg', $avg);
                     $Response[$pid]['disable'] = parent::get_options('kksr_unique') ? 'true' : 'false';
                     do_action('kksr_rate', $pid, $stars, $ip);
+
+                    if ( method_exists( 'LiteSpeed_Cache_API', 'purge_post' ) ) {
+                        LiteSpeed_Cache_API::purge_post( $pid ) ;
+                    }
                 }
                 else
                 {
@@ -508,8 +512,21 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             $Intersection = array_intersect($Cat_ids, $Post_cat_ids);
             return count($Intersection);
         }
-        public function markup($id=false)
+        public function markup($id=false , $from_esi = false)
         {
+            // To make sure it is the original call
+            if ( ! $from_esi ) {
+                // To make sure LSCWP ESI is on
+                if( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) {
+                    // To make sure is using the compatible API version
+                    if ( method_exists( 'LiteSpeed_Cache_API', 'v' ) && LiteSpeed_Cache_API::v( '1.2.4' ) ) {
+                        $params = array( 'id' => $id ) ;// If you have any parameters want to pass
+                            // Let's turn this block to ESI by returning directly
+                        return LiteSpeed_Cache_API::esi_url( 'kk_esi', 'KK Star', $params ) ;
+                    }
+                }
+            }
+
             $id = !$id ? get_the_ID() : $id;
             if($this->exclude_cat($id))
             {
@@ -555,6 +572,13 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
             $markup .= parent::get_options('kksr_clear') ? '<br clear="both" />' : '';
             return $markup;
         }
+
+        public function hook_esi( $params ) {
+            $id = $params[ 'id' ] ;
+            echo $this->markup( $id, true ) ;
+            exit;
+        }
+
         public function manual($atts)
         {
             extract(shortcode_atts(array('id' => false), $atts));
@@ -746,6 +770,11 @@ if(!class_exists('BhittaniPlugin_kkStarRatings')) :
     add_action('wp_enqueue_scripts', array($kkStarRatings_obj, 'css'));
     add_action('wp_head', array($kkStarRatings_obj, 'css_custom'));
     add_action('admin_init', array($kkStarRatings_obj, 'admin_scripts'));
+
+    // Added by LiteSpeed
+    if ( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) {
+        LiteSpeed_Cache_API::hook_tpl_esi( 'kk_esi', array( $kkStarRatings_obj, 'hook_esi' ) ) ;
+    }
 
     // Menu
     add_action('admin_menu', array($kkStarRatings_obj, 'menu'));
