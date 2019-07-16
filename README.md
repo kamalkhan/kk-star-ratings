@@ -200,6 +200,8 @@ cd kk-star-ratings
 
 composer install
 
+composer install-test-suite
+
 composer test
 ```
 
