@@ -45,7 +45,7 @@ add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts()
     }
 }
 
-add_action('wp_head', KKSR_NAMESPACE.'stylesheet'); function stylesheet()
+add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'stylesheet'); function stylesheet()
 {
     if (! isValidRequest()) {
         return;
@@ -72,7 +72,5 @@ add_action('wp_head', KKSR_NAMESPACE.'stylesheet'); function stylesheet()
     include KKSR_PATH_PUBLIC.'css/kk-star-ratings.css.php';
     $stylesheet = ob_get_clean();
 
-    echo '<style type="text/css">';
-    echo apply_filters(prefix('stylesheet'), $stylesheet);
-    echo '</style>';
+    wp_add_inline_style(KKSR_SLUG, apply_filters(prefix('stylesheet'), $stylesheet));
 }
