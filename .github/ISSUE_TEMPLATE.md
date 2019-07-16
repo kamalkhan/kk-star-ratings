@@ -25,7 +25,3 @@ Include as many relevant details about the environment you experienced the bug i
 * Link to your project:
 * ...
 * ...
-
-## Attribution
-
-This issue template guide has been adapted from the [thephpleague's skeleton package](https://github.com/thephpleague/skeleton).

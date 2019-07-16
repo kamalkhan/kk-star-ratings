@@ -1,115 +1,111 @@
 === kk Star Ratings ===
 Contributors: bhittani
 Donate link: https://github.com/kamalkhan/kk-star-ratings
-Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets
+Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SRP
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.1.1
-Stable tag: 2.6.3
+Tested up to: 5.2.2
+Stable tag: 2.6.4
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+
 
 kk Star Ratings allows blog visitors to involve and interact more effectively with your website by rating posts.
 
+This plugin has been renewed from the ground up as of v3 covered by unit tests.
+
+
+
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
 
-A few notes about the sections above:
+kk Star Ratings is a widely used star rating plugin for wordpress. Here are some highlighted features:
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+- User defined amount of star ratings (5 as default) in your **posts**, **pages** and publicly accesible **custom post types**.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+- Structured data supporting **google rich snippets** showing the star ratings in search results which has the potential to drive more traffic to your website.
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+- Widespread coverage of custom hooks.
+
+- Full control via options page. You can,
+
+  - Enable or disable globally.
+  
+  - Disable star ratings in posts that belong to certain categories.
+
+  - Choose where to show the star ratings. It can be on the **homepage**, in **archives**, in **posts**, in **pages** and/or in **custom post types**.
+
+  - Control the structured data schema and type.
+
+  - Restrict votings per unique ip.
+
+  - Allow voting in archives.
+
+  - Allow guests to vote.
+
+  - Customize position within the post content.
+
+  - Adjust the number of stars.
+
+  - Adjust the amount of stars.
+
+  - Adjust the colors of the stars.
+  
+- And much more...
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
 
-e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+
+
+
+1. Extract the plugin zip file.
+1. Upload/move the folder `kk-star-ratings` to the `wp-content/plugins` directory.
+1. Activate the plugin via the wordpress plugins dashboard page.
+1. Adjust the plugin options under the kk Star Ratings menu in wp-admin.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
 
-An answer to that question.
 
-= What about foo bar? =
+= What should I do if structured data do not show in search result pages. =
 
-Answer to foo bar dilemma.
+
+Please have patience as we have no control over how google or any search engine indexes your pages. It might take some days or even weeks for the robots to crawl the ratings.
+
+= I have been using a verion of this plugin prior to v3. Is it safe for me to update? =
+
+
+The source of this plugin is located at [Github](https://github.com/kamalkhan/kk-star-ratings). Feel free to post an issue or submit a pull request.
+
+= I found a bug or want to contribute. =
+
+
+All previous ratings and options will be preserved. However, since v3 has been renewed from scratch, we do not support downgrading to v2 after moving from v2 to v3.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Screenshot label 1
+2. Screenshot label 2
+3. ...
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 3.0.0 =
+- Describe the changes!
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 2.x =
+[Archived](.github/CHANGELOG-v2.md)
+
+= 1.x =
+[Archived](.github/CHANGELOG-v1.md)
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
+= 3.0.0 =
+All previous ratings and options will be preserved. However, since v3 has been renewed from scratch, we do not support downgrading to v2 after moving from v2 to v3.
 
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
 
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: https://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`

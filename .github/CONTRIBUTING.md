@@ -2,7 +2,7 @@
 
 Thank you for considering contributing towards this project.
 
-We accept contributions via pull requests on [Github](https://github.com/kamalkhan/laravel-stripe).
+We accept contributions via pull requests on [Github](https://github.com/kamalkhan/kk-star-ratings).
 
 ## Pull Requests
 

@@ -39,9 +39,3 @@ Please, please, please, don't send your pull request until all of the boxes are 
 - [ ] Each individual commit in the pull request is meaningful.
 - [ ] I have added tests to cover my changes.
 - [ ] If my change requires a change to the readme or documentation, I have updated it accordingly.
-
-If you're unsure about any of these, don't hesitate to ask. We're here to help!
-
-## Attribution
-
-This pull request template guide has been adapted from the [thephpleague's skeleton package](https://github.com/thephpleague/skeleton).

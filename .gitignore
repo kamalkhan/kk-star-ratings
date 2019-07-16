@@ -8,4 +8,5 @@ coverage.xml
 *.sql
 *.tar.gz
 *.zip
+readme.txt
 TODO.md
