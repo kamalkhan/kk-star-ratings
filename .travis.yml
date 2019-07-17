@@ -70,6 +70,7 @@ before_deploy:
   - cp README.txt deploy
   - cp LICENSE.txt deploy
   - cp index.php deploy
+  - cp freemius.php deploy
   - cp -rf src/ deploy/
   - cp -rf views/ deploy/
   - cp -rf public/ deploy/
