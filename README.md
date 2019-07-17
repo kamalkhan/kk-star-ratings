@@ -163,7 +163,31 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 == Changelog ==
 
 = 3.0.0 =
-- Describe the changes!
+
+**Added**
+- Optionally allow guests to vote.
+- Ratings can also be included in publicly accessible custom posts.
+
+**Fixed**
+- Google rich snippets.
+- AJAX call on every load causing high CPU usage.
+
+**Changed**
+- Stars are now based on svg.
+- Appearance has been simplified.
+- Html based structured data has been replaced by json based structured data.
+- kk_star_ratings_get function no longer includes the post_title key.
+
+**Removed**
+- Labels have been removed.
+- Top posts widget has been removed in favor of a future addon.
+- Admin table colum has been removed in favor of a future addon.
+
+**Deprecated**
+- Nothing
+
+**Security**
+- Nothing
 
 = 2.x =
 [Archived](.github/CHANGELOG-v2.md)
