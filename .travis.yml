@@ -55,13 +55,13 @@ script:
     fi
   - |
     if [[ "$CS_CHECK" == "phpcs" ]] ; then
-      composer cs-check
+      composer check
     fi
 
 after_success:
   - |
     if [[ "$COVERAGE" == "codacy" && "$CODACY_PROJECT_TOKEN" != "" ]]; then
-      composer require codacy/coverage --dev
+      composer require codacy/coverage
       composer coverage-clover
       php vendor/bin/codacycoverage clover coverage.xml
     fi
