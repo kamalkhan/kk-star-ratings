@@ -142,7 +142,7 @@ Please have patience as we have no control over how google or any search engine 
 > I have been using a verion of this plugin prior to v3. Is it safe for me to update?
 <!-- /only:github -->
 
-The source of this plugin is located at [Github](https://github.com/kamalkhan/kk-star-ratings). Feel free to post an issue or submit a pull request.
+All previous ratings and options will be preserved. However, since v3 has been renewed from scratch, we do not support downgrading to v2 after upgrading to v3.
 
 <!-- only:wp>
 = I found a bug or want to contribute. =
@@ -151,14 +151,12 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 > I found a bug or want to contribute.
 <!-- /only:github -->
 
-All previous ratings and options will be preserved. However, since v3 has been renewed from scratch, we do not support downgrading to v2 after moving from v2 to v3.
+The source of this plugin is located at [Github](https://github.com/kamalkhan/kk-star-ratings). Feel free to post an issue or submit a pull request.
 
 <!-- only:wp>
 == Screenshots ==
 
-1. Screenshot label 1
-2. Screenshot label 2
-3. ...
+1. Appearance
 </only:wp -->
 
 <!-- only:wp>
