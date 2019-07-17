@@ -6,7 +6,7 @@ if [ $# -lt 1 ]; then
 fi
 
 WP_TEST_PATH=$(echo $1 | sed -e "s/\/$//")
-WP_VERSION=${2-latest}
+WP_VERSION=${2-${WP_VERSION-latest}}
 
 WP_TESTS_DIR=$WP_TEST_PATH
 WP_CORE_DIR=$WP_TEST_PATH/src

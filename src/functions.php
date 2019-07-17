@@ -11,6 +11,32 @@
 
 namespace Bhittani\StarRating;
 
+function options()
+{
+    return [
+        'ver' => KKSR_VERSION,
+        // General
+        'enable' => true,
+        'position' => 'top-left',
+        'exclude_locations' => [],
+        'exclude_categories' => [],
+        'strategies' => ['guests', 'unique'],
+        // Rich Snippets
+        'grs' => true,
+        'sd_type' => 'CreativeWork',
+        'sd_context' => 'https://schema.org/',
+        // Appearance
+        'stars' => 5,
+        'size' => 24,
+        'fill_color_star' => '#ffffff',
+        'stroke_color_star' => '#333333',
+        'fill_color_active_star' => '#dddddd',
+        'stroke_color_active_star' => '#333333',
+        'fill_color_hover_star' => '#f2fa6f',
+        'stroke_color_hover_star' => '#333333',
+    ];
+}
+
 function stripPrefix($key)
 {
     return strpos($key, KKSR_PREFIX) === 0 ? substr($key, 5) : $key;
@@ -23,7 +49,7 @@ function prefix($key)
 
 function getDefaultOption($key, $fallback = null)
 {
-    $options = KKSR_OPTIONS;
+    $options = options();
 
     $value = array_key_exists($key, $options) ? $options[$key] : $fallback;
 
@@ -35,7 +61,7 @@ function getDefaultOption($key, $fallback = null)
 function getDefaultOptions($key = null, $fallback = null)
 {
     return is_null($key)
-        ? apply_filters(prefix('default_options'), KKSR_OPTIONS)
+        ? apply_filters(prefix('default_options'), options())
         : getDefaultOption($key, $fallback);
 }
 
@@ -58,7 +84,7 @@ function getOptions($key = null, $default = null)
 
     $options = [];
 
-    foreach (array_keys(KKSR_OPTIONS) as $key) {
+    foreach (array_keys(getDefaultOptions()) as $key) {
         $options[$key] = getOption($key);
     }
 

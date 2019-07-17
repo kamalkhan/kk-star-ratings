@@ -58,7 +58,7 @@ add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
     $rating = $_POST['rating'];
 
     try {
-        [$ratings, $count] = vote($id, $rating);
+        list($ratings, $count) = vote($id, $rating);
     } catch (\Exception $e) {
         status_header(406);
 

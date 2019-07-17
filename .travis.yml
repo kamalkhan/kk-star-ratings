@@ -19,11 +19,7 @@ cache:
 matrix:
   include:
     - php: 5.5
-      env: WP_VERSION=trunk CS_CHECK=phpcs COVERAGE=codacy
-    - php: 5.5
-      env: WP_VERSION=4.5
-    - php: 5.5
-      env: WP_VERSION=latest
+      env: WP_VERSION=4.5 CS_CHECK=phpcs COVERAGE=codacy
     - php: 5.6
       env: WP_VERSION=latest
     - php: 7.0
