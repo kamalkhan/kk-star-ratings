@@ -9,6 +9,7 @@
  * Text Domain:     kk-star-ratings
  * Domain Path:     /languages
  * Version:         3.0.0
+ * License:         GPLv2 or later
  *
  * @package         Bhittani\StarRating
  */

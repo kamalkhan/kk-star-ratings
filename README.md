@@ -2,9 +2,9 @@
 === kk Star Ratings ===
 Contributors: bhittani
 Donate link: https://github.com/kamalkhan/kk-star-ratings
-Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SRP
+Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SERP
 Requires at least: 4.5
-Requires PHP: 5.4
+Requires PHP: 5.5.9
 Tested up to: 5.2.2
 Stable tag: 2.6.4
 License: GPLv2 or later
@@ -43,6 +43,7 @@ This plugin has been renewed from the ground up as of v3 covered by unit tests.
     - [Manual](#manual)
   - [FAQs](#faqs)
   - [Changelog](#changelog)
+  - [i18n](#i18n)
   - [Testing](#testing)
   - [Contributing](#contributing)
   - [Security](#security)
@@ -188,6 +189,20 @@ Please see the [CHANGELOG](CHANGELOG.md) for more information on what has change
 [Version 2.x](.github/CHANGELOG-v2.md) has been *archived* as of July 2019.
 
 [Version 1.x](.github/CHANGELOG-v1.md) has been *archived* as of March 2016.
+
+## i18n
+
+```bash
+npm install
+npm run i18n
+```
+
+or
+
+```bash
+yarn
+yarn i18n
+```
 
 ## Testing
 

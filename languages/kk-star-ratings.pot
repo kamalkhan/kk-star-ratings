@@ -1,0 +1,244 @@
+# Copyright (C) 2019 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kk-star-ratings\n"
+"POT-Creation-Date: 2019-07-17 00:24:56+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+
+#: src/admin/appearance.php:19
+msgid "Stars"
+msgstr ""
+
+#: src/admin/appearance.php:22
+msgid "Total number of stars."
+msgstr ""
+
+#: src/admin/appearance.php:29
+msgid "Size"
+msgstr ""
+
+#: src/admin/appearance.php:32
+msgid "Size of a single star."
+msgstr ""
+
+#: src/admin/appearance.php:39
+msgid "Fill color"
+msgstr ""
+
+#: src/admin/appearance.php:42
+msgid "Fill color of stars."
+msgstr ""
+
+#: src/admin/appearance.php:49
+msgid "Stroke color"
+msgstr ""
+
+#: src/admin/appearance.php:52
+msgid "Stroke color of stars."
+msgstr ""
+
+#: src/admin/appearance.php:59
+msgid "Active fill color"
+msgstr ""
+
+#: src/admin/appearance.php:62
+msgid "Fill color of active stars."
+msgstr ""
+
+#: src/admin/appearance.php:69
+msgid "Active stroke color"
+msgstr ""
+
+#: src/admin/appearance.php:72
+msgid "Stroke color of active stars."
+msgstr ""
+
+#: src/admin/appearance.php:79
+msgid "Hover fill color"
+msgstr ""
+
+#: src/admin/appearance.php:82
+msgid "Fill color of hover stars."
+msgstr ""
+
+#: src/admin/appearance.php:89
+msgid "Hover stroke color"
+msgstr ""
+
+#: src/admin/appearance.php:92
+msgid "Stroke color of hover stars."
+msgstr ""
+
+#: src/admin/general.php:53 src/admin/rich-snippets.php:18
+msgid "Status"
+msgstr ""
+
+#: src/admin/general.php:54 src/admin/rich-snippets.php:19
+msgid "Active"
+msgstr ""
+
+#: src/admin/general.php:58
+msgid "Globally activate/deactivate the star ratings."
+msgstr ""
+
+#: src/admin/general.php:65
+msgid "Strategies"
+msgstr ""
+
+#: src/admin/general.php:67
+msgid "Select the voting strategies."
+msgstr ""
+
+#: src/admin/general.php:74
+msgid "Allow voting in archives"
+msgstr ""
+
+#: src/admin/general.php:81
+msgid "Allow guests to vote"
+msgstr ""
+
+#: src/admin/general.php:88
+msgid "Unique votes (based on IP Address)"
+msgstr ""
+
+#: src/admin/general.php:100
+msgid "Default Position"
+msgstr ""
+
+#: src/admin/general.php:102
+msgid "Choose a default position."
+msgstr ""
+
+#: src/admin/general.php:106
+msgid "Top Left"
+msgstr ""
+
+#: src/admin/general.php:113
+msgid "Top Center"
+msgstr ""
+
+#: src/admin/general.php:120
+msgid "Top Right"
+msgstr ""
+
+#: src/admin/general.php:127
+msgid "Bottom Left"
+msgstr ""
+
+#: src/admin/general.php:134
+msgid "Bottom Center"
+msgstr ""
+
+#: src/admin/general.php:141
+msgid "Bottom Right"
+msgstr ""
+
+#: src/admin/general.php:153
+msgid "Disable Locations"
+msgstr ""
+
+#: src/admin/general.php:155
+msgid "Select the locations where the star ratings should be excluded."
+msgstr ""
+
+#: src/admin/general.php:162
+msgid "Home page"
+msgstr ""
+
+#: src/admin/general.php:169
+msgid "Archives"
+msgstr ""
+
+#: src/admin/general.php:176
+msgid "Posts"
+msgstr ""
+
+#: src/admin/general.php:183
+msgid "Pages"
+msgstr ""
+
+#: src/admin/general.php:196
+msgid "Disable Categories"
+msgstr ""
+
+#: src/admin/general.php:203
+msgid ""
+"Exclude star ratings from posts belonging to the selected "
+"categories.<br>Use <strong>cmd/ctrl + click</strong> to select/deselect "
+"multiple categories."
+msgstr ""
+
+#: src/admin/rich-snippets.php:23
+msgid "Activate/deactivate rich snippets."
+msgstr ""
+
+#: src/admin/rich-snippets.php:29
+msgid "Context"
+msgstr ""
+
+#: src/admin/rich-snippets.php:32
+msgid "Structured data context."
+msgstr ""
+
+#: src/admin/rich-snippets.php:38
+msgid "Type"
+msgstr ""
+
+#: src/admin/rich-snippets.php:41
+msgid "Structured data type."
+msgstr ""
+
+#: src/ajax.php:22
+msgid "This action is forbidden."
+msgstr ""
+
+#: src/ajax.php:29
+msgid "Unauthorized."
+msgstr ""
+
+#: src/ajax.php:35
+msgid "An id is required to vote."
+msgstr ""
+
+#: src/ajax.php:49
+msgid "Not allowed to vote."
+msgstr ""
+
+#: src/ajax.php:55
+msgid "A rating is required to vote."
+msgstr ""
+
+#: src/functions.php:302
+msgid "You can only rate between 0 and %s."
+msgstr ""
+
+#: src/functions.php:401
+msgid "General"
+msgstr ""
+
+#: src/functions.php:402
+msgid "Rich Snippets"
+msgstr ""
+
+#: src/functions.php:403
+msgid "Appearance"
+msgstr ""
