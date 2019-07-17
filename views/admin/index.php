@@ -15,6 +15,12 @@
         </small>
     </h1>
 
+    <?php
+        ob_start();
+        include KKSR_PATH_VIEWS.'admin/social.php';
+        echo ob_get_clean();
+    ?>
+
     <h2 class="nav-tab-wrapper">
         <?php do_action('kksr_setting_tabs'); ?>
     </h2>
