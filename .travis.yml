@@ -68,7 +68,7 @@ before_deploy:
   - npm run i18n
   - php bin/readme
   - mkdir deploy
-  - cp README.txt deploy
+  - cp readme.txt deploy
   - cp LICENSE.txt deploy
   - cp index.php deploy
   - cp freemius.php deploy
