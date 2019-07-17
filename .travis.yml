@@ -74,6 +74,7 @@ before_deploy:
   - cp -rf views/ deploy/
   - cp -rf public/ deploy/
   - cp -rf languages/ deploy/
+  - cp -rf freemius/ deploy/
 
 deploy:
   - provider: wordpress-plugin

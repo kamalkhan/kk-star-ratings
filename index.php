@@ -33,6 +33,8 @@ define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
 define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
 define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
 
+require_once KKSR_PATH . 'freemius.php';
+
 require_once KKSR_PATH_SRC . 'functions.php';
 require_once KKSR_PATH_SRC . 'activate.php';
 require_once KKSR_PATH_SRC . 'enqueue.php';
