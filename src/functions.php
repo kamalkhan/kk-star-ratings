@@ -132,24 +132,24 @@ function upgradeOptions(array $merge = [])
 function upgradeRatings()
 {
     global $wpdb;
-    $postMetaTable = $wpdb->prefix.'postmeta';
 
     // Normalize ratings.
 
     $stars = getOption('stars');
 
     $rows = $wpdb->get_results("
-        SELECT posts.ID, postmeta.meta_value as ratings
+        SELECT posts.ID, postmeta_avg.meta_value as avg, postmeta_casts.meta_value as casts
         FROM {$wpdb->posts} posts
-        JOIN {$wpdb->postmeta} postmeta ON posts.ID = postmeta.post_id
-        WHERE postmeta.meta_key = '_kksr_ratings'
+        JOIN {$wpdb->postmeta} postmeta_avg ON posts.ID = postmeta_avg.post_id
+        JOIN {$wpdb->postmeta} postmeta_casts ON posts.ID = postmeta_casts.post_id
+        WHERE postmeta_avg.meta_key = '_kksr_avg' AND postmeta_casts.meta_key = '_kksr_casts'
     ");
 
     foreach ($rows as $row) {
         update_post_meta(
             $row->ID,
             '_'.prefix('ratings'),
-            toNormalizedRatings($row->ratings, $stars)
+            scoreToRatings($row->avg, $row->casts, $stars)
         );
     }
 
@@ -284,6 +284,28 @@ function calculateWidth($score, $size = null, $pad = 4)
     $size = (int) ($size ?: getOption('size'));
 
     return $score * $size + $score * $pad;
+}
+
+function scoreToRatings($score, $count, $from = 5, $to = 5)
+{
+    $to = (int) $to;
+    $from = (int) $from;
+    $count = (int) $count;
+    $score = (float) $score;
+
+    if ($from <= 0 || $to <= 0) {
+        return 0;
+    }
+
+    if ($score < 0) {
+        $score = 1;
+    }
+
+    if ($score > $from) {
+        $score = $from;
+    }
+
+    return (float) round($score * $count / ($from / $to), 0, PHP_ROUND_HALF_DOWN);
 }
 
 function extractPosition($position = null)

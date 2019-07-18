@@ -95,19 +95,93 @@ class ActivateTest extends TestCase
     }
 
     /** @test */
-    function it_normalizes_all_the_post_ratings_if_the_plugin_version_was_older_than_three()
+    function it_normalizes_all_the_5_star_post_ratings_if_the_plugin_version_was_older_than_three()
     {
+        $postId0 = static::factory()->post->create();
         $postId1 = static::factory()->post->create();
         $postId2 = static::factory()->post->create();
+        $postId3 = static::factory()->post->create();
+        $postId4 = static::factory()->post->create();
 
         update_option('kksr_ver', '2.6.5');
-        update_option('kksr_stars', 10);
-        update_post_meta($postId1, '_kksr_ratings', 5);
-        update_post_meta($postId2, '_kksr_ratings', 10);
+
+        update_post_meta($postId0, '_kksr_avg', null);
+        update_post_meta($postId0, '_kksr_casts', null);
+
+        update_post_meta($postId1, '_kksr_avg', 4);
+        update_post_meta($postId1, '_kksr_casts', 2);
+
+        update_post_meta($postId2, '_kksr_avg', 3.3);
+        update_post_meta($postId2, '_kksr_casts', 3);
+
+        update_post_meta($postId3, '_kksr_avg', 5.1);
+        update_post_meta($postId3, '_kksr_casts', 150);
+
+        update_post_meta($postId4, '_kksr_avg', -5);
+        update_post_meta($postId4, '_kksr_casts', 2);
 
         activate();
 
-        $this->assertEquals(2.5, get_post_meta($postId1, '_kksr_ratings', true));
-        $this->assertEquals(5, get_post_meta($postId2, '_kksr_ratings', true));
+        $this->assertEquals('', $count = get_post_meta($postId0, '_kksr_casts', true));
+        $this->assertEquals(0, $ratings = get_post_meta($postId0, '_kksr_ratings', true));
+        $this->assertEquals(0, calculateScore($ratings, $count));
+
+        $this->assertEquals(2, $count = get_post_meta($postId1, '_kksr_casts', true));
+        $this->assertEquals(8, $ratings = get_post_meta($postId1, '_kksr_ratings', true));
+        $this->assertEquals(4, calculateScore($ratings, $count));
+
+        $this->assertEquals(3, $count = get_post_meta($postId2, '_kksr_casts', true));
+        $this->assertEquals(10, $ratings = get_post_meta($postId2, '_kksr_ratings', true));
+        $this->assertEquals(3.3, calculateScore($ratings, $count));
+
+        $this->assertEquals(150, $count = get_post_meta($postId3, '_kksr_casts', true));
+        $this->assertEquals(750, $ratings = get_post_meta($postId3, '_kksr_ratings', true));
+        $this->assertEquals(5.0, calculateScore($ratings, $count));
+
+        $this->assertEquals(2, $count = get_post_meta($postId4, '_kksr_casts', true));
+        $this->assertEquals(2, $ratings = get_post_meta($postId4, '_kksr_ratings', true));
+        $this->assertEquals(1.0, calculateScore($ratings, $count));
+    }
+
+    /** @test */
+    function it_normalizes_all_the_X_star_post_ratings_if_the_plugin_version_was_older_than_three()
+    {
+        $postId1 = static::factory()->post->create();
+        $postId2 = static::factory()->post->create();
+        $postId3 = static::factory()->post->create();
+        $postId4 = static::factory()->post->create();
+
+        update_option('kksr_stars', 10);
+        update_option('kksr_ver', '2.6.5');
+
+        update_post_meta($postId1, '_kksr_avg', 8);
+        update_post_meta($postId1, '_kksr_casts', 2);
+
+        update_post_meta($postId2, '_kksr_avg', 6.7);
+        update_post_meta($postId2, '_kksr_casts', 3);
+
+        update_post_meta($postId3, '_kksr_avg', 10.1);
+        update_post_meta($postId3, '_kksr_casts', 150);
+
+        update_post_meta($postId4, '_kksr_avg', -5);
+        update_post_meta($postId4, '_kksr_casts', 2);
+
+        activate();
+
+        $this->assertEquals(2, $count = get_post_meta($postId1, '_kksr_casts', true));
+        $this->assertEquals(8, $ratings = get_post_meta($postId1, '_kksr_ratings', true));
+        $this->assertEquals(8, calculateScore($ratings, $count, 10));
+
+        $this->assertEquals(3, $count = get_post_meta($postId2, '_kksr_casts', true));
+        $this->assertEquals(10, $ratings = get_post_meta($postId2, '_kksr_ratings', true));
+        $this->assertEquals(6.7, calculateScore($ratings, $count, 10));
+
+        $this->assertEquals(150, $count = get_post_meta($postId3, '_kksr_casts', true));
+        $this->assertEquals(750, $ratings = get_post_meta($postId3, '_kksr_ratings', true));
+        $this->assertEquals(10.0, calculateScore($ratings, $count, 10));
+
+        $this->assertEquals(2, $count = get_post_meta($postId4, '_kksr_casts', true));
+        $this->assertEquals(1, $ratings = get_post_meta($postId4, '_kksr_ratings', true));
+        $this->assertEquals(1.0, calculateScore($ratings, $count, 10));
     }
 }
