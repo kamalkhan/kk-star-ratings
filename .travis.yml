@@ -1,3 +1,4 @@
+sudo: false
 dist: trusty
 
 language: php
@@ -76,9 +77,11 @@ before_deploy:
   - cp -rf public/ deploy/
   - cp -rf languages/ deploy/
   - cp -rf freemius/ deploy/
+  - cd $TRAVIS_BUILD_DIR
 
 deploy:
   - provider: wordpress-plugin
+    skip_cleanup: true
     edge:
       source: TypistTech/dpl
       branch: add-wordpress-plugin-deployment
