@@ -15,7 +15,8 @@ $enabled = (bool) getOption('enable');
 $position = getOption('position');
 $excludedLocations = getOption('exclude_locations');
 $strategies = getOption('strategies');
-$excludedCategories = getOption('exclude_categories');
+$excludedCategories = getOption('exclude_categories', []);
+$excludedCategories = is_array($excludedCategories) ? $excludedCategories : [];
 
 $categories = get_terms([
     'taxonomy' => 'category',

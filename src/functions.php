@@ -215,7 +215,10 @@ function isValidPost($p = null)
         return $category->term_id;
     }, get_the_category($p->ID));
 
-    $categoriesDiff = array_diff($categories, getOption('exclude_categories'));
+    $excludedCategories = getOption('exclude_categories', []);
+    $excludedCategories = is_array($excludedCategories) ? $excludedCategories : [];
+
+    $categoriesDiff = array_diff($categories, $excludedCategories);
 
     $bool = ($type = get_post_type($p))
         // post does not belong to an excluded category.
