@@ -1,4 +1,4 @@
-<div data-id="<?php echo $id; ?>"
+<div data-id="<?php echo $id; ?>" data-score="<?php echo $score; ?>" data-count="<?php echo $count; ?>"
     class="kk-star-ratings <?php echo (isset($disabled) && $disabled) ? 'kksr-disable' : ''; ?> kksr-<?php echo isset($placement) ? $placement : 'top'; ?> kksr-<?php echo isset($alignment) ? $alignment : 'left'; ?><?php echo (isset($isRtl) && $isRtl) ? ' kksr-rtl' : ''; ?>">
     <?php
         ob_start();
