@@ -44,10 +44,12 @@ class AjaxTest extends TestCase
     /** @test*/
     function it_allows_guests_to_vote_if_guest_voting_is_allowed()
     {
+        update_option('kksr_stars', 10);
+
         $post = static::factory()->post->create_and_get();
 
         $_POST['id'] = $post->ID;
-        $_POST['rating'] = 4;
+        $_POST['rating'] = 8;
 
         $this->assertFalse(is_user_logged_in());
         $this->assertContains('guests', get_option('kksr_strategies', []));
@@ -104,8 +106,16 @@ class AjaxTest extends TestCase
             $this->assertPayloadSubset($extra);
         }
 
+        $this->assertAvg($score, $post);
         $this->assertRatings($ratings, $post);
         $this->assertVoteCount($count, $post);
+    }
+
+    function assertAvg($score, $post)
+    {
+        $id = is_object($post) ? $post->ID : $post;
+
+        $this->assertEquals($score, get_post_meta($id, '_kksr_avg', true));
     }
 
     function assertRatings($ratings, $post)

@@ -348,7 +348,7 @@ function vote($idOrPost, $rating)
     update_post_meta($id, '_'.prefix('ratings'), $ratings);
     update_post_meta($id, '_'.prefix('casts'), $count);
     // For legacy reasons.
-    update_post_meta($id, '_'.prefix('avg'), calculateScore($ratings, $count));
+    update_post_meta($id, '_'.prefix('avg'), calculateScore($ratings, $count, $stars));
 
     do_action(prefix('vote'), $id, $rating);
 
