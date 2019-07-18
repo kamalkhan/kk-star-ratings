@@ -51,5 +51,5 @@ add_filter('kksr_score', KKSR_NAMESPACE.'scoreFilter'); function scoreFilter($sc
 
 add_filter('kksr_count', KKSR_NAMESPACE.'countFilter', 10); function countFilter($count)
 {
-    return str_pad($count, 2, 0, STR_PAD_LEFT);
+    return str_pad($count, 2, 0, is_rtl() ? STR_PAD_RIGHT : STR_PAD_LEFT);
 }
