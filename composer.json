@@ -51,5 +51,19 @@
         "check": "php-cs-fixer fix --dry-run --using-cache=no",
         "fix": "php-cs-fixer fix --using-cache=no",
         "ci": ["@check", "@test"]
+    },
+    "archive": {
+        "exclude": [
+            "*",
+            "!/index.php",
+            "!/readme.txt",
+            "!/LICENSE.txt",
+            "!/freemius.php",
+            "!/src",
+            "!/views",
+            "!/public",
+            "!/freemius",
+            "!/languages"
+        ]
     }
 }
