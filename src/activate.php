@@ -15,7 +15,7 @@ register_activation_hook(KKSR_FILE, KKSR_NAMESPACE.'activate'); function activat
 {
     $previousVersion = getOption('ver', false);
 
-    if ($previousVersion && version_compare($previousVersion, '3.0.0', '<')) {
+    if ($previousVersion && version_compare($previousVersion, '3.0.1', '<')) {
         // We are upgrading, lets normalize the previous options.
         upgradeOptions();
         // Also normalize all the previous post ratings.
