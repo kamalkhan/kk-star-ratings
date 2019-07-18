@@ -6,7 +6,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "<?php echo $score; ?>",
-    "reviewCount": "<?php echo $count; ?>",
+    "ratingCount": "<?php echo $count; ?>",
     "bestRating": "<?php echo $stars; ?>",
     "worstRating": "1"
   }
