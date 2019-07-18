@@ -131,19 +131,19 @@
 /* RTL */
 
 .kk-star-ratings.kksr-rtl {
-    direction: rtl;
+    direction: ltr;
 }
 
-.kk-star-ratings.kksr-rtl.kksr-right {
+/* .kk-star-ratings.kksr-rtl.kksr-right {
     -webkit-box-pack: flex-start;
     -webkit-justify-content: flex-start;
     -ms-flex-pack: flex-start;
     justify-content: flex-start;
-}
+} */
 
 /* RTL - stars */
 
-.kk-star-ratings.kksr-rtl .kksr-stars .kksr-star {
+/* .kk-star-ratings.kksr-rtl .kksr-stars .kksr-star {
     padding-left: 4px;
     padding-right: 0;
 }
@@ -161,15 +161,15 @@
 .kk-star-ratings.kksr-rtl .kksr-stars .kksr-inactive-stars .kksr-star:last-child,
 .kk-star-ratings.kksr-rtl .kksr-stars .kksr-active-stars .kksr-star:last-child {
     padding-left: 0;
-}
+} */
 
 /* RTL - legend */
 
-.kk-star-ratings.kksr-rtl .kksr-legend {
+/* .kk-star-ratings.kksr-rtl .kksr-legend {
     margin-left: 8px;
     margin-right: 0;
 }
 .kk-star-ratings.kksr-rtl .kksr-legend .kksr-legend-meta {
     margin-left: 0;
     margin-right: 8px;
-}
+} */
