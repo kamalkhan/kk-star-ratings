@@ -17,3 +17,12 @@ add_shortcode(KKSR_SHORTCODE, KKSR_NAMESPACE.'shortcode'); function shortcode($a
 
     return markup(null, true, $id);
 }
+
+// Legacy
+
+add_shortcode('kkratings', KKSR_NAMESPACE.'shortcodeLegacy'); function shortcodeLegacy($atts)
+{
+    extract(shortcode_atts(['id' => null], $atts, 'kkratings'));
+
+    return markup(null, true, $id);
+}
