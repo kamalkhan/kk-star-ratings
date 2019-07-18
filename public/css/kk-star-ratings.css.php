@@ -23,9 +23,9 @@
 }
 
 .kk-star-ratings .kksr-legend {
-    color: <?php echo $colors['active']['stroke']; ?>;
+    background-color: <?php echo $colors['active']['stroke']; ?>;
 }
 
-.kk-star-ratings .kksr-legend .kksr-legend-score {
-    background-color: <?php echo $colors['active']['stroke']; ?>;
+.kk-star-ratings .kksr-legend .kksr-legend-meta {
+    color: <?php echo $colors['active']['stroke']; ?>;
 }
