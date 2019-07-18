@@ -119,7 +119,7 @@ class AjaxTest extends TestCase
     {
         $id = is_object($post) ? $post->ID : $post;
 
-        $this->assertEquals($count, get_post_meta($id, '_kksr_count', true));
+        $this->assertEquals($count, get_post_meta($id, '_kksr_casts', true));
     }
 
     function assertError($error, $post = null, $ratings = null, $count = null)

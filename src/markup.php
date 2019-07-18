@@ -31,7 +31,7 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content, $f
     $stars = (int) getOption('stars');
     list($placement, $alignment) = extractPosition();
     $total = get_post_meta($id, '_kksr_ratings', true);
-    $count = (int) get_post_meta($id, '_kksr_count', true);
+    $count = (int) get_post_meta($id, '_kksr_casts', true);
     $score = calculateScore($total, $count, $stars);
     $percent = calculatePercentage($total, $count);
     $width = calculateWidth($score, $size);

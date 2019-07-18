@@ -16,7 +16,7 @@ class MarkupTest extends TestCase
     {
         $post = static::factory()->post->create_and_get(['post_content' => 'content']);
 
-        update_post_meta($post->ID, '_kksr_count', 3);
+        update_post_meta($post->ID, '_kksr_casts', 3);
         update_post_meta($post->ID, '_kksr_ratings', 10);
 
         $this->onPost($post);

@@ -24,7 +24,7 @@ add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData(
     global $post;
 
     $id = $post->ID;
-    $count = (int) get_post_meta($id, '_kksr_count', true);
+    $count = (int) get_post_meta($id, '_kksr_casts', true);
 
     if (! $count) {
         return;

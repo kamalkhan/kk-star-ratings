@@ -130,7 +130,7 @@ class LegacyTest extends TestCase
             'post_content' => 'content',
         ]);
 
-        update_post_meta($post->ID, '_kksr_count', $count);
+        update_post_meta($post->ID, '_kksr_casts', $count);
 
         update_post_meta($post->ID, '_kksr_ratings', $ratings);
 

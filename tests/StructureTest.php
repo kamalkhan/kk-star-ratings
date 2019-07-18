@@ -55,7 +55,7 @@ class StructureTest extends TestCase
 
         $structuredData = $this->getStructuredData($post, null, null);
 
-        $this->assertEquals('', get_post_meta($post->ID, '_kksr_count', true));
+        $this->assertEquals('', get_post_meta($post->ID, '_kksr_casts', true));
 
         $this->assertEquals('', $structuredData);
     }
@@ -91,7 +91,7 @@ class StructureTest extends TestCase
         $id = is_object($idOrPost) ? $idOrPost->ID : $idOrPost;
 
         if (! is_null($count)) {
-            update_post_meta($id, '_kksr_count', $count);
+            update_post_meta($id, '_kksr_casts', $count);
         }
 
         if (! is_null($ratings)) {
@@ -121,7 +121,7 @@ class StructureTest extends TestCase
         extract($payload);
 
         $name = isset($name) ? $name : get_the_title($id);
-        $count = isset($count) ? $count : get_post_meta($id, '_kksr_count', true);
+        $count = isset($count) ? $count : get_post_meta($id, '_kksr_casts', true);
         $total = isset($total) ? $total : get_post_meta($id, '_kksr_ratings', true);
         $score = isset($score) ? $score : calculateScore($total, $count, $stars);
 

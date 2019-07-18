@@ -139,9 +139,10 @@ function upgradeRatings()
     $stars = getOption('stars');
 
     $rows = $wpdb->get_results("
-        SELECT a.ID, b.meta_value as ratings
-        FROM {$wpdb->posts} a, {$postMetaTable} b
-        WHERE a.ID=b.post_id AND b.meta_key='_kksr_ratings'
+        SELECT posts.ID, postmeta.meta_value as ratings
+        FROM {$wpdb->posts} posts
+        JOIN {$wpdb->postmeta} postmeta ON posts.ID = postmeta.post_id
+        WHERE postmeta.meta_key = '_kksr_ratings'
     ");
 
     foreach ($rows as $row) {
@@ -152,23 +153,9 @@ function upgradeRatings()
         );
     }
 
-    // Casts => Count.
-
-    $rows = $wpdb->get_results("
-        SELECT a.ID, b.meta_value as casts
-        FROM {$wpdb->posts} a, {$postMetaTable} b
-        WHERE a.ID=b.post_id AND b.meta_key='_kksr_casts'
-    ");
-
-    foreach ($rows as $row) {
-        update_post_meta($row->ID, '_'.prefix('count'), $row->casts);
-    }
-
-    $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_casts']);
-
     // Truncate IP addresses.
 
-    $wpdb->delete($postMetaTable, ['meta_key' => '_kksr_ips']);
+    $wpdb->delete($wpdb->postmeta, ['meta_key' => '_kksr_ips']);
 }
 
 function canVote($p = null)
@@ -333,11 +320,11 @@ function vote($idOrPost, $rating)
     $ratings = (float) get_post_meta($id, '_'.prefix('ratings'), true);
     $ratings += toNormalizedRatings($rating, $stars);
 
-    $count = (int) get_post_meta($id, '_'.prefix('count'), true);
+    $count = (int) get_post_meta($id, '_'.prefix('casts'), true);
     $count += 1;
 
     update_post_meta($id, '_'.prefix('ratings'), $ratings);
-    update_post_meta($id, '_'.prefix('count'), $count);
+    update_post_meta($id, '_'.prefix('casts'), $count);
 
     do_action(prefix('vote'), $id, $rating);
 
@@ -376,7 +363,7 @@ function collect($limit = 5, $taxonomyId = null, $offset = 0)
         WHERE
             posts.post_status = 'publish'
             AND CAST(postmeta_count.meta_value AS UNSIGNED) != 0
-            AND postmeta_count.meta_key = '_kksr_count'
+            AND postmeta_count.meta_key = '_kksr_casts'
             AND postmeta_ratings.meta_key = '_kksr_ratings'
     ";
 
