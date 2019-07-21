@@ -40,6 +40,7 @@ require_once KKSR_PATH_SRC . 'activate.php';
 require_once KKSR_PATH_SRC . 'enqueue.php';
 require_once KKSR_PATH_SRC . 'markup.php';
 require_once KKSR_PATH_SRC . 'admin.php';
+require_once KKSR_PATH_SRC . 'metabox.php';
 require_once KKSR_PATH_SRC . 'ajax.php';
 require_once KKSR_PATH_SRC . 'structure.php';
 require_once KKSR_PATH_SRC . 'shortcode.php';
