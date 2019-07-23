@@ -168,6 +168,18 @@ class MarkupTest extends TestCase
     }
 
     /** @test */
+    function it_does_not_embed_the_markup_in_posts_that_are_manually_controlled()
+    {
+        $post = static::factory()->post->create_and_get(['post_content' => 'content']);
+
+        $this->onPost($post);
+
+        update_option('kksr_manual_control', ['post']);
+
+        $this->assertContents($post);
+    }
+
+    /** @test */
     function it_does_not_show_the_markup_in_posts_that_are_explicitly_disabled()
     {
         $post = static::factory()->post->create_and_get(['post_content' => 'content']);

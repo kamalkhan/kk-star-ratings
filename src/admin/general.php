@@ -13,6 +13,7 @@ namespace Bhittani\StarRating;
 
 $enabled = (bool) getOption('enable');
 $position = getOption('position');
+$manuallyControlled = getOption('manual_control');
 $excludedLocations = getOption('exclude_locations');
 $strategies = getOption('strategies');
 $excludedCategories = getOption('exclude_categories', []);
@@ -33,19 +34,21 @@ foreach ($categories as $category) {
     ];
 }
 
-$excludedPostTypes = [];
+$postTypes = [];
 
-$postTypes = get_post_types(['publicly_queryable' => true, '_builtin' => false], 'objects');
+$customPostTypes = get_post_types(['publicly_queryable' => true, '_builtin' => false], 'objects');
 
-foreach ($postTypes as $postType) {
-    $excludedPostTypes[] = [
-        'field' => 'checkbox',
-        'label' => $postType->labels->name,
-        'name' => prefix('exclude_locations[]'),
+foreach ($customPostTypes as $postType) {
+    $postTypes[] = [
         'value' => $postType->name,
-        'checked' => in_array($postType->name, $excludedLocations),
+        'label' => $postType->labels->name,
     ];
 }
+
+$postTypes = array_merge([
+    ['value' => 'post', 'label' => __('Posts', 'kk-star-ratings')],
+    ['value' => 'page', 'label' => __('Pages', 'kk-star-ratings')],
+], $customPostTypes);
 
 return [
     [
@@ -94,6 +97,25 @@ return [
         ],
     ],
 
+    // Manual Control
+
+    [
+        'id' => prefix('manual_control'),
+        'title' => __('Manual Control', 'kk-star-ratings'),
+        'name' => prefix('manual_control'),
+        'help' => sprintf(__('Select the post types that should not auto embed the<br>markup and will be manually controlled by the theme.<br>E.g. Using %s in your template.', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>'),
+        'filter' => function ($values) {
+            return (array) $values;
+        },
+        'fields' => array_map(function ($field) use ($manuallyControlled) {
+            $field['field'] = 'checkbox';
+            $field['name'] = prefix('manual_control[]');
+            $field['checked'] = in_array($field['value'], $manuallyControlled);
+
+            return $field;
+        }, $postTypes),
+    ],
+
     // Locations
 
     [
@@ -104,36 +126,23 @@ return [
         'filter' => function ($values) {
             return (array) $values;
         },
-        'fields' => array_merge([
-            [
-                'field' => 'checkbox',
-                'label' => __('Home page', 'kk-star-ratings'),
-                'name' => prefix('exclude_locations[]'),
-                'value' => 'home',
-                'checked' => in_array('home', $excludedLocations),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Archives', 'kk-star-ratings'),
-                'name' => prefix('exclude_locations[]'),
-                'value' => 'archives',
-                'checked' => in_array('archives', $excludedLocations),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Posts', 'kk-star-ratings'),
-                'name' => prefix('exclude_locations[]'),
-                'value' => 'post',
-                'checked' => in_array('post', $excludedLocations),
-            ],
-            [
-                'field' => 'checkbox',
-                'label' => __('Pages', 'kk-star-ratings'),
-                'name' => prefix('exclude_locations[]'),
-                'value' => 'page',
-                'checked' => in_array('page', $excludedLocations),
-            ],
-        ], $excludedPostTypes),
+        'fields' => array_map(function ($field) use ($excludedLocations) {
+            $field['field'] = 'checkbox';
+            $field['name'] = prefix('exclude_locations[]');
+            $field['checked'] = in_array($field['value'], $excludedLocations);
+
+            return $field;
+        }, array_merge([
+                [
+                    'label' => __('Home page', 'kk-star-ratings'),
+                    'value' => 'home',
+                ],
+                [
+                    'label' => __('Archives', 'kk-star-ratings'),
+                    'value' => 'archives',
+                ],
+            ], $postTypes)
+        ),
     ],
 
     // Categories

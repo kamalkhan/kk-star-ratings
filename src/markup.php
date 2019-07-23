@@ -28,6 +28,10 @@ add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content, $f
         return $content;
     }
 
+    if (! is_null($content) && in_array(get_post_type($p), getOption('manual_control'))) {
+        return $content;
+    }
+
     $id = $p->ID;
     $isRtl = is_rtl();
     $size = (int) getOption('size');

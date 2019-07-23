@@ -18,6 +18,7 @@ function options()
         // General
         'enable' => true,
         'position' => 'top-left',
+        'manual_control' => [],
         'exclude_locations' => [],
         'exclude_categories' => [],
         'strategies' => ['guests', 'unique'],
