@@ -14,7 +14,8 @@
 }
 
 .kk-star-ratings.kksr-bottom {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
+    margin: 2rem 0;
 }
 
 .kk-star-ratings.kksr-center {
