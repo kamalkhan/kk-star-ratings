@@ -189,10 +189,29 @@ function canVote($p = null)
     return apply_filters($filterTag, true, $p);
 }
 
+// function force($bool = true)
+// {
+//     static $isForced;
+
+//     if (! is_null($bool)) {
+//         $isForced = (bool) $bool;
+//     }
+
+//     return (bool) $isForced;
+// }
+
+// function isForced()
+// {
+//     return force(null);
+// }
+
 function isValidPost($p = null)
 {
+    $bail = $p === false;
+
     global $post;
     $p = $p ?: $post;
+    $p = is_object($p) ? $p : get_post($p);
 
     $filterTag = prefix('is_valid_post');
 
@@ -201,14 +220,21 @@ function isValidPost($p = null)
         return apply_filters($filterTag, false, $p);
     }
 
+    // if (isForced()) {
+    //     // Manually forced.
+    //     return apply_filters($filterTag, true, $p);
+    // }
+
+    if ($bail && (
+        has_shortcode($p->post_content, KKSR_SHORTCODE)
+            || has_shortcode($p->post_content, 'kkratings')
+    )) {
+        return apply_filters($filterTag, false, $p);
+    }
+
     if ($status = get_post_meta($p->ID, '_'.prefix('status'), true)) {
         // Exclusive status.
         return apply_filters($filterTag, $status == 'enable', $p);
-    }
-
-    if (has_shortcode($p->post_content, KKSR_SHORTCODE)) {
-        // Has shortcode.
-        return apply_filters($filterTag, true, $p);
     }
 
     $categories = array_map(function ($category) {
@@ -229,7 +255,7 @@ function isValidPost($p = null)
     return apply_filters($filterTag, $bool, $p);
 }
 
-function isValidRequest()
+function isValidRequest($p = null)
 {
     $filterTag = prefix('is_valid_request');
 
@@ -238,13 +264,18 @@ function isValidRequest()
         return apply_filters($filterTag, false);
     }
 
+    // if (isForced()) {
+    //     // Manually forced.
+    //     return apply_filters($filterTag, true);
+    // }
+
     $bool =
         // home or front page AND home is not an excluded location.
         (! in_array('home', getOption('exclude_locations')) && (is_front_page() || is_home()))
         // archives AND archives is not an excluded location.
         || (! in_array('archives', getOption('exclude_locations')) && is_archive())
         // singular AND (exclusively enabled OR (post does not belong to an excluded category AND post type is not an excluded location)).
-        || (is_singular() && isValidPost());
+        || (is_singular() && isValidPost($p));
 
     return apply_filters($filterTag, $bool);
 }
@@ -358,11 +389,49 @@ function vote($idOrPost, $rating)
     return [$ratings, $count];
 }
 
+function queue($post = null)
+{
+    // static $queued;
+
+    // if ($queued) {
+    //     return;
+    // }
+
+    styles(true);
+    scripts(true);
+    stylesheet(true);
+
+    $sd = function () use ($post) {
+        echo structuredData(true, $post);
+    };
+
+    if (! has_action('wp_footer', $sd)) {
+        add_action('wp_footer', $sd);
+    }
+
+    // $queued = true;
+}
+
 function get($post = null, $force = null)
 {
     $force = is_null($force) ? ($post ? true : false) : $force;
 
+    if ($force) {
+        queue($post);
+    }
+
     return markup(null, $force, $post);
+}
+
+function quick($atts, $shortcode = '')
+{
+    extract(shortcode_atts(['id' => null, 'force' => null], $atts, $shortcode));
+
+    $force = is_null($force)
+        ? (in_array('force', (array) $atts) ? true : null)
+        : (in_array($force, ['null', 'false']) ? false : (bool) $force);
+
+    return get($id ?: false, $force);
 }
 
 function collect($limit = 5, $taxonomyId = null, $offset = 0)

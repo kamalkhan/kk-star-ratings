@@ -11,9 +11,9 @@
 
 namespace Bhittani\StarRating;
 
-add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'styles'); function styles()
+add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'styles'); function styles($force = false)
 {
-    if (isValidRequest()) {
+    if ($force || isValidRequest()) {
         wp_enqueue_style(
             KKSR_SLUG,
             KKSR_URI.'css/kk-star-ratings.css',
@@ -23,9 +23,9 @@ add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'styles'); function styles()
     }
 }
 
-add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts()
+add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts($force = false)
 {
-    if (isValidRequest()) {
+    if ($force || isValidRequest()) {
         wp_enqueue_script(
             KKSR_SLUG,
             KKSR_URI.'js/kk-star-ratings.js',
@@ -45,9 +45,9 @@ add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'scripts'); function scripts()
     }
 }
 
-add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'stylesheet'); function stylesheet()
+add_action('wp_enqueue_scripts', KKSR_NAMESPACE.'stylesheet'); function stylesheet($force = false)
 {
-    if (! isValidRequest()) {
+    if (! ($force || isValidRequest())) {
         return;
     }
 

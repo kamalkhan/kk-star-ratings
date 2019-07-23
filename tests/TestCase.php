@@ -12,8 +12,11 @@ class TestCase extends WP_UnitTestCase
             delete_option('kksr_'.$key);
         }
 
+        remove_all_actions('wp_footer');
         wp_scripts()->dequeue(KKSR_SLUG);
+        wp_scripts()->remove(KKSR_SLUG);
         wp_styles()->dequeue(KKSR_SLUG);
+        wp_styles()->remove(KKSR_SLUG);
         delete_option('page_on_front');
         delete_option('show_on_front');
     }

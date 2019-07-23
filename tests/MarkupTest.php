@@ -160,7 +160,7 @@ class MarkupTest extends TestCase
     {
         update_option('kksr_exclude_locations', ['post']);
 
-        $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings]']);
+        $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings force]']);
 
         $this->onPost($post);
 

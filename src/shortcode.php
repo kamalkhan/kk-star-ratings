@@ -13,16 +13,17 @@ namespace Bhittani\StarRating;
 
 add_shortcode(KKSR_SHORTCODE, KKSR_NAMESPACE.'shortcode'); function shortcode($atts)
 {
-    extract(shortcode_atts(['id' => null], $atts, KKSR_SHORTCODE));
-
-    return markup(null, true, $id);
+    return quick($atts, KKSR_SHORTCODE);
 }
 
-// Legacy
+// add_filter('shortcode_atts_kkratings', KKSR_NAMESPACE.'filterShortcode');
+// add_filter('shortcode_atts_'.KKSR_SHORTCODE, KKSR_NAMESPACE.'filterShortcode');
+// function filterShortcode($atts)
+// {
+//     // if ($atts['id']) {
+//     //     queue();
+//     // }
+//     die(var_dump($atts));
 
-add_shortcode('kkratings', KKSR_NAMESPACE.'shortcodeLegacy'); function shortcodeLegacy($atts)
-{
-    extract(shortcode_atts(['id' => null], $atts, 'kkratings'));
-
-    return markup(null, true, $id);
-}
+//     return $atts;
+// }

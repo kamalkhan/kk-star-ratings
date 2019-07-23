@@ -31,6 +31,48 @@ class LegacyTest extends TestCase
     }
 
     /** @test */
+    function func_kk_star_ratings_is_forced_when_a_post_is_provided()
+    {
+        update_option('kksr_exclude_locations', ['post']);
+
+        $post = $this->createPost();
+
+        $this->onPost($post);
+
+        $this->assertPostMarkup($post, kk_star_ratings($post));
+        $this->assertTrue(wp_style_is(KKSR_SLUG));
+        $this->assertTrue(wp_script_is(KKSR_SLUG));
+    }
+
+    /** @test */
+    function func_kk_star_ratings_can_be_manually_forced()
+    {
+        update_option('kksr_exclude_locations', ['post']);
+
+        $post = $this->createPost();
+
+        $this->onPost($post);
+
+        $this->assertPostMarkup($post, kk_star_ratings(true));
+        $this->assertTrue(wp_style_is(KKSR_SLUG));
+        $this->assertTrue(wp_script_is(KKSR_SLUG));
+    }
+
+    /** @test */
+    function func_kk_star_ratings_does_not_leak()
+    {
+        update_option('kksr_exclude_locations', ['post']);
+
+        $post = $this->createPost();
+
+        $this->onPost($post);
+
+        $this->assertNull(kk_star_ratings());
+        $this->assertFalse(wp_style_is(KKSR_SLUG));
+        $this->assertFalse(wp_script_is(KKSR_SLUG));
+    }
+
+    /** @test */
     function func_kk_star_ratings_get_returns_the_top_scored_posts()
     {
         global $wpdb;

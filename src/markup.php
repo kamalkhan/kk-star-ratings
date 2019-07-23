@@ -13,17 +13,20 @@ namespace Bhittani\StarRating;
 
 add_filter('the_content', KKSR_NAMESPACE.'markup'); function markup($content, $force = false, $p = null)
 {
-    if (! $force && ! (isValidRequest() && isValidPost())) {
-        return $content;
-    }
-
-    if (! $force && has_shortcode($content, KKSR_SHORTCODE)) {
-        return $content;
-    }
-
     global $post;
     $p = $p ?: $post;
     $p = is_object($p) ? $p : get_post($p);
+
+    if (! $force && ! (isValidRequest($p) && isValidPost($p))) {
+        return $content;
+    }
+
+    if (! $force && (
+        has_shortcode($content, KKSR_SHORTCODE)
+            || has_shortcode($content, 'kkratings')
+    )) {
+        return $content;
+    }
 
     $id = $p->ID;
     $isRtl = is_rtl();

@@ -135,20 +135,20 @@ class EnqueueTest extends TestCase
         $this->assertTrue(wp_script_is(KKSR_SLUG));
     }
 
-    /** @test*/
-    function it_enqueues_assets_in_custom_post_types_if_it_contains_the_shortcode()
-    {
-        update_option('kksr_exclude_locations', ['post']);
+    // /** @test*/
+    // function it_enqueues_assets_in_custom_post_types_if_it_contains_the_shortcode()
+    // {
+    //     update_option('kksr_exclude_locations', ['post']);
 
-        $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings]']);
+    //     $post = static::factory()->post->create_and_get(['post_content' => '[kkstarratings]']);
 
-        $this->onPost($post);
+    //     $this->onPost($post);
 
-        do_action('wp_enqueue_scripts');
+    //     do_action('wp_enqueue_scripts');
 
-        $this->assertTrue(wp_style_is(KKSR_SLUG));
-        $this->assertTrue(wp_script_is(KKSR_SLUG));
-    }
+    //     $this->assertTrue(wp_style_is(KKSR_SLUG));
+    //     $this->assertTrue(wp_script_is(KKSR_SLUG));
+    // }
 
     /** @test*/
     function it_does_not_enqueue_assets_in_custom_post_types_if_the_custom_post_type_is_an_excluded_location()

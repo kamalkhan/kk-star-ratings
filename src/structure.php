@@ -11,19 +11,21 @@
 
 namespace Bhittani\StarRating;
 
-add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData()
+add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData($force = false, $p = null)
 {
     if (! getOption('grs')) {
         return;
     }
 
-    if (! (isValidRequest() && is_singular())) {
+    global $post;
+    $p = $p ?: $post;
+    $p = is_object($p) ? $p : get_post($p);
+
+    if (! (($force || isValidRequest($p)) && is_singular())) {
         return;
     }
 
-    global $post;
-
-    $id = $post->ID;
+    $id = $p->ID;
     $count = (int) get_post_meta($id, '_kksr_casts', true);
 
     if (! $count) {
@@ -41,5 +43,5 @@ add_action('wp_head', KKSR_NAMESPACE.'structuredData'); function structuredData(
     include KKSR_PATH_VIEWS.'structured-data.php';
     $html = ob_get_clean();
 
-    echo apply_filters(prefix('structured_data'), $html, $post);
+    echo apply_filters(prefix('structured_data'), $html, $p);
 }

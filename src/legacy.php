@@ -10,9 +10,11 @@
  */
 
 if (! function_exists('kk_star_ratings')) {
-    function kk_star_ratings($post = null, $force = null)
+    function kk_star_ratings($postOrForce = null, $force = null)
     {
-        return \Bhittani\StarRating\get($post, $force);
+        $force = is_null($force) ? (is_bool($postOrForce) ? $postOrForce : null) : $force;
+
+        return \Bhittani\StarRating\get(is_bool($postOrForce) ? null : $postOrForce, $force);
     }
 }
 
@@ -21,4 +23,9 @@ if (! function_exists('kk_star_ratings_get')) {
     {
         return \Bhittani\StarRating\collect($limit, $taxonomyId, $offset);
     }
+}
+
+add_shortcode('kkratings', KKSR_NAMESPACE.'legacyShortcode'); function legacyShortcode($atts)
+{
+    return quick($atts, 'kkratings');
 }
