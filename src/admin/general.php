@@ -48,7 +48,7 @@ foreach ($customPostTypes as $postType) {
 $postTypes = array_merge([
     ['value' => 'post', 'label' => __('Posts', 'kk-star-ratings')],
     ['value' => 'page', 'label' => __('Pages', 'kk-star-ratings')],
-], $customPostTypes);
+], $postTypes);
 
 return [
     [
