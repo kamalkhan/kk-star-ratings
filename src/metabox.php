@@ -41,6 +41,7 @@ function echoMetabox($post)
 {
     wp_nonce_field(basename(__FILE__), KKSR_SLUG.'-metabox-nonce');
 
+    $resetFieldName = '__'.prefix('reset');
     $statusFieldName = '_'.prefix('status');
     $status = get_post_meta($post->ID, $statusFieldName, true);
 
@@ -62,6 +63,12 @@ add_action('save_post', KKSR_NAMESPACE.'saveMetabox'); function saveMetabox($id)
     }
 
     update_post_meta($id, '_'.prefix('status'), $_POST['_'.prefix('status')]);
+
+    if (checked($_POST['__'.prefix('reset')], '1')) {
+        delete_post_meta($id, '_kksr_avg');
+        delete_post_meta($id, '_'.prefix('casts'));
+        delete_post_meta($id, '_'.prefix('ratings'));
+    }
 
     do_action('kksr_save_metabox');
 }

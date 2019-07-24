@@ -7,11 +7,18 @@
 
 <div class="components-base-control">
     <div class='components-base-control__field'>
-        <label class="components-base-control__label" style="margin-top: .75rem; margin-bottom: .25rem;">
+        <div style="margin-top: 1rem;">
+            <label class="components-base-control__label" style="margin-top: .75rem; margin-bottom: .25rem;">
+                <input type="checkbox" name="<?php echo $resetFieldName; ?>" value="1">
+                <?php _e('Reset Ratings', 'kk-star-ratings'); ?>
+            </label>
+        </div>
+
+        <label class="components-base-control__label" style="margin-top: 1rem;">
             <?php _e('Status', 'kk-star-ratings'); ?>
         </label>
 
-        <div style="margin: 1rem 0 -.5rem 0;">
+        <div style="margin-top: 1rem;">
             <label class="components-base-control__label" style="margin-top: .75rem; margin-bottom: .25rem;">
                 <input type="radio" name="<?php echo $statusFieldName; ?>" value="" <?php checked($status, ''); ?>>
                 <?php _e('Auto', 'kk-star-ratings'); ?>
