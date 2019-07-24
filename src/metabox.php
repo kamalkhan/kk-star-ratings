@@ -34,7 +34,7 @@ add_action('add_meta_boxes', KKSR_NAMESPACE.'metabox', 10, 2); function metabox(
         ";
     }
 
-    add_meta_box('meta-box-id', $icon.KKSR_LABEL.$legend, KKSR_NAMESPACE.'echoMetabox', $postTypes, 'side');
+    add_meta_box(KKSR_SLUG, $icon.KKSR_LABEL.$legend, KKSR_NAMESPACE.'echoMetabox', $postTypes, 'side');
 }
 
 function echoMetabox($post)
