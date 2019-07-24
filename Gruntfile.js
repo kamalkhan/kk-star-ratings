@@ -15,7 +15,7 @@ module.exports = function( grunt ) {
 				options: {
 					updateDomains: true
 				},
-				src: [ '*.php', '**/*.php', '!\.git/**/*', '!bin/**/*', '!node_modules/**/*', '!vendor/**/*', '!tests/**/*' ]
+				src: [ '*.php', '**/*.php', '!\.git/**/*', '!bin/**/*', '!node_modules/**/*', '!vendor/**/*', '!tests/**/*', '!freemius/**/*' ]
 			}
 		},
 
@@ -23,8 +23,8 @@ module.exports = function( grunt ) {
 			target: {
 				options: {
 					domainPath: '/languages',
-					exclude: [ '\.git/*', '\.github/*', 'bin/*', 'vendor/*', 'node_modules/*', 'tests/*' ],
-					mainFile: 'kk-star-ratings.php',
+					exclude: [ '\.git/*', '\.github/*', 'bin/*', 'vendor/*', 'node_modules/*', 'tests/*', 'freemius/*' ],
+					mainFile: 'index.php',
 					potFilename: 'kk-star-ratings.pot',
 					potHeaders: {
 						poedit: true,
