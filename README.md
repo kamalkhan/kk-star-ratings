@@ -6,7 +6,7 @@ Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited
 Requires at least: 4.5
 Requires PHP: 5.5.9
 Tested up to: 5.2.2
-Stable tag: 3.0.5
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 </only:wp -->
@@ -161,6 +161,32 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 
 <!-- only:wp>
 == Changelog ==
+
+= 3.1.0 =
+
+**Added**
+- Bottom margin added when bottom position in effect.
+- Ability to reset ratings for individual posts/pages.
+- Enable/disable star ratings for individual posts/pages.
+- Take manual control of the auto embedded markup to avoid duplication when using in a template.
+
+**Fixed**
+- Markup is now hidden under AMP.
+- Assets are now enqueued when manually/forcefully loading the markup via template function.
+
+**Changed**
+- Default colors have been updated.
+- Default size is now 22px instead of 24px.
+- Structured data now uses ratingCount instead of reviewCount.
+
+**Removed**
+- Nothing
+
+**Deprecated**
+- Nothing
+
+**Security**
+- Nothing
 
 = 3.0.0 =
 

@@ -8,7 +8,7 @@
  * Author URI:      http://bhittani.com
  * Text Domain:     kk-star-ratings
  * Domain Path:     /languages
- * Version:         3.0.5
+ * Version:         3.1.0
  * License:         GPLv2 or later
  *
  * @package         Bhittani\StarRating
@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
 
 define('KKSR_FILE', __FILE__);
 define('KKSR_PLUGIN', plugin_basename(KKSR_FILE));
-define('KKSR_VERSION', '3.0.5');
+define('KKSR_VERSION', '3.1.0');
 define('KKSR_PREFIX', 'kksr_');
 define('KKSR_SLUG', 'kk-star-ratings');
 define('KKSR_LABEL', 'kk Star Ratings');
