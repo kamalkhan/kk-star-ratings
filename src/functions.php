@@ -28,13 +28,13 @@ function options()
         'sd_context' => 'https://schema.org/',
         // Appearance
         'stars' => 5,
-        'size' => 24,
+        'size' => 22,
         'fill_color_star' => '#ffffff',
-        'stroke_color_star' => '#333333',
-        'fill_color_active_star' => '#dddddd',
-        'stroke_color_active_star' => '#333333',
-        'fill_color_hover_star' => '#f2fa6f',
-        'stroke_color_hover_star' => '#333333',
+        'stroke_color_star' => '#555555',
+        'fill_color_active_star' => '#fb9005',
+        'stroke_color_active_star' => '#2c1901',
+        'fill_color_hover_star' => '#fffb00',
+        'stroke_color_hover_star' => '#201f00',
     ];
 }
 

@@ -270,7 +270,7 @@ class MarkupTest extends TestCase
 
         $payload = array_merge([
             'id' => $post->ID,
-            'size' => 24,
+            'size' => 22,
             'count' => 0,
             'ratings' => 0,
             'stars' => 5,
