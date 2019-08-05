@@ -71,7 +71,7 @@ add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
 
     status_header(201);
 
-    $disable = false;
+    $disable = in_array('unique', getOption('strategies'));
     $count = apply_filters('kksr_count', $count);
     $score = apply_filters('kksr_score', calculateScore($ratings, $count, getOption('stars')));
     $percentage = apply_filters('kksr_percentage', calculatePercentage($ratings, $count));
