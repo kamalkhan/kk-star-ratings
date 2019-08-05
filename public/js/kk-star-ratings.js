@@ -44,7 +44,7 @@ jQuery(document).ready(function ($) {
                     $score.text(response.score);
                     $count.text(response.count);
                     $legend.show();
-                    if (response.block) {
+                    if (response.disable) {
                         $el.addClass('kksr-disable');
                     }
                     console.log('success', response);
