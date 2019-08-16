@@ -6,7 +6,7 @@ Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited
 Requires at least: 4.5
 Requires PHP: 5.5.9
 Tested up to: 5.2.2
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 </only:wp -->
@@ -161,6 +161,14 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 
 <!-- only:wp>
 == Changelog ==
+
+= 3.1.1 =
+
+**Fixed **
+- GitHub PR #84: Voting is now disabled on the current page when unique IP is enforced.
+
+**Changed**
+- GitHub PR #83: Trim extra spacing in the legend.
 
 = 3.1.0 =
 
