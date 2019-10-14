@@ -4,9 +4,260 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac15480f2d5b9dd86ffa018232198fa8",
+    "content-hash": "d455eb53018ea009b85a349189e5d397",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "bhittani/filesystem",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../../../../github/bhittani/filesystem",
+                "reference": "672fe4e3c5ba34f8800b18b1f32ea727c420116c"
+            },
+            "require": {
+                "php": ">=5.6",
+                "symfony/filesystem": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "phpunit/phpunit": "<8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bhittani\\Filesystem\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bhittani\\Filesystem\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "cs-fix": [
+                    "php-cs-fixer fix --using-cache=no"
+                ],
+                "cs-check": [
+                    "php-cs-fixer fix --dry-run --using-cache=no"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "role": "developer",
+                    "name": "Kamal Khan",
+                    "email": "shout@bhittani.com",
+                    "homepage": "http://bhittani.com"
+                }
+            ],
+            "description": "Utilities for working with the filesystem.",
+            "homepage": "https://github.com/kamalkhan/filesystem",
+            "keywords": [
+                "filesystem",
+                "utility"
+            ],
+            "support": {
+                "source": "https://github.com/kamalkhan/filesystem",
+                "issues": "https://github.com/kamalkhan/filesystem/issues"
+            }
+        },
+        {
+            "name": "bhittani/path",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kamalkhan/path.git",
+                "reference": "cf497a91e607e448649e74f9c208407d5548bf30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kamalkhan/path/zipball/cf497a91e607e448649e74f9c208407d5548bf30",
+                "reference": "cf497a91e607e448649e74f9c208407d5548bf30",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "phpunit/phpunit": "<8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bhittani\\Path\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamal Khan",
+                    "email": "shout@bhittani.com",
+                    "homepage": "http://bhittani.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Utilities for working with paths.",
+            "homepage": "https://github.com/kamalkhan/path",
+            "keywords": [
+                "path",
+                "utility"
+            ],
+            "time": "2019-10-14T02:18:13+00:00"
+        },
+        {
+            "name": "bhittani/web-server",
+            "version": "0.2.0",
+            "dist": {
+                "type": "path",
+                "url": "../../../../../github/bhittani/web-server",
+                "reference": "c235dbad8ca916000aaa1e76db9770ffa87e32f5"
+            },
+            "require": {
+                "php": ">=5.6",
+                "symfony/process": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "<8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bhittani\\WebServer\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bhittani\\WebServer\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "role": "developer",
+                    "name": "Kamal Khan",
+                    "email": "shout@bhittani.com",
+                    "homepage": "http://bhittani.com"
+                }
+            ],
+            "description": "Run a web server programmatically.",
+            "homepage": "https://github.com/kamalkhan/web-server",
+            "keywords": [
+                "process",
+                "programmatic",
+                "scripting",
+                "server",
+                "web"
+            ],
+            "support": {
+                "source": "https://github.com/kamalkhan/web-server",
+                "issues": "https://github.com/kamalkhan/web-server/issues"
+            }
+        },
+        {
+            "name": "bhittani/wp-test-suite",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../../../../github/bhittani/wp-test-suite",
+                "reference": "e94ab38348a6806f94ecaae6d87a87b6c98c46f4"
+            },
+            "require": {
+                "bhittani/filesystem": "*@dev",
+                "bhittani/path": "^0.2.1",
+                "bhittani/web-server": "^0.2.0",
+                "ext-pdo": "*",
+                "ext-zip": "*",
+                "php": ">=5.6",
+                "symfony/console": "^3.4"
+            },
+            "require-dev": {
+                "bhittani/flyover": "*@dev",
+                "phpunit/phpunit": "<8"
+            },
+            "suggest": {
+                "bhittani/flyover": "For browser/integration testing",
+                "phpunit/phpunit": "For testing purposes"
+            },
+            "bin": [
+                "bin/wp-test-suite"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bhittani\\WordPressTestSuite\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bhittani\\WordPressTestSuite\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "install-test-suite": [
+                    "bin/wp-test-suite install"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "role": "developer",
+                    "name": "Kamal Khan",
+                    "email": "shout@bhittani.com",
+                    "homepage": "http://bhittani.com"
+                }
+            ],
+            "description": "Browser and unit test suite for WordPress",
+            "homepage": "https://github.com/kamalkhan/wp-test-suite",
+            "keywords": [
+                "browser",
+                "dusk",
+                "suite",
+                "test",
+                "unit",
+                "wordpress"
+            ],
+            "support": {
+                "source": "https://github.com/kamalkhan/wp-test-suite",
+                "issues": "https://github.com/kamalkhan/wp-test-suite/issues"
+            }
+        },
         {
             "name": "composer/semver",
             "version": "1.5.0",
@@ -2474,7 +2725,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "bhittani/wp-test-suite": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

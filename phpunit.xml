@@ -14,4 +14,10 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <listeners>
+        <listener class="Bhittani\WordPressTestSuite\Extensions\PHPUnit"/>
+    </listeners>
+    <php>
+        <env name="WP_PLUGIN_FILE" value="index.php"/>
+    </php>
 </phpunit>
