@@ -1,4 +1,5 @@
 kk Star Ratings - WordPress Plugin
+
 Copyright (C) 2011-2019 Kamal Khan
 
 This program is free software; you can redistribute it and/or

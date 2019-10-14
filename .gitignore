@@ -1,13 +1,3 @@
-.DS_Store
-Thumbs.db
-wp-cli.local.yml
-coverage.xml
 /node_modules
 /vendor
-/tests/_wp_
-/svn
-*.sql
-*.tar.gz
-*.zip
-readme.txt
 TODO.md

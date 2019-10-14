@@ -1,13 +1,13 @@
 <?php
 
-$header = <<<'EOF'
+$header = <<<HEADER
 This file is part of bhittani/kk-star-ratings.
 
 (c) Kamal Khan <shout@bhittani.com>
 
 This source file is subject to the GPL v2 license that
 is bundled with this source code in the file LICENSE.
-EOF;
+HEADER;
 
 $rules = [
     '@PSR2' => true,
@@ -39,7 +39,9 @@ $rules = [
     ],
 ];
 
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__ . '/src');
+
 return PhpCsFixer\Config::create()
     ->setRules($rules)
-    ->setFinder(PhpCsFixer\Finder::create()
-        ->in(__DIR__ . '/src'));
+    ->setFinder($finder);
