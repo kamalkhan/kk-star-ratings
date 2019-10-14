@@ -12,6 +12,7 @@ EOF;
 $rules = [
     '@PSR2' => true,
     '@Symfony' => true,
+    'yoda_style' => false,
     'phpdoc_order' => true,
     'no_useless_else' => true,
     'heredoc_to_nowdoc' => true,

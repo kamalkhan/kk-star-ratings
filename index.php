@@ -10,8 +10,6 @@
  * Domain Path:     /languages
  * Version:         3.1.2
  * License:         GPLv2 or later
- *
- * @package         Bhittani\StarRating
  */
 
 if (! defined('ABSPATH')) {

@@ -20,7 +20,7 @@ cache:
 matrix:
   include:
     - php: 5.5
-      env: WP_VERSION=4.5 CS_CHECK=phpcs COVERAGE=codacy
+      env: WP_VERSION=4.5 CS_CHECK=1
     - php: 5.6
       env: WP_VERSION=latest
     - php: 7.0
@@ -51,46 +51,6 @@ script:
       WP_MULTISITE=1 composer test
     fi
   - |
-    if [[ "$CS_CHECK" == "phpcs" ]] ; then
-      composer check
+    if [[ "$CS_CHECK" == "1" ]] ; then
+      composer cs-check
     fi
-
-after_success:
-  - |
-    if [[ "$COVERAGE" == "codacy" && "$CODACY_PROJECT_TOKEN" != "" ]]; then
-      composer require codacy/coverage
-      composer coverage-clover
-      php vendor/bin/codacycoverage clover coverage.xml
-    fi
-
-before_deploy:
-  - npm install
-  - npm run i18n
-  - php bin/readme
-  - mkdir deploy
-  - cp readme.txt deploy
-  - cp LICENSE.txt deploy
-  - cp index.php deploy
-  - cp freemius.php deploy
-  - cp -rf src/ deploy/
-  - cp -rf views/ deploy/
-  - cp -rf public/ deploy/
-  - cp -rf languages/ deploy/
-  - cp -rf freemius/ deploy/
-  - cd $TRAVIS_BUILD_DIR
-
-deploy:
-  - provider: wordpress-plugin
-    skip_cleanup: true
-    edge:
-      source: TypistTech/dpl
-      branch: add-wordpress-plugin-deployment
-    on:
-      php: 7.2
-      tags: true
-      repo: kamalkhan/kk-star-ratings
-    slug: kk-star-ratings
-    username: bhittani
-    password: $WORDPRESS_ORG_PASSWORD
-    build_dir: deploy
-    assets_dir: assets
