@@ -31,4 +31,8 @@ define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
 define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
 define('KKSR_ASSET', plugin_dir_url(KKSR_FILE) . 'public/');
 
-//
+foreach ([
+    'functions.php',
+] as $src) {
+    require_once KKSR_PATH_SRC.$src;
+}
