@@ -35,16 +35,13 @@
         "platform": { "php": "5.6" }
     },
     "require": {
-        "php": ">=5.6",
-        "bhittani/steroid": "^1.0@dev"
+        "php": ">=5.6"
     },
     "require-dev": {
-        "bhittani/wp-test-suite": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.15",
         "phpunit/phpunit": "<8"
     },
     "scripts": {
-        "install-test-suite": "wp-test-suite install",
         "test": "phpunit --colors=always",
         "cs-fix": "php-cs-fixer fix --using-cache=no",
         "cs-check": "php-cs-fixer fix --dry-run --using-cache=no"
@@ -53,9 +50,5 @@
         "exclude": [
             "*"
         ]
-    },
-    "repositories": [
-        { "type": "path", "url": "../../../../../github/bhittani/*" },
-        { "type": "git", "url": "../../../../../github/laraport/dusk" }
-    ]
+    }
 }
