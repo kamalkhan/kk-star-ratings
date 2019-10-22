@@ -16,11 +16,6 @@
         "source": "https://github.com/kamalkhan/kk-star-ratings",
         "issues": "https://github.com/kamalkhan/kk-star-ratings/issues"
     },
-    "autoload": {
-        "psr-4": {
-            "Bhittani\\StarRating\\": "src"
-        }
-    },
     "autoload-dev": {
         "psr-4": {
             "Bhittani\\StarRating\\": "tests"
