@@ -10,8 +10,8 @@
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true">
     <testsuites>
-        <testsuite name="kk-star-ratings">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="unit">
+            <directory suffix=".test.php">./tests</directory>
         </testsuite>
     </testsuites>
     <listeners>

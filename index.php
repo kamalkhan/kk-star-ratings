@@ -2,6 +2,8 @@
 
 /**
  * Plugin Name:     kk Star Ratings
+ * Plugin Slug:     kk-star-ratings
+ * Plugin Nick:     kksr
  * Plugin URI:      https://github.com/kamalkhan/kk-star-ratings
  * Description:     Allow blog visitors to involve and interact more effectively with your website by rating posts.
  * Author:          Kamal Khan
@@ -17,4 +19,17 @@ if (! defined('ABSPATH')) {
     die();
 }
 
-//
+$steroid = require_once __DIR__.'/steroid/steroid.php';
+
+$steroid(__FILE__, [
+    'options' => [
+        'enable' => true,
+        'stars' => 5,
+    ],
+
+    'post-meta' => [
+        'count' => 0,
+        'counter' => 0,
+        'best' => null,
+    ],
+]);
