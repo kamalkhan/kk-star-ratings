@@ -4,7 +4,7 @@ Contributors: bhittani
 Donate link: https://github.com/kamalkhan/kk-star-ratings
 Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SERP
 Requires at least: 4.5
-Requires PHP: 5.5.9
+Requires PHP: 5.6
 Tested up to: 5.2.2
 Stable tag: 3.1.2
 License: GPLv2 or later
@@ -162,66 +162,12 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 <!-- only:wp>
 == Changelog ==
 
-= 3.1.1 =
+= 4.0.0 =
 
-**Fixed **
-- GitHub PR #84: Voting is now disabled on the current page when unique IP is enforced.
+- Stability
 
-**Changed**
-- GitHub PR #83: Trim extra spacing in the legend.
-
-= 3.1.0 =
-
-**Added**
-- Bottom margin added when bottom position in effect.
-- Ability to reset ratings for individual posts/pages.
-- Enable/disable star ratings for individual posts/pages.
-- Take manual control of the auto embedded markup to avoid duplication when using in a template.
-
-**Fixed**
-- Markup is now hidden under AMP.
-- Assets are now enqueued when manually/forcefully loading the markup via template function.
-
-**Changed**
-- Default colors have been updated.
-- Default size is now 22px instead of 24px.
-- Structured data now uses ratingCount instead of reviewCount.
-
-**Removed**
-- Nothing
-
-**Deprecated**
-- Nothing
-
-**Security**
-- Nothing
-
-= 3.0.0 =
-
-**Added**
-- Optionally allow guests to vote.
-- Ratings can also be included in publicly accessible custom posts.
-
-**Fixed**
-- Google rich snippets.
-- AJAX call on every load causing high CPU usage.
-
-**Changed**
-- Stars are now based on svg.
-- Appearance has been simplified.
-- Html based structured data has been replaced by json based structured data.
-- kk_star_ratings_get function no longer includes the post_title key.
-
-**Removed**
-- Labels have been removed.
-- Top posts widget has been removed in favor of a future addon.
-- Admin table colum has been removed in favor of a future addon.
-
-**Deprecated**
-- Nothing
-
-**Security**
-- Nothing
+= 3.x =
+[Archived](.github/CHANGELOG-v3.md)
 
 = 2.x =
 [Archived](.github/CHANGELOG-v2.md)
