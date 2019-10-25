@@ -190,6 +190,10 @@ function vote_post($score, $best, $id, $slug)
 add_action('wp_head', __NAMESPACE__.'\structured_data');
 function structured_data()
 {
+    if (! get_option(prefix('enable'))) {
+        return;
+    }
+
     if (is_singular() && get_option(prefix('grs'))) {
         $id = get_post_field('ID');
         $title = get_post_field('post_title');

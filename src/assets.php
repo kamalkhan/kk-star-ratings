@@ -19,6 +19,10 @@ if (! defined('ABSPATH')) {
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\styles');
 function styles($hook)
 {
+    if (! get_option(prefix('enable'))) {
+        return;
+    }
+
     wp_enqueue_style(
         config('slug'),
         config('url').'public/css/kk-star-ratings.css',
@@ -26,12 +30,16 @@ function styles($hook)
         config('version')
     );
 
-    wp_add_inline_style(config('slug'), '');
+    // wp_add_inline_style(config('slug'), '');
 }
 
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\scripts');
 function scripts($hook)
 {
+    if (! get_option(prefix('enable'))) {
+        return;
+    }
+
     wp_enqueue_script(
         config('slug'),
         config('url').'public/js/kk-star-ratings.js',

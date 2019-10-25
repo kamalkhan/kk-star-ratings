@@ -34,6 +34,10 @@ function response(array $payload = [], $validate = true)
         return ! is_null($value);
     }));
 
+    if (! get_option(prefix('enable'))) {
+        return '';
+    }
+
     if (! $payload['id'] && ! $payload['slug']) {
         $payload['id'] = get_post_field('ID');
     }
