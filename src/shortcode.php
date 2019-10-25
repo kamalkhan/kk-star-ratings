@@ -23,7 +23,7 @@ function shortcode($attrs, $content, $tag)
 {
     $attrs = (array) $attrs;
 
-    foreach ($attrs as $key => & $value) {
+    foreach ($attrs as $key => &$value) {
         if (is_numeric($key)) {
             $attrs[$value] = true;
             unset($attrs[$key]);
