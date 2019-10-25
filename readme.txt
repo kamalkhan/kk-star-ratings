@@ -3,7 +3,7 @@ Contributors: bhittani
 Donate link: https://github.com/kamalkhan/kk-star-ratings
 Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SERP
 Requires at least: 4.5
-Requires PHP: 5.6
+Requires PHP: 5.5.9
 Tested up to: 5.2.2
 Stable tag: 3.1.2
 License: GPLv2 or later
@@ -92,7 +92,7 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 
 == Changelog ==
 
-= 4.0.0 =
+= 4.0.0.0 =
 
 - Stability
 
