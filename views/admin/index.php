@@ -20,8 +20,6 @@
         </small>
     </h1>
 
-    <!-- \Bhittani\StarRating\view('admin.social') -->
-
     <h2 class="nav-tab-wrapper">
         <?php foreach ($tabs as $tab => $label) : ?>
             <a class="nav-tab <?= $tab === $active ? 'nav-tab-active' : ''; ?>"
@@ -29,6 +27,9 @@
                 <?= $label; ?>
             </a>
         <?php endforeach; ?>
+        <div style="float: left; margin-left: 10px;">
+            <?= \Bhittani\StarRating\view('admin.social') ?>
+        </div>
     </h2>
 
     <?= $content ?>
