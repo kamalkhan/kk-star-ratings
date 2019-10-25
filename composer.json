@@ -33,6 +33,13 @@
     "require": {
         "php": ">=5.6"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15"
+    },
+    "scripts": {
+        "cs-fix": "php-cs-fixer fix --using-cache=no",
+        "cs-check": "php-cs-fixer fix --dry-run --using-cache=no"
+    },
     "archive": {
         "exclude": [
             "*",
