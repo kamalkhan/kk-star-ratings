@@ -31,7 +31,10 @@ return [
         'label' => __('Enable', 'kk-star-ratings'),
         'name' => $grs[0],
         'value' => true,
-        'checked' => checked($grs[1], true, false),
+        'filter' => function ($bool) {
+            return (string) $bool;
+        },
+        'checked' => checked($grs[1], '1', false),
         'help' => __('Enable/disable rich snippets.', 'kk-star-ratings'),
     ],
 

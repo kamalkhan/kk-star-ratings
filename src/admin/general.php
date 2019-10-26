@@ -51,7 +51,10 @@ return [
         'label' => __('Active', 'kk-star-ratings'),
         'name' => $enable[0],
         'value' => true,
-        'checked' => checked($enable[1], true, false),
+        'filter' => function ($bool) {
+            return (string) $bool;
+        },
+        'checked' => checked($enable[1], '1', false),
         'help' => __('Globally activate/deactivate the star ratings.', 'kk-star-ratings'),
     ],
 
