@@ -4,8 +4,8 @@ Contributors: bhittani
 Donate link: https://github.com/kamalkhan/kk-star-ratings
 Tags: star ratings, votings, rate posts, ajax ratings, infinite stars, unlimited stars, google rich snippets, structured data, SEO, SERP
 Requires at least: 4.5
-Requires PHP: 5.5.9
-Tested up to: 5.2.2
+Requires PHP: 5.6
+Tested up to: 5.2.4
 Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,14 +25,14 @@ kk Star Ratings - A WordPress Plugin
 ![icon-wp-tested]
 
 ![icon-php-version]
-[![Travis Build Status][icon-travis-status]][link-travis-status]
+<!-- [![Travis Build Status][icon-travis-status]][link-travis-status] -->
 
 [![License][icon-license]](LICENSE.txt)
 <!-- /only:github -->
 
 kk Star Ratings allows blog visitors to involve and interact more effectively with your website by rating posts.
 
-This plugin has been renewed from the ground up as of v3 covered by unit tests.
+This plugin has been renewed from the ground up as of v4.
 
 <!-- only:github/ -->
 **Table of contents**
@@ -162,66 +162,12 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 <!-- only:wp>
 == Changelog ==
 
-= 3.1.1 =
+= 4.x =
 
-**Fixed **
-- GitHub PR #84: Voting is now disabled on the current page when unique IP is enforced.
+- [View Changelog](CHANGELOG.md)
 
-**Changed**
-- GitHub PR #83: Trim extra spacing in the legend.
-
-= 3.1.0 =
-
-**Added**
-- Bottom margin added when bottom position in effect.
-- Ability to reset ratings for individual posts/pages.
-- Enable/disable star ratings for individual posts/pages.
-- Take manual control of the auto embedded markup to avoid duplication when using in a template.
-
-**Fixed**
-- Markup is now hidden under AMP.
-- Assets are now enqueued when manually/forcefully loading the markup via template function.
-
-**Changed**
-- Default colors have been updated.
-- Default size is now 22px instead of 24px.
-- Structured data now uses ratingCount instead of reviewCount.
-
-**Removed**
-- Nothing
-
-**Deprecated**
-- Nothing
-
-**Security**
-- Nothing
-
-= 3.0.0 =
-
-**Added**
-- Optionally allow guests to vote.
-- Ratings can also be included in publicly accessible custom posts.
-
-**Fixed**
-- Google rich snippets.
-- AJAX call on every load causing high CPU usage.
-
-**Changed**
-- Stars are now based on svg.
-- Appearance has been simplified.
-- Html based structured data has been replaced by json based structured data.
-- kk_star_ratings_get function no longer includes the post_title key.
-
-**Removed**
-- Labels have been removed.
-- Top posts widget has been removed in favor of a future addon.
-- Admin table colum has been removed in favor of a future addon.
-
-**Deprecated**
-- Nothing
-
-**Security**
-- Nothing
+= 3.x =
+[Archived](.github/CHANGELOG-v3.md)
 
 = 2.x =
 [Archived](.github/CHANGELOG-v2.md)
@@ -233,7 +179,10 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 <!-- only:wp>
 == Upgrade Notice ==
 
-= 3.0.0 =
+= 4.x =
+It is seamless to upgrade from v3 to v4.
+
+= 3.x =
 All previous ratings and options will be preserved. However, since v3 has been renewed from scratch, we do not support downgrading to v2 after moving from v2 to v3.
 </only:wp -->
 
@@ -242,11 +191,13 @@ All previous ratings and options will be preserved. However, since v3 has been r
 
 Please see the [CHANGELOG](CHANGELOG.md) for more information on what has changed.
 
+[Version 3.x](.github/CHANGELOG-v3.md) has been *archived* as of October 2019.
+
 [Version 2.x](.github/CHANGELOG-v2.md) has been *archived* as of July 2019.
 
 [Version 1.x](.github/CHANGELOG-v1.md) has been *archived* as of March 2016.
 
-## i18n
+<!-- ## i18n
 
 ```bash
 npm install
@@ -274,7 +225,7 @@ composer install
 composer install-test-suite
 
 composer test
-```
+``` -->
 
 ## Contributing
 
@@ -298,29 +249,29 @@ The [pull request template](.github/PR_TEMPLATE) and [issue template](.github/IS
 The GPLv2 or later license. Please see the [License File](LICENSE.txt) for more information.
 
 <!-- WordPress -->
-[icon-wp-version]: https://img.shields.io/wordpress/plugin/wp-version/kk-star-ratings.svg?style=for-the-badge
-[icon-wp-tested]: https://img.shields.io/wordpress/plugin/tested/kk-star-ratings.svg?style=for-the-badge
-[icon-wp-rating]: https://img.shields.io/wordpress/plugin/rating/kk-star-ratings.svg?style=for-the-badge
+[icon-wp-version]: https://img.shields.io/wordpress/plugin/wp-version/kk-star-ratings.svg
+[icon-wp-tested]: https://img.shields.io/wordpress/plugin/tested/kk-star-ratings.svg
+[icon-wp-rating]: https://img.shields.io/wordpress/plugin/rating/kk-star-ratings.svg
 
 <!-- Plugin -->
-[icon-plugin-downloads-per-day]: https://img.shields.io/wordpress/plugin/dd/kk-star-ratings.svg?style=for-the-badge
-[icon-plugin-downloads]: https://img.shields.io/wordpress/plugin/dt/kk-star-ratings.svg?style=for-the-badge
-[icon-plugin-installs]: https://img.shields.io/wordpress/plugin/installs/kk-star-ratings.svg?style=for-the-badge
-[icon-plugin-version]: https://img.shields.io/wordpress/plugin/v/kk-star-ratings.svg?style=for-the-badge
+[icon-plugin-downloads-per-day]: https://img.shields.io/wordpress/plugin/dd/kk-star-ratings.svg
+[icon-plugin-downloads]: https://img.shields.io/wordpress/plugin/dt/kk-star-ratings.svg
+[icon-plugin-installs]: https://img.shields.io/wordpress/plugin/installs/kk-star-ratings.svg
+[icon-plugin-version]: https://img.shields.io/wordpress/plugin/v/kk-star-ratings.svg
 
 <!-- PHP version -->
-[icon-php-version]: https://img.shields.io/travis/php-v/kamalkhan/kk-star-ratings/master.svg?style=for-the-badge
+[icon-php-version]: https://img.shields.io/travis/php-v/kamalkhan/kk-star-ratings/master.svg
 
 <!-- Travis Status -->
-[icon-travis-status]: https://img.shields.io/travis/kamalkhan/kk-star-ratings.svg?style=for-the-badge
+[icon-travis-status]: https://img.shields.io/travis/kamalkhan/kk-star-ratings.svg
 [link-travis-status]: https://travis-ci.org/kamalkhan/kk-star-ratings
 
 <!-- Packagist Downloads -->
-[icon-packagist-downloads]: https://img.shields.io/packagist/dt/bhittani/kk-star-ratings.svg?style=for-the-badge
+[icon-packagist-downloads]: https://img.shields.io/packagist/dt/bhittani/kk-star-ratings.svg
 [link-packagist-downloads]: https://packagist.org/packages/bhittani/kk-star-ratings
 
 <!-- License -->
-[icon-license]: https://img.shields.io/badge/License-GPL%20v2-blue.svg?style=for-the-badge
+[icon-license]: https://img.shields.io/badge/License-GPL%20v2-blue.svg
 
 <!-- Composer -->
 [link-composer]: https://getcomposer.org

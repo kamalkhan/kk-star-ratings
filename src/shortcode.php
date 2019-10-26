@@ -5,25 +5,45 @@
  *
  * (c) Kamal Khan <shout@bhittani.com>
  *
- * This source file is subject to the GPL v2 license that
- * is bundled with this source code in the file LICENSE.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
 namespace Bhittani\StarRating;
 
-add_shortcode(KKSR_SHORTCODE, KKSR_NAMESPACE.'shortcode'); function shortcode($atts)
-{
-    return quick($atts, KKSR_SHORTCODE);
+if (! defined('ABSPATH')) {
+    http_response_code(404);
+    die();
 }
 
-// add_filter('shortcode_atts_kkratings', KKSR_NAMESPACE.'filterShortcode');
-// add_filter('shortcode_atts_'.KKSR_SHORTCODE, KKSR_NAMESPACE.'filterShortcode');
-// function filterShortcode($atts)
-// {
-//     // if ($atts['id']) {
-//     //     queue();
-//     // }
-//     die(var_dump($atts));
+add_shortcode(config('shortcode'), __NAMESPACE__.'\shortcode');
+// Legacy support.
+add_shortcode('kkratings', __NAMESPACE__.'\shortcode');
+function shortcode($attrs, $content, $tag)
+{
+    $attrs = (array) $attrs;
 
-//     return $atts;
-// }
+    foreach ($attrs as $key => &$value) {
+        if (is_numeric($key)) {
+            $attrs[$value] = true;
+            unset($attrs[$key]);
+        }
+        if ($value === 'false') {
+            $value = false;
+        }
+        if ($value === 'true') {
+            $value = true;
+        }
+        if ($value === 'null') {
+            $value = null;
+        }
+    }
+
+    $attrs = shortcode_atts(array_fill_keys([
+        'id', 'slug', 'score', 'count', 'best',
+        'size', 'align', 'valign', 'disabled',
+        'greet', 'force',
+    ], null), $attrs, $tag);
+
+    return response($attrs);
+}

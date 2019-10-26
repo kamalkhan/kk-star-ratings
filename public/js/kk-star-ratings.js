@@ -1,61 +1,67 @@
+"use strict";
+
 jQuery(document).ready(function ($) {
-    $('.kk-star-ratings').each(function (i, el) {
-        var $el = $(el);
-        var $activeStars = $('.kksr-active-stars', $el);
-        var $legend = $('.kksr-legend', $el);
-        var $score = $('.kksr-legend-score', $legend);
-        var $count = $('.kksr-legend-meta', $legend);
+    function apply ($el, options) {
+        var options = options || { isBusy: false };
 
-        var busy = false;
-
-        $el.on('click', function (e) {
-            if (busy || $el.hasClass('kksr-disable')) {
+        function ajax(data, successCallback, errorCallback)
+        {
+            if (options.isBusy || $el.hasClass('kksr-disabled')) {
                 return;
             }
 
-            busy = true;
-
-            var id = $el.data('id');
-
-            if (! id) {
-                return busy = false;
-            }
-
-            var star = e.target;
-            var $star = $(star);
-            var rating = $star.data('star');
-
-            if (! rating) {
-                return busy = false;
-            }
+            options.isBusy = true;
 
             $.ajax({
                 type: 'POST',
                 url: kk_star_ratings.endpoint,
-                data: {
-                    id: id,
-                    rating: rating,
-                    action: 'kk-star-ratings',
-                    nonce: kk_star_ratings.nonce
-                },
-                dataType: 'json',
-                success: function (response) {
-                    $activeStars.width(response.width + 'px');
-                    $score.text(response.score);
-                    $count.text(response.count);
-                    $legend.show();
-                    if (response.disable) {
-                        $el.addClass('kksr-disable');
-                    }
-                    console.log('success', response);
-                },
-                error: function (xhr) {
-                    console.log('error', xhr, xhr.responseJSON);
-                },
+                data: Object.assign({
+                    nonce: kk_star_ratings.nonce,
+                    action: kk_star_ratings.action
+                }, data),
+                error: errorCallback,
+                success: successCallback,
                 complete: function () {
-                    busy = false;
+                    options.isBusy = false;
                 }
             });
+        }
+
+        function onClick(e) {
+            var $star = $(this);
+
+            ajax({
+                id: $el.data('id'),
+                slug: $el.data('slug'),
+                score: $star.data('star'),
+                best: $('[data-star]', $el).length
+            }, function (response, status, xhr) {
+                var $newEl = $(response);
+                $newEl.addClass($el.attr('class'));
+                $el.replaceWith($newEl);
+                destroy();
+                apply($newEl, options);
+            }, function (xhr, status, err) {
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    console.error(xhr.responseJSON.error);
+                }
+            });
+        }
+
+        function destroy() {
+            $('[data-star]', $el).each(function () {
+                $(this).off('click', onClick);
+            });
+
+            $el.remove();
+        }
+
+        $('[data-star]', $el).each(function () {
+            $(this).on('click', onClick);
         });
+    }
+
+    $('.kk-star-ratings').each(function () {
+        apply($(this))
     });
 });

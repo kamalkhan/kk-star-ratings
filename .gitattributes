@@ -1,0 +1,10 @@
+* text=auto
+
+/.php_cs export-ignore
+/.github export-ignore
+/README.md export-ignore
+/.gitignore export-ignore
+/composer.lock export-ignore
+/composer.json export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore

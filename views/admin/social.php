@@ -1,9 +1,21 @@
-<div style="display: flex; height: 20px; margin: 5px; 0;">
+<?php
+    if (! defined('ABSPATH')) {
+        http_response_code(404);
+        die();
+    }
+?>
+
+<div style="display: flex;">
     <!-- Github -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <div style="float: left; margin-right: 5px;">
-        <a class="github-button" href="https://github.com/kamalkhan/kk-star-ratings" data-icon="octicon-star" data-show-count="true" aria-label="Star kamalkhan/kk-star-ratings on GitHub">
+        <a class="github-button"
+            href="https://github.com/kamalkhan/kk-star-ratings"
+            data-icon="octicon-star"
+            data-show-count="true"
+            data-size="large"
+            aria-label="Star kamalkhan/kk-star-ratings on GitHub">
             kk Star Ratings
         </a>
     </div>
@@ -29,7 +41,11 @@
     </script>
 
     <div style="float: left; margin-right: 5px;">
-        <a class="twitter-share-button" href="https://github.com/kamalkhan/kk-star-ratings">
+        <a class="twitter-share-button"
+            data-size="large"
+            data-text="kk Star Ratings is awesome."
+            data-url="https://github.com/kamalkhan/kk-star-ratings"
+            href="https://twitter.com/intent/tweet">
             Tweet
         </a>
     </div>
@@ -48,5 +64,13 @@
 
     <div id="fb-root" style="float: left; margin-right: 5px;"></div>
 
-    <div class="fb-like" data-href="https://github.com/kamalkhan/kk-star-ratings" data-width="167" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+    <div class="fb-like"
+        data-href="https://github.com/kamalkhan/kk-star-ratings"
+        data-width="167"
+        data-layout="button_count"
+        data-action="like"
+        data-size="large"
+        data-show-faces="true"
+        data-share="true">
+    </div>
 </div>

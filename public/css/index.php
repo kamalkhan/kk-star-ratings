@@ -1,5 +1,6 @@
 <?php
 
-http_response_code(404);
-
-die();
+if (! defined('ABSPATH')) {
+    http_response_code(404);
+    die();
+}

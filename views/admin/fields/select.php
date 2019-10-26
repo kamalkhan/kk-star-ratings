@@ -1,11 +1,17 @@
-<select name="<?php echo $name; ?><?php echo (isset($multiple) && $multiple) ? '[]' : ''; ?>"
+<?php
+    if (! defined('ABSPATH')) {
+        http_response_code(404);
+        die();
+    }
+?>
+
+<select name="<?= $name ?><?= (isset($multiple) && $multiple) ? '[]' : '' ?>"
     style="min-width: 15rem; padding: .5rem;"
-    <?php echo isset($id) ? ('id="'.$id.'"') : ''; ?>
-    <?php echo isset($multiple) ? ('multiple="multiple"') : ''; ?>>
+    <?= (isset($multiple) && $multiple) ? 'multiple="multiple"' : '' ?>>
     <?php foreach ($options as $option) : ?>
-        <option value="<?php echo $option['value']; ?>"
-            <?php echo $option['selected'] ? 'selected="selected"' : ''; ?>>
-            <?php echo $option['label']; ?>
+        <option value="<?= $option['value'] ?>"
+            <?= $option['selected'] ? 'selected="selected"' : '' ?>>
+            <?= $option['label'] ?>
         </option>
     <?php endforeach; ?>
 </select>

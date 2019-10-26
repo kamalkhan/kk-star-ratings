@@ -1,7 +1,12 @@
-<label>
-    <input type="checkbox" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
-        <?php echo isset($id) ? ('id="'.$id.'"') : ''; ?>
-        <?php echo $checked ? 'checked="checked"' : ''; ?>>
+<?php
+    if (! defined('ABSPATH')) {
+        http_response_code(404);
+        die();
+    }
+?>
 
-    <?php echo isset($label) ? $label : ''; ?>
+<label>
+    <input type="checkbox" name="<?= $name ?>" value="<?= $value ?>"
+        <?= $checked ? 'checked="checked"' : '' ?>>
+    <?= $label ?>
 </label>

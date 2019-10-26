@@ -9,21 +9,28 @@
     <?php settings_errors(); ?>
 
     <h1>
-        <?php echo $label; ?>
-        <small style="margin-left: .5rem; font-size: 80%; font-family: monospace; letter-spacing: -2px; color: gray;">
-            <?php echo $version; ?>
+        <?= $label; ?>
+        <small style="
+            color: gray;
+            font-size: 80%;
+            margin-left: .5rem;
+            letter-spacing: -2px;
+            font-family: monospace;">
+            <?= $version; ?>
         </small>
     </h1>
 
-    <?php
-        ob_start();
-        include KKSR_PATH_VIEWS.'admin/social.php';
-        echo ob_get_clean();
-    ?>
-
     <h2 class="nav-tab-wrapper">
-        <?php do_action('kksr_setting_tabs'); ?>
+        <?php foreach ($tabs as $tab => $label) : ?>
+            <a class="nav-tab <?= $tab === $active ? 'nav-tab-active' : ''; ?>"
+                href="<?= admin_url('admin.php?page='.$_GET['page'].'&tab='.$tab); ?>">
+                <?= $label; ?>
+            </a>
+        <?php endforeach; ?>
+        <div style="float: left; margin-left: 10px;">
+            <?= \Bhittani\StarRating\view('admin.social') ?>
+        </div>
     </h2>
 
-    <?php do_action('kksr_setting_contents'); ?>
+    <?= $content ?>
 </div>

@@ -5,77 +5,62 @@
  *
  * (c) Kamal Khan <shout@bhittani.com>
  *
- * This source file is subject to the GPL v2 license that
- * is bundled with this source code in the file LICENSE.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
 namespace Bhittani\StarRating;
 
-add_action('wp_ajax_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax');
-add_action('wp_ajax_nopriv_'.KKSR_SLUG, KKSR_NAMESPACE.'ajax'); function ajax()
+if (! defined('ABSPATH')) {
+    http_response_code(404);
+    die();
+}
+
+add_action('wp_ajax_'.config('slug'), __NAMESPACE__.'\ajax');
+add_action('wp_ajax_nopriv_'.config('slug'), __NAMESPACE__.'\ajax');
+function ajax()
 {
-    header('Content-Type: application/json; charset=utf-8', true);
+    if (! check_ajax_referer(config('slug').'-ajax', 'nonce', false)) {
+        header('Content-Type: application/json; charset=utf-8', true, 403);
 
-    if (! check_ajax_referer(KKSR_SLUG, 'nonce', false)) {
-        status_header(403);
-
-        return wp_die(json_encode(['error' => __('This action is forbidden.', 'kk-star-ratings')]));
-    }
-
-    // Are guests allowed?
-    if (! is_user_logged_in() && ! in_array('guests', getOption('strategies'))) {
-        status_header(401);
-
-        return wp_die(json_encode(['error' => __('Unauthorized.', 'kk-star-ratings')]));
+        return wp_die(json_encode([
+            'error' => __('This action is forbidden.', 'kk-star-ratings'),
+        ]));
     }
 
     if (! isset($_POST['id'])) {
-        status_header(406);
+        header('Content-Type: application/json; charset=utf-8', true, 406);
 
-        return wp_die(json_encode(['error' => __('An id is required to vote.', 'kk-star-ratings')]));
+        return wp_die(json_encode([
+            'error' => __('An id is required to vote.', 'kk-star-ratings'),
+        ]));
     }
 
     $id = $_POST['id'];
+    $slug = $_POST['slug'];
 
-    $ip = md5($_SERVER['REMOTE_ADDR']);
-    $ips = get_post_meta($id, '_kksr_ips');
+    if (! apply_plugin_filters('can_vote', true, $id, $slug)) {
+        header('Content-Type: application/json; charset=utf-8', true, 401);
 
-    // Is the IP address unique?
-    if (in_array('unique', getOption('strategies'))
-        && in_array($ip, $ips)
-    ) {
-        status_header(403);
-
-        return wp_die(json_encode(['error' => __('Not allowed to vote.', 'kk-star-ratings')]));
+        return wp_die(json_encode([
+            'error' => __('You are not allowed to vote.', 'kk-star-ratings'),
+        ]));
     }
 
-    if (! isset($_POST['rating'])) {
-        status_header(406);
+    if (! isset($_POST['score'])) {
+        header('Content-Type: application/json; charset=utf-8', true, 406);
 
-        return wp_die(json_encode(['error' => __('A rating is required to vote.', 'kk-star-ratings')]));
+        return wp_die(json_encode([
+            'error' => __('A rating is required to vote.', 'kk-star-ratings'),
+        ]));
     }
 
-    $rating = $_POST['rating'];
+    $best = $_POST['best'] ?: get_option(prefix('stars'));
+    $best = max((int) $best, 1);
+    $score = $_POST['score'];
+    $score = min(max((int) $score, 1), $best);
 
-    try {
-        list($ratings, $count) = vote($id, $rating);
-    } catch (\Exception $e) {
-        status_header(406);
+    do_plugin_action('vote', $score, $best, $id, $slug);
 
-        return wp_die(json_encode(['error' => $e->getMessage()]));
-    }
-
-    if (! in_array($ip, $ips)) {
-        update_post_meta($id, '_kksr_ips', $ip);
-    }
-
-    status_header(201);
-
-    $disable = in_array('unique', getOption('strategies'));
-    $count = apply_filters('kksr_count', $count);
-    $score = apply_filters('kksr_score', calculateScore($ratings, $count, getOption('stars')));
-    $percentage = apply_filters('kksr_percentage', calculatePercentage($ratings, $count));
-    $width = apply_filters('kksr_width', calculateWidth($score));
-
-    wp_die(json_encode(compact('percentage', 'score', 'count', 'width', 'disable')));
+    wp_die(response(compact('id', 'slug', 'best'), false), 201);
 }

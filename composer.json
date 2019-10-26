@@ -1,7 +1,7 @@
 {
     "name": "bhittani/kk-star-ratings",
     "type": "wordpress-plugin",
-    "license": "GPL",
+    "license": "GPL-2.0-or-later",
     "description": "Allow blog visitors to involve and interact more effectively with your website by rating posts.",
     "homepage": "https://github.com/kamalkhan/kk-star-ratings",
     "authors": [
@@ -17,14 +17,10 @@
         "issues": "https://github.com/kamalkhan/kk-star-ratings/issues"
     },
     "autoload": {},
-    "autoload-dev": {
-        "psr-4": {
-            "Bhittani\\StarRating\\": "tests"
-        }
-    },
+    "autoload-dev": {},
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "minimum-stability": "dev",
@@ -32,25 +28,17 @@
     "config": {
         "sort-packages": true,
         "preferred-install": "dist",
-        "platform": { "php": "5.5.9" }
+        "platform": { "php": "5.6" }
     },
     "require": {
-        "php": ">=5.5.9,<8.0-DEV"
+        "php": ">=5.6"
     },
     "require-dev": {
-        "php": ">=5.5.9,<8.0-DEV",
-        "ext-pdo": "*",
-        "ext-pdo_sqlite": "*",
-        "friendsofphp/php-cs-fixer": "*",
-        "phpunit/phpunit": "*"
+        "friendsofphp/php-cs-fixer": "^2.15"
     },
     "scripts": {
-        "install-test-suite": "bin/install-test-suite.sh tests/_wp_",
-        "test": "phpunit --colors=always",
-        "coverage": "phpunit --colors=always --coverage-clover coverage.xml",
-        "check": "php-cs-fixer fix --dry-run --using-cache=no",
-        "fix": "php-cs-fixer fix --using-cache=no",
-        "ci": ["@check", "@test"]
+        "cs-fix": "php-cs-fixer fix --using-cache=no",
+        "cs-check": "php-cs-fixer fix --dry-run --using-cache=no"
     },
     "archive": {
         "exclude": [

@@ -5,143 +5,171 @@
  *
  * (c) Kamal Khan <shout@bhittani.com>
  *
- * This source file is subject to the GPL v2 license that
- * is bundled with this source code in the file LICENSE.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
 namespace Bhittani\StarRating;
 
-add_action('admin_menu', KKSR_NAMESPACE.'admin'); function admin()
+if (! defined('ABSPATH')) {
+    http_response_code(404);
+    die();
+}
+
+use RuntimeException;
+
+function get_admin_tabs()
+{
+    $tabs = apply_plugin_filters('admin_tabs', []);
+    $keys = array_keys($tabs);
+    $active = (isset($_GET['tab']) && $_GET['tab']) ? $_GET['tab'] : reset($keys);
+    $active = apply_plugin_filters('active_admin_tab', $active);
+
+    return [$tabs, $active];
+}
+
+add_action('admin_menu', __NAMESPACE__.'\admin');
+function admin()
 {
     add_menu_page(
-        KKSR_LABEL,
-        KKSR_LABEL,
+        config('name'),
+        config('name'),
         'manage_options',
-        KKSR_SLUG,
-        KKSR_NAMESPACE.'adminCallback',
+        config('slug'),
+        __NAMESPACE__.'\admin_callback',
         'dashicons-star-filled'
     );
-} function adminCallback()
-{
-    $label = KKSR_LABEL;
-    $version = KKSR_VERSION;
-
-    ob_start();
-    include KKSR_PATH_VIEWS.'admin/index.php';
-    $html = ob_get_clean();
-
-    echo apply_filters(prefix('settings'), $html);
 }
 
-add_action(prefix('setting_tabs'), KKSR_NAMESPACE.'adminTabs'); function adminTabs()
+function admin_callback()
 {
-    $tabs = getAdminTabs();
-    $active = getActiveAdminTab();
+    list($tabs, $active) = get_admin_tabs();
 
-    ob_start();
-    include KKSR_PATH_VIEWS.'admin/tabs.php';
-    echo ob_get_clean();
+    $content = apply_plugin_filters('admin_content', '', $active);
+
+    if ($active) {
+        $content = apply_plugin_filters('admin_content.'.$active, $content);
+    }
+
+    echo view('admin.index', [
+        'label' => config('name'),
+        'version' => config('version'),
+        'tabs' => $tabs,
+        'active' => $active,
+        'content' => $content,
+    ]);
 }
 
-add_action(prefix('setting_contents'), KKSR_NAMESPACE.'adminContents'); function adminContents()
+add_plugin_filter('admin_tabs', __NAMESPACE__.'\admin_tabs', 9);
+function admin_tabs($tabs)
 {
-    if (! ($active = getActiveAdminTab())) {
+    return $tabs + [
+        'general' => 'General',
+        'appearance' => 'Appearance',
+        'rich-snippets' => 'Rich Snippets',
+    ];
+}
+
+add_plugin_filter('admin_content', __NAMESPACE__.'\admin_content', 9, 2);
+function admin_content($content, $active)
+{
+    if (! $active) {
+        return $content;
+    }
+
+    $slug = config('slug');
+
+    return view(["admin.tabs.{$active}", 'admin.content'], compact('active', 'slug'));
+}
+
+add_action('admin_init', __NAMESPACE__.'\settings_callback');
+function settings_callback()
+{
+    list($tabs, $active) = get_admin_tabs();
+
+    if (! $active) {
         return;
     }
 
-    ob_start();
+    $slug = config('slug');
 
-    if (file_exists($file = KKSR_PATH_VIEWS.'admin/tabs/'.$active.'.php')) {
-        include $file;
-    } else {
-        include KKSR_PATH_VIEWS.'admin/contents.php';
-    }
+    add_settings_section('default', null, null, $slug);
 
-    echo ob_get_clean();
-}
-
-add_action('admin_init', KKSR_NAMESPACE.'adminFields'); function adminFields()
-{
-    if (! ($active = getActiveAdminTab())) {
-        return;
-    }
-
-    add_settings_section('default', null, null, KKSR_SLUG);
-
-    $fields = [];
-
-    if (file_exists($file = KKSR_PATH_SRC.'admin/'.$active.'.php')) {
-        $fields = array_merge($fields, (array) require $file);
-    }
-
-    $fields = apply_filters(prefix('setting_fields'), $fields, $active);
-    $fields = apply_filters(prefix('setting_fields:'.$active), $fields);
+    $fields = apply_plugin_filters('setting_fields', [], $active);
+    $fields = apply_plugin_filters('setting_fields.'.$active, $fields);
 
     foreach ($fields as $field) {
-        $field = apply_filters(prefix('setting_field'), $field);
-
-        if (isset($field['field'])) {
-            $field = apply_filters(prefix('setting_field:'.$field['field']), $field);
-        } elseif (isset($field['fields'])) {
-            foreach ($field['fields'] as &$childField) {
-                $childField = apply_filters(prefix('setting_field:'.$childField['field']), $childField);
-            }
-        }
-
-        $field = apply_filters(prefix('setting_input:'.$field['name']), $field);
-
         register_setting(
-            KKSR_SLUG,
+            $slug,
             $field['name'],
-            isset($field['filter']) ? $field['filter'] : null
+            [
+                'sanitize_callback' => isset($field['filter']) ? $field['filter'] : null,
+            ]
         );
 
         add_settings_field(
-            $field['id'],
+            $field['name'],
             $field['title'],
-            KKSR_NAMESPACE.'fieldCallback',
-            KKSR_SLUG,
+            __NAMESPACE__.'\setting_field_callback',
+            $slug,
             'default',
             $field
         );
     }
-} function fieldCallback($args)
+}
+
+function setting_field_callback($field)
 {
-    extract($args);
+    if (isset($field['fields'])) {
+        $input = apply_plugin_filters('setting_field', '', $field);
 
-    ob_start();
-
-    if (isset($fields)) {
-        $br = '<br><br>';
-
-        for ($i = 0; $i < count($fields); ++$i) {
-            echo $i != 0 ? $br : '';
-            fieldCallback($fields[$i]);
+        foreach ($field['fields'] as $field) {
+            setting_field_callback($field);
+            echo '<br><br>';
         }
-        if (isset($help)) {
-            echo $br;
+
+        echo $input;
+    } else {
+        $input = apply_plugin_filters('setting_field', '', $field);
+
+        if (isset($field['type']) && $field['type']) {
+            echo apply_plugin_filters('setting_field.'.$field['type'], $input, $field);
+        } else {
+            echo $input;
         }
-    } elseif (isset($args['field'])
-        && file_exists($file = KKSR_PATH_VIEWS.'admin/fields/'.$args['field'].'.php')
-    ) {
-        include $file;
+    }
+}
+
+add_plugin_filter('setting_fields', __NAMESPACE__.'\setting_fields', 9, 2);
+function setting_fields($fields, $active)
+{
+    if (is_file($file = __DIR__.'/admin/'.$active.'.php')) {
+        return array_merge($fields, (array) require $file);
     }
 
-    if (isset($help)) {
-        echo '<p class="description">'.$help.'</p>';
+    return $fields;
+}
+
+add_plugin_filter('setting_field', __NAMESPACE__.'\setting_field', 9, 2);
+function setting_field($input, $payload)
+{
+    if ($input || ! isset($payload['type']) || ! $payload['type']) {
+        return $input;
     }
 
-    $html = ob_get_clean();
+    try {
+        return view('admin.fields.'.$payload['type'], $payload);
+    } catch (RuntimeException $e) {
+        return $input;
+    }
+}
 
-    $html = apply_filters(prefix('setting_field_html'), $html, $args);
-
-    if (isset($args['field'])) {
-        $html = apply_filters(prefix('setting_field_html:'.$args['field']), $html, $args);
+add_plugin_filter('setting_field', __NAMESPACE__.'\setting_field_help', 11, 2);
+function setting_field_help($input, $payload)
+{
+    if (! isset($payload['help']) || ! $payload['help']) {
+        return $input;
     }
 
-    if (isset($args['name'])) {
-        $html = apply_filters(prefix('setting_input_html:'.$args['name']), $html, $args);
-    }
-
-    echo $html;
+    return $input.'<p class="description">'.$payload['help'].'</p>';
 }

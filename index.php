@@ -2,46 +2,84 @@
 
 /**
  * Plugin Name:     kk Star Ratings
+ * Plugin Slug:     kk-star-ratings
+ * Plugin Nick:     kksr
  * Plugin URI:      https://github.com/kamalkhan/kk-star-ratings
  * Description:     Allow blog visitors to involve and interact more effectively with your website by rating posts.
  * Author:          Kamal Khan
  * Author URI:      http://bhittani.com
  * Text Domain:     kk-star-ratings
  * Domain Path:     /languages
- * Version:         3.1.2
+ * Version:         4.0.0
  * License:         GPLv2 or later
- *
- * @package         Bhittani\StarRating
  */
+
+namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
     die();
 }
 
-define('KKSR_FILE', __FILE__);
-define('KKSR_PLUGIN', plugin_basename(KKSR_FILE));
-define('KKSR_VERSION', '3.1.2');
-define('KKSR_PREFIX', 'kksr_');
-define('KKSR_SLUG', 'kk-star-ratings');
-define('KKSR_LABEL', 'kk Star Ratings');
-define('KKSR_SHORTCODE', 'kkstarratings');
-define('KKSR_NAMESPACE', 'Bhittani\StarRating\\');
-define('KKSR_PATH', plugin_dir_path(KKSR_FILE));
-define('KKSR_PATH_SRC', KKSR_PATH . 'src/');
-define('KKSR_PATH_VIEWS', KKSR_PATH . 'views/');
-define('KKSR_PATH_PUBLIC', KKSR_PATH . 'public/');
-define('KKSR_URI', plugin_dir_url(KKSR_FILE) . 'public/');
+define('KK_STAR_RATINGS', __FILE__);
 
-require_once KKSR_PATH . 'freemius.php';
+if (file_exists($freemius = __DIR__.'/freemius.php')) {
+    require_once $freemius;
+}
 
-require_once KKSR_PATH_SRC . 'functions.php';
-require_once KKSR_PATH_SRC . 'activate.php';
-require_once KKSR_PATH_SRC . 'enqueue.php';
-require_once KKSR_PATH_SRC . 'markup.php';
-require_once KKSR_PATH_SRC . 'admin.php';
-require_once KKSR_PATH_SRC . 'metabox.php';
-require_once KKSR_PATH_SRC . 'ajax.php';
-require_once KKSR_PATH_SRC . 'structure.php';
-require_once KKSR_PATH_SRC . 'shortcode.php';
-require_once KKSR_PATH_SRC . 'legacy.php';
+require_once __DIR__.'/src/config.php';
+
+config([
+    'views' => __DIR__.'/views/',
+    'shortcode' => 'kkstarratings',
+    'options' => [
+        // General
+        'enable' => true,
+        'strategies' => ['guests'],
+        'manual_control' => [],
+        'exclude_locations' => ['home', 'archives'],
+        'exclude_categories' => [],
+        'position' => 'top-left',
+        // Appearance
+        'stars' => 5,
+        'size' => 24,
+        'greet' => 'Rate this [type]',
+        // Rich snippets
+        'grs' => true,
+        'sd' => <<<HTML
+{
+    "@context": "https://schema.org/",
+    "@type": "CreativeWorkSeries",
+    "name": "[title]",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "[score]",
+        "bestRating": "[best]",
+        "ratingCount": "[count]"
+    }
+}
+HTML
+    ],
+]);
+
+require_once __DIR__.'/src/global.php';
+require_once __DIR__.'/src/hook.php';
+require_once __DIR__.'/src/ajax.php';
+require_once __DIR__.'/src/view.php';
+require_once __DIR__.'/src/post.php';
+require_once __DIR__.'/src/response.php';
+require_once __DIR__.'/src/legacy.php';
+
+if (is_admin()) {
+    require_once __DIR__.'/src/activate.php';
+    require_once __DIR__.'/src/admin.php';
+    require_once __DIR__.'/src/metabox.php';
+} else {
+    require_once __DIR__.'/src/validate.php';
+    require_once __DIR__.'/src/shortcode.php';
+    require_once __DIR__.'/src/assets.php';
+}
+
+add_action('plugins_loaded', function () {
+    do_action(prefix('init'));
+});
