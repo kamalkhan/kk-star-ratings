@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the kk Star Ratings plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: kk Star Ratings 4.0.0-alpha\n"
+"Project-Id-Version: kk Star Ratings 4.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kk-star-ratings\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-26T10:49:54+00:00\n"
+"POT-Creation-Date: 2019-10-26T15:44:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.1.0\n"
 "X-Domain: kk-star-ratings\n"
@@ -78,40 +78,40 @@ msgstr ""
 msgid "A rating is required to vote."
 msgstr ""
 
-#: src/admin/rich-snippets.php:35
+#: src/admin/rich-snippets.php:38
 msgid "Enable/disable rich snippets."
 msgstr ""
 
-#: src/admin/rich-snippets.php:40
+#: src/admin/rich-snippets.php:43
 msgid "Content"
 msgstr ""
 
-#: src/admin/rich-snippets.php:44
+#: src/admin/rich-snippets.php:47
 msgid "Provide the %s structure."
 msgstr ""
 
-#: src/admin/rich-snippets.php:45
+#: src/admin/rich-snippets.php:48
 #: src/admin/appearance.php:31
 msgid "The following variables are available:"
 msgstr ""
 
-#: src/admin/rich-snippets.php:46
+#: src/admin/rich-snippets.php:49
 msgid "%s Post title."
 msgstr ""
 
-#: src/admin/rich-snippets.php:47
+#: src/admin/rich-snippets.php:50
 msgid "%s Average post ratings."
 msgstr ""
 
-#: src/admin/rich-snippets.php:48
+#: src/admin/rich-snippets.php:51
 msgid "%s Number of votes casted."
 msgstr ""
 
-#: src/admin/rich-snippets.php:49
+#: src/admin/rich-snippets.php:52
 msgid "%s Total amount of stars."
 msgstr ""
 
-#: src/admin/rich-snippets.php:51
+#: src/admin/rich-snippets.php:54
 msgid "You may <a href=\"%s\" target=\"_blank\">test the snippet here</a>."
 msgstr ""
 
@@ -127,91 +127,91 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: src/admin/general.php:55
+#: src/admin/general.php:58
 msgid "Globally activate/deactivate the star ratings."
 msgstr ""
 
-#: src/admin/general.php:61
+#: src/admin/general.php:64
 msgid "Strategies"
 msgstr ""
 
-#: src/admin/general.php:63
+#: src/admin/general.php:66
 msgid "Select the voting strategies."
 msgstr ""
 
-#: src/admin/general.php:70
+#: src/admin/general.php:73
 msgid "Allow voting in archives"
 msgstr ""
 
-#: src/admin/general.php:77
+#: src/admin/general.php:80
 msgid "Allow guests to vote"
 msgstr ""
 
-#: src/admin/general.php:84
+#: src/admin/general.php:87
 msgid "Unique votes (based on IP Address)"
 msgstr ""
 
-#: src/admin/general.php:95
+#: src/admin/general.php:98
 msgid "Manual Control"
 msgstr ""
 
-#: src/admin/general.php:97
+#: src/admin/general.php:100
 msgid "Select the post types that should not auto embed the<br>markup and will be manually controlled by the theme.<br>E.g. Using %s in your template."
 msgstr ""
 
-#: src/admin/general.php:113
+#: src/admin/general.php:116
 msgid "Disable Locations"
 msgstr ""
 
-#: src/admin/general.php:115
+#: src/admin/general.php:118
 msgid "Select the locations where the star ratings should be excluded."
 msgstr ""
 
-#: src/admin/general.php:127
+#: src/admin/general.php:130
 msgid "Home page"
 msgstr ""
 
-#: src/admin/general.php:131
+#: src/admin/general.php:134
 msgid "Archives"
 msgstr ""
 
-#: src/admin/general.php:143
+#: src/admin/general.php:146
 msgid "Disable Categories"
 msgstr ""
 
-#: src/admin/general.php:155
+#: src/admin/general.php:158
 msgid "Exclude star ratings from posts belonging to the selected categories.<br>Use <strong>cmd/ctrl + click</strong> to select/deselect multiple categories."
 msgstr ""
 
-#: src/admin/general.php:161
+#: src/admin/general.php:164
 msgid "Default Position"
 msgstr ""
 
-#: src/admin/general.php:163
+#: src/admin/general.php:166
 msgid "Choose a default position."
 msgstr ""
 
-#: src/admin/general.php:167
+#: src/admin/general.php:170
 msgid "Top Left"
 msgstr ""
 
-#: src/admin/general.php:174
+#: src/admin/general.php:177
 msgid "Top Center"
 msgstr ""
 
-#: src/admin/general.php:181
+#: src/admin/general.php:184
 msgid "Top Right"
 msgstr ""
 
-#: src/admin/general.php:188
+#: src/admin/general.php:191
 msgid "Bottom Left"
 msgstr ""
 
-#: src/admin/general.php:195
+#: src/admin/general.php:198
 msgid "Bottom Center"
 msgstr ""
 
-#: src/admin/general.php:202
+#: src/admin/general.php:205
 msgid "Bottom Right"
 msgstr ""
 
