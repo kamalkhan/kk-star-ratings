@@ -1,12 +1,13 @@
 .kk-star-ratings {
-    display: -webkit-box !important;
-    display: -webkit-flex !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
+    display: -webkit-inline-box !important;
+    display: -webkit-inline-flex !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    vertical-align: text-top;
 }
 
 .kk-star-ratings.kksr-valign-top {
@@ -99,6 +100,15 @@
 
 .kk-star-ratings .kksr-legend {
     margin-left: .75rem;
+    margin-right: .75rem;
     font-size: 90%;
     opacity: .8;
+    line-height: 1;
+}
+
+/* RTL */
+
+[dir="rtl"] .kk-star-ratings .kksr-stars .kksr-stars-active {
+    left: auto;
+    right: 0;
 }
