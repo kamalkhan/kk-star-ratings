@@ -1,6 +1,5 @@
 * text=auto
 
-/bin export-ignore
 /.php_cs export-ignore
 /.github export-ignore
 /README.md export-ignore
