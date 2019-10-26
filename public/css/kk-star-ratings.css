@@ -12,10 +12,18 @@
 
 .kk-star-ratings.kksr-valign-top {
     margin-bottom: 2rem;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
 }
 
 .kk-star-ratings.kksr-valign-bottom {
     margin-top: 2rem;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
 }
 
 .kk-star-ratings.kksr-align-left {
