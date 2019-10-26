@@ -1,0 +1,244 @@
+# Copyright (C) 2019 Kamal Khan
+# This file is distributed under the same license as the kk Star Ratings plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: kk Star Ratings 4.0.0-alpha\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kk-star-ratings\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-10-26T10:48:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.1.0\n"
+"X-Domain: kk-star-ratings\n"
+
+#. Plugin Name of the plugin
+msgid "kk Star Ratings"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/kamalkhan/kk-star-ratings"
+msgstr ""
+
+#. Description of the plugin
+msgid "Allow blog visitors to involve and interact more effectively with your website by rating posts."
+msgstr ""
+
+#. Author of the plugin
+msgid "Kamal Khan"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://bhittani.com"
+msgstr ""
+
+#: views/legend.php:9
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] ""
+
+#: views/metabox/content.php:12
+msgid "Reset Ratings"
+msgstr ""
+
+#: views/metabox/content.php:19
+#: src/admin/rich-snippets.php:30
+#: src/admin/general.php:50
+msgid "Status"
+msgstr ""
+
+#: views/metabox/content.php:25
+msgid "Auto"
+msgstr ""
+
+#: views/metabox/content.php:29
+#: src/admin/rich-snippets.php:31
+msgid "Enable"
+msgstr ""
+
+#: views/metabox/content.php:33
+msgid "Disable"
+msgstr ""
+
+#: src/ajax.php:27
+msgid "This action is forbidden."
+msgstr ""
+
+#: src/ajax.php:35
+msgid "An id is required to vote."
+msgstr ""
+
+#: src/ajax.php:46
+msgid "You are not allowed to vote."
+msgstr ""
+
+#: src/ajax.php:54
+msgid "A rating is required to vote."
+msgstr ""
+
+#: src/admin/rich-snippets.php:35
+msgid "Enable/disable rich snippets."
+msgstr ""
+
+#: src/admin/rich-snippets.php:40
+msgid "Content"
+msgstr ""
+
+#: src/admin/rich-snippets.php:44
+msgid "Provide the %s structure."
+msgstr ""
+
+#: src/admin/rich-snippets.php:45
+#: src/admin/appearance.php:31
+msgid "The following variables are available:"
+msgstr ""
+
+#: src/admin/rich-snippets.php:46
+msgid "%s Post title."
+msgstr ""
+
+#: src/admin/rich-snippets.php:47
+msgid "%s Average post ratings."
+msgstr ""
+
+#: src/admin/rich-snippets.php:48
+msgid "%s Number of votes casted."
+msgstr ""
+
+#: src/admin/rich-snippets.php:49
+msgid "%s Total amount of stars."
+msgstr ""
+
+#: src/admin/rich-snippets.php:51
+msgid "You may <a href=\"%s\" target=\"_blank\">test the snippet here</a>."
+msgstr ""
+
+#: src/admin/general.php:27
+msgid "Posts"
+msgstr ""
+
+#: src/admin/general.php:28
+msgid "Pages"
+msgstr ""
+
+#: src/admin/general.php:51
+msgid "Active"
+msgstr ""
+
+#: src/admin/general.php:55
+msgid "Globally activate/deactivate the star ratings."
+msgstr ""
+
+#: src/admin/general.php:61
+msgid "Strategies"
+msgstr ""
+
+#: src/admin/general.php:63
+msgid "Select the voting strategies."
+msgstr ""
+
+#: src/admin/general.php:70
+msgid "Allow voting in archives"
+msgstr ""
+
+#: src/admin/general.php:77
+msgid "Allow guests to vote"
+msgstr ""
+
+#: src/admin/general.php:84
+msgid "Unique votes (based on IP Address)"
+msgstr ""
+
+#: src/admin/general.php:95
+msgid "Manual Control"
+msgstr ""
+
+#: src/admin/general.php:97
+msgid "Select the post types that should not auto embed the<br>markup and will be manually controlled by the theme.<br>E.g. Using %s in your template."
+msgstr ""
+
+#: src/admin/general.php:113
+msgid "Disable Locations"
+msgstr ""
+
+#: src/admin/general.php:115
+msgid "Select the locations where the star ratings should be excluded."
+msgstr ""
+
+#: src/admin/general.php:127
+msgid "Home page"
+msgstr ""
+
+#: src/admin/general.php:131
+msgid "Archives"
+msgstr ""
+
+#: src/admin/general.php:143
+msgid "Disable Categories"
+msgstr ""
+
+#: src/admin/general.php:155
+msgid "Exclude star ratings from posts belonging to the selected categories.<br>Use <strong>cmd/ctrl + click</strong> to select/deselect multiple categories."
+msgstr ""
+
+#: src/admin/general.php:161
+msgid "Default Position"
+msgstr ""
+
+#: src/admin/general.php:163
+msgid "Choose a default position."
+msgstr ""
+
+#: src/admin/general.php:167
+msgid "Top Left"
+msgstr ""
+
+#: src/admin/general.php:174
+msgid "Top Center"
+msgstr ""
+
+#: src/admin/general.php:181
+msgid "Top Right"
+msgstr ""
+
+#: src/admin/general.php:188
+msgid "Bottom Left"
+msgstr ""
+
+#: src/admin/general.php:195
+msgid "Bottom Center"
+msgstr ""
+
+#: src/admin/general.php:202
+msgid "Bottom Right"
+msgstr ""
+
+#: src/admin/appearance.php:26
+msgid "Greeting text"
+msgstr ""
+
+#: src/admin/appearance.php:30
+msgid "Text that will be displayed when no votes have been casted."
+msgstr ""
+
+#: src/admin/appearance.php:32
+msgid "%s Post type."
+msgstr ""
+
+#: src/admin/appearance.php:38
+msgid "Stars"
+msgstr ""
+
+#: src/admin/appearance.php:42
+msgid "Total number of stars."
+msgstr ""
+
+#: src/admin/appearance.php:47
+msgid "Size"
+msgstr ""
+
+#: src/admin/appearance.php:51
+msgid "Size of a single star."
+msgstr ""
