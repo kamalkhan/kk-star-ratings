@@ -27,7 +27,7 @@ function activate()
 add_plugin_action('activate', __NAMESPACE__.'\upgrade_options', 9, 2);
 function upgrade_options($version, $previous)
 {
-    if ($previous && version_compare($previous, '3.0.1', '<')) {
+    if ($previous && version_compare($previous, '3.0.0', '>')) {
         return;
     }
 
@@ -55,7 +55,7 @@ function upgrade_options($version, $previous)
 add_plugin_action('activate', __NAMESPACE__.'\upgrade_post_ratings', 9, 2);
 function upgrade_post_ratings($version, $previous)
 {
-    if ($previous && version_compare($previous, '3.0.1', '<')) {
+    if ($previous && version_compare($previous, '3.0.0', '>')) {
         return;
     }
 
