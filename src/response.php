@@ -86,5 +86,8 @@ function response(array $payload = [], $validate = true)
     $percentage = round($percentage, 2, PHP_ROUND_HALF_DOWN);
     $payload['percentage'] = min(max($percentage, 0), 100);
 
+    $payload['gap'] = max((int) get_option(prefix('gap')), 0);
+    $payload['width'] = $payload['score'] * $payload['size'] + $payload['gap'] * (int) $payload['score'];
+
     return view('markup', $payload);
 }

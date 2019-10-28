@@ -30,7 +30,14 @@ function styles($hook)
         config('version')
     );
 
-    // wp_add_inline_style(config('slug'), '');
+    wp_add_inline_style(config('slug'), trim(get_view(config('path').'public/css/kk-star-ratings.css.php', [
+        'stars' => [
+            'active' => get_option(prefix('active_star')),
+            'inactive' => get_option(prefix('inactive_star')),
+            'selected' => get_option(prefix('selected_star')),
+        ],
+        'gap' => max((int) get_option(prefix('gap')), 0),
+    ])));
 }
 
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\scripts');

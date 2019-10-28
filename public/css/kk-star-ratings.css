@@ -71,6 +71,7 @@
 .kk-star-ratings .kksr-stars .kksr-star {
     /* display: inline-flex; */
     cursor: pointer;
+    margin-right: 0px;
 }
 
 .kk-star-ratings.kksr-disabled .kksr-stars .kksr-star {
@@ -91,19 +92,16 @@
 
 .kk-star-ratings .kksr-stars .kksr-star .kksr-icon,
 .kk-star-ratings:not(.kksr-disabled) .kksr-stars .kksr-star:hover ~ .kksr-star .kksr-icon {
-    /* background-image: url("/wp-content/plugins/kk-star-ratings/public/gray.png"); */
-    background-image: url("/wp-content/plugins/kk-star-ratings/public/svg/inactive.svg");
+    background-image: url("../svg/inactive.svg");
 }
 
 .kk-star-ratings .kksr-stars .kksr-stars-active .kksr-star .kksr-icon {
-    /* background-image: url("/wp-content/plugins/kk-star-ratings/public/orange.png"); */
-    background-image: url("/wp-content/plugins/kk-star-ratings/public/svg/active.svg");
+    background-image: url("../svg/active.svg");
 }
 
 .kk-star-ratings.kksr-disabled .kksr-stars .kksr-stars-active .kksr-star .kksr-icon,
 .kk-star-ratings:not(.kksr-disabled) .kksr-stars:hover .kksr-star .kksr-icon {
-    /* background-image: url("/wp-content/plugins/kk-star-ratings/public/yellow.png"); */
-    background-image: url("/wp-content/plugins/kk-star-ratings/public/svg/selected.svg");
+    background-image: url("../svg/selected.svg");
 }
 
 .kk-star-ratings .kksr-legend {
@@ -119,4 +117,9 @@
 [dir="rtl"] .kk-star-ratings .kksr-stars .kksr-stars-active {
     left: auto;
     right: 0;
+}
+
+[dir="rtl"] .kk-star-ratings .kksr-stars .kksr-star {
+    margin-left: 0px;
+    margin-right: 0;
 }

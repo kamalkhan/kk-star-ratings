@@ -41,6 +41,7 @@ config([
         'exclude_categories' => [],
         'position' => 'top-left',
         // Appearance
+        'gap' => 4,
         'stars' => 5,
         'size' => 24,
         'greet' => 'Rate this [type]',

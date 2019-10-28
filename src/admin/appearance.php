@@ -16,6 +16,7 @@ if (! defined('ABSPATH')) {
     die();
 }
 
+$gap = [prefix('gap'), get_option(prefix('gap'))];
 $size = [prefix('size'), get_option(prefix('size'))];
 $stars = [prefix('stars'), get_option(prefix('stars'))];
 $greet = [prefix('greet'), get_option(prefix('greet'))];
@@ -40,6 +41,15 @@ return [
         'value' => $stars[1],
         'min' => 1,
         'help' => __('Total number of stars.', 'kk-star-ratings'),
+    ],
+
+    [
+        'type' => 'number',
+        'title' => __('Gap', 'kk-star-ratings'),
+        'name' => $gap[0],
+        'value' => $gap[1],
+        'min' => 0,
+        'help' => __('Gap between the stars.', 'kk-star-ratings'),
     ],
 
     [
