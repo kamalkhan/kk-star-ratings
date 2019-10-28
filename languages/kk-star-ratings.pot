@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the kk Star Ratings plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: kk Star Ratings 4.0.0\n"
+"Project-Id-Version: kk Star Ratings 4.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kk-star-ratings\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-26T15:44:59+00:00\n"
+"POT-Creation-Date: 2019-10-28T12:14:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.1.0\n"
+"X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: kk-star-ratings\n"
 
 #. Plugin Name of the plugin
@@ -34,85 +34,45 @@ msgstr ""
 msgid "http://bhittani.com"
 msgstr ""
 
-#: views/legend.php:9
-msgid "vote"
-msgid_plural "votes"
-msgstr[0] ""
-
-#: views/metabox/content.php:12
-msgid "Reset Ratings"
+#: src/admin/appearance.php:27
+msgid "Greeting text"
 msgstr ""
 
-#: views/metabox/content.php:19
-#: src/admin/rich-snippets.php:30
-#: src/admin/general.php:50
-msgid "Status"
-msgstr ""
-
-#: views/metabox/content.php:25
-msgid "Auto"
-msgstr ""
-
-#: views/metabox/content.php:29
-#: src/admin/rich-snippets.php:31
-msgid "Enable"
-msgstr ""
-
-#: views/metabox/content.php:33
-msgid "Disable"
-msgstr ""
-
-#: src/ajax.php:27
-msgid "This action is forbidden."
-msgstr ""
-
-#: src/ajax.php:35
-msgid "An id is required to vote."
-msgstr ""
-
-#: src/ajax.php:46
-msgid "You are not allowed to vote."
-msgstr ""
-
-#: src/ajax.php:54
-msgid "A rating is required to vote."
-msgstr ""
-
-#: src/admin/rich-snippets.php:38
-msgid "Enable/disable rich snippets."
-msgstr ""
-
-#: src/admin/rich-snippets.php:43
-msgid "Content"
-msgstr ""
-
-#: src/admin/rich-snippets.php:47
-msgid "Provide the %s structure."
-msgstr ""
-
-#: src/admin/rich-snippets.php:48
 #: src/admin/appearance.php:31
+msgid "Text that will be displayed when no votes have been casted."
+msgstr ""
+
+#: src/admin/appearance.php:32
+#: src/admin/rich-snippets.php:48
 msgid "The following variables are available:"
 msgstr ""
 
-#: src/admin/rich-snippets.php:49
-msgid "%s Post title."
+#: src/admin/appearance.php:33
+msgid "%s Post type."
 msgstr ""
 
-#: src/admin/rich-snippets.php:50
-msgid "%s Average post ratings."
+#: src/admin/appearance.php:39
+msgid "Stars"
 msgstr ""
 
-#: src/admin/rich-snippets.php:51
-msgid "%s Number of votes casted."
+#: src/admin/appearance.php:43
+msgid "Total number of stars."
 msgstr ""
 
-#: src/admin/rich-snippets.php:52
-msgid "%s Total amount of stars."
+#: src/admin/appearance.php:48
+msgid "Gap"
 msgstr ""
 
-#: src/admin/rich-snippets.php:54
-msgid "You may <a href=\"%s\" target=\"_blank\">test the snippet here</a>."
+#: src/admin/appearance.php:52
+msgid "Gap between the stars."
+msgstr ""
+
+#: src/admin/appearance.php:57
+msgid "Size"
+msgstr ""
+
+#: src/admin/appearance.php:61
+msgid "Size of a single star."
 msgstr ""
 
 #: src/admin/general.php:27
@@ -121,6 +81,12 @@ msgstr ""
 
 #: src/admin/general.php:28
 msgid "Pages"
+msgstr ""
+
+#: src/admin/general.php:50
+#: src/admin/rich-snippets.php:30
+#: views/metabox/content.php:19
+msgid "Status"
 msgstr ""
 
 #: src/admin/general.php:51
@@ -215,30 +181,73 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: src/admin/appearance.php:26
-msgid "Greeting text"
+#: src/admin/rich-snippets.php:31
+#: views/metabox/content.php:29
+msgid "Enable"
 msgstr ""
 
-#: src/admin/appearance.php:30
-msgid "Text that will be displayed when no votes have been casted."
+#: src/admin/rich-snippets.php:38
+msgid "Enable/disable rich snippets."
 msgstr ""
 
-#: src/admin/appearance.php:32
-msgid "%s Post type."
+#: src/admin/rich-snippets.php:43
+msgid "Content"
 msgstr ""
 
-#: src/admin/appearance.php:38
-msgid "Stars"
+#: src/admin/rich-snippets.php:47
+msgid "Provide the %s structure."
 msgstr ""
 
-#: src/admin/appearance.php:42
-msgid "Total number of stars."
+#: src/admin/rich-snippets.php:49
+msgid "%s Post title."
 msgstr ""
 
-#: src/admin/appearance.php:47
-msgid "Size"
+#: src/admin/rich-snippets.php:50
+msgid "%s Average post ratings."
 msgstr ""
 
-#: src/admin/appearance.php:51
-msgid "Size of a single star."
+#: src/admin/rich-snippets.php:51
+msgid "%s Number of votes casted."
+msgstr ""
+
+#: src/admin/rich-snippets.php:52
+msgid "%s Total amount of stars."
+msgstr ""
+
+#: src/admin/rich-snippets.php:54
+msgid "You may <a href=\"%s\" target=\"_blank\">test the snippet here</a>."
+msgstr ""
+
+#: src/ajax.php:27
+msgid "This action is forbidden."
+msgstr ""
+
+#: src/ajax.php:35
+msgid "An id is required to vote."
+msgstr ""
+
+#: src/ajax.php:46
+msgid "You are not allowed to vote."
+msgstr ""
+
+#: src/ajax.php:54
+msgid "A rating is required to vote."
+msgstr ""
+
+#: views/legend.php:9
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/metabox/content.php:12
+msgid "Reset Ratings"
+msgstr ""
+
+#: views/metabox/content.php:25
+msgid "Auto"
+msgstr ""
+
+#: views/metabox/content.php:33
+msgid "Disable"
 msgstr ""
