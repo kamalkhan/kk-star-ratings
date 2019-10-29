@@ -94,6 +94,11 @@ add_plugin_action('activate', __NAMESPACE__.'\sync_options', 9, 2);
 function sync_options($version, $previous)
 {
     foreach (config('options') as $key => $value) {
-        update_option(prefix($key), get_option(prefix($key), $value));
+        $storedValue = get_option(prefix($key));
+
+        $value = (! $storedValue && ! is_bool($value))
+            ? $value : $storedValue;
+
+        update_option(prefix($key), $value);
     }
 }
