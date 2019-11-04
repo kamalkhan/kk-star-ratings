@@ -198,7 +198,7 @@ function structured_data()
         && (is_singular() || is_page())
     ) {
         $id = get_post_field('ID');
-        $title = get_post_field('post_title');
+        $title = htmlentities(get_post_field('post_title'));
         $best = max((int) get_option(prefix('stars')), 1);
         $count = count_filter(null, $id, null);
         $score = score_filter(null, $best, $id, null);
