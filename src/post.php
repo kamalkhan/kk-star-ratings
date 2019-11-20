@@ -184,7 +184,7 @@ function vote_post($score, $best, $id, $slug)
 
     $ip = md5($_SERVER['REMOTE_ADDR']);
 
-    update_post_meta($id, meta_prefix('ref'), $ip, $ip);
+    add_post_meta($id, meta_prefix('ref'), $ip);
 }
 
 add_action('wp_head', __NAMESPACE__.'\structured_data');
