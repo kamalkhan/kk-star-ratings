@@ -164,16 +164,16 @@ The source of this plugin is located at [Github](https://github.com/kamalkhan/kk
 
 = 4.x =
 
-- [View Changelog](CHANGELOG.md)
+- [View Changelog](https://github.com/kamalkhan/kk-star-ratings/blob/master/CHANGELOG.md)
 
 = 3.x =
-[Archived](.github/CHANGELOG-v3.md)
+[Archived](https://github.com/kamalkhan/kk-star-ratings/blob/master/.github/CHANGELOG-v3.md)
 
 = 2.x =
-[Archived](.github/CHANGELOG-v2.md)
+[Archived](https://github.com/kamalkhan/kk-star-ratings/blob/master/.github/CHANGELOG-v2.md)
 
 = 1.x =
-[Archived](.github/CHANGELOG-v1.md)
+[Archived](https://github.com/kamalkhan/kk-star-ratings/blob/master/.github/CHANGELOG-v1.md)
 </only:wp -->
 
 <!-- only:wp>
