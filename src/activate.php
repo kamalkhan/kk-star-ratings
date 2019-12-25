@@ -11,26 +11,53 @@
 
 namespace Bhittani\StarRating;
 
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     http_response_code(404);
     die();
 }
 
-register_activation_hook(config('file'), __NAMESPACE__.'\activate');
-function activate()
+register_activation_hook(config('file'), __NAMESPACE__ . '\activation');
+function activation()
 {
-    do_plugin_action('activate', config('version'), get_option(prefix('ver')));
+    $version = config('version');
+    $previous = get_option(prefix('ver'));
 
-    update_option(prefix('ver'), config('version'));
-}
-
-add_plugin_action('activate', __NAMESPACE__.'\upgrade_options', 9, 2);
-function upgrade_options($version, $previous)
-{
-    if ($previous && version_compare($previous, '3.0.0', '>')) {
-        return;
+    if (!$previous) {
+        do_plugin_action('install', $version);
+    } else if (version_compare($previous, '3.0.0', '>')) {
+        do_plugin_action('activate', $version, $previous);
+    } else {
+        do_plugin_action('upgrade', $version, $previous);
     }
 
+    update_option(prefix('ver'), $version);
+}
+
+add_plugin_action('install', __NAMESPACE__ . '\save_options', 9);
+function save_options($version)
+{
+    foreach (config('options') as $key => $value) {
+        update_option(prefix($key), $value);
+    }
+}
+
+add_plugin_action('activate', __NAMESPACE__ . '\sync_options', 9, 2);
+function sync_options($version, $previous)
+{
+    foreach (config('options') as $k => $v) {
+        $value = get_option(prefix($k));
+
+        if (!$value && !is_bool($v)) {
+            $value = $v;
+        }
+
+        update_option(prefix($k), $value);
+    }
+}
+
+add_plugin_action('upgrade', __NAMESPACE__ . '\upgrade_options', 9, 2);
+function upgrade_options($version, $previous)
+{
     $options = [
         'strategies' => get_option(prefix('strategies'), array_filter([
             'guests',
@@ -52,13 +79,9 @@ function upgrade_options($version, $previous)
     }
 }
 
-add_plugin_action('activate', __NAMESPACE__.'\upgrade_post_ratings', 9, 2);
-function upgrade_post_ratings($version, $previous)
+add_plugin_action('upgrade', __NAMESPACE__ . '\upgrade_posts', 9, 2);
+function upgrade_posts($version, $previous)
 {
-    if ($previous && version_compare($previous, '3.0.0', '>')) {
-        return;
-    }
-
     global $wpdb;
 
     // Truncate IP addresses.
@@ -87,18 +110,5 @@ function upgrade_post_ratings($version, $previous)
             meta_prefix('ratings'),
             round($ratings, 0, PHP_ROUND_HALF_DOWN)
         );
-    }
-}
-
-add_plugin_action('activate', __NAMESPACE__.'\sync_options', 9, 2);
-function sync_options($version, $previous)
-{
-    foreach (config('options') as $key => $value) {
-        $storedValue = get_option(prefix($key));
-
-        $value = (! $storedValue && ! is_bool($value))
-            ? $value : $storedValue;
-
-        update_option(prefix($key), $value);
     }
 }
