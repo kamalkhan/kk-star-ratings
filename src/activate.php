@@ -11,20 +11,20 @@
 
 namespace Bhittani\StarRating;
 
-if (!defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     http_response_code(404);
     die();
 }
 
-register_activation_hook(config('file'), __NAMESPACE__ . '\activation');
+register_activation_hook(config('file'), __NAMESPACE__.'\activation');
 function activation()
 {
     $version = config('version');
     $previous = get_option(prefix('ver'));
 
-    if (!$previous) {
+    if (! $previous) {
         do_plugin_action('install', $version);
-    } else if (version_compare($previous, '3.0.0', '>')) {
+    } elseif (version_compare($previous, '3.0.0', '>')) {
         do_plugin_action('activate', $version, $previous);
     } else {
         do_plugin_action('upgrade', $version, $previous);
@@ -33,7 +33,7 @@ function activation()
     update_option(prefix('ver'), $version);
 }
 
-add_plugin_action('install', __NAMESPACE__ . '\save_options', 9);
+add_plugin_action('install', __NAMESPACE__.'\save_options', 9);
 function save_options($version)
 {
     foreach (config('options') as $key => $value) {
@@ -41,13 +41,13 @@ function save_options($version)
     }
 }
 
-add_plugin_action('activate', __NAMESPACE__ . '\sync_options', 9, 2);
+add_plugin_action('activate', __NAMESPACE__.'\sync_options', 9, 2);
 function sync_options($version, $previous)
 {
     foreach (config('options') as $k => $v) {
         $value = get_option(prefix($k));
 
-        if (!$value && !is_bool($v)) {
+        if (! $value && ! is_bool($v)) {
             $value = $v;
         }
 
@@ -55,7 +55,7 @@ function sync_options($version, $previous)
     }
 }
 
-add_plugin_action('upgrade', __NAMESPACE__ . '\upgrade_options', 9, 2);
+add_plugin_action('upgrade', __NAMESPACE__.'\upgrade_options', 9, 2);
 function upgrade_options($version, $previous)
 {
     $options = [
@@ -79,7 +79,7 @@ function upgrade_options($version, $previous)
     }
 }
 
-add_plugin_action('upgrade', __NAMESPACE__ . '\upgrade_posts', 9, 2);
+add_plugin_action('upgrade', __NAMESPACE__.'\upgrade_posts', 9, 2);
 function upgrade_posts($version, $previous)
 {
     global $wpdb;
