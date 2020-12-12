@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.5] - 2020-12-13
+
+### Security
+- Escaped html attributes to avoid possible XSS exploits.
+
 ## [4.1.4] - 2020-11-28
 
 ### Updated
