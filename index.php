@@ -10,7 +10,7 @@
  * Author URI:      http://bhittani.com
  * Text Domain:     kk-star-ratings
  * Domain Path:     /languages
- * Version:         4.1.5
+ * Version:         4.1.6
  * License:         GPLv2 or later
  */
 
