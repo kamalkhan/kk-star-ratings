@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.6] - 2020-12-16
+
+### Security
+- Sanitized and escaped all potential unsafe data.
+
 ## [4.1.5] - 2020-12-13
 
 ### Security
