@@ -5,7 +5,7 @@
     }
 ?>
 
-<form method="POST" action="options.php?tab=<?= $active; ?>" style="margin: 2rem;">
+<form method="POST" action="options.php?tab=<?= esc_attr($active); ?>" style="margin: 2rem;">
     <?php submit_button(); ?>
     <?php settings_fields($slug); ?>
     <?php do_settings_sections($slug); ?>

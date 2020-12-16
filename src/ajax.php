@@ -36,8 +36,8 @@ function ajax()
         ]));
     }
 
-    $id = $_POST['id'];
-    $slug = $_POST['slug'];
+    $id = sanitize_text_field($_POST['id']);
+    $slug = sanitize_text_field($_POST['slug']);
 
     if (! apply_plugin_filters('can_vote', true, $id, $slug)) {
         header('Content-Type: application/json; charset=utf-8', true, 401);
@@ -55,9 +55,9 @@ function ajax()
         ]));
     }
 
-    $best = $_POST['best'] ?: get_option(prefix('stars'));
+    $best = isset($_POST['best']) ? sanitize_text_field($_POST['best']): get_option(prefix('stars'));
     $best = max((int) $best, 1);
-    $score = $_POST['score'];
+    $score = sanitize_text_field($_POST['score']);
     $score = min(max((int) $score, 1), $best);
 
     do_plugin_action('vote', $score, $best, $id, $slug);

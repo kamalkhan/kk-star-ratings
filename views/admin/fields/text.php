@@ -5,5 +5,5 @@
     }
 ?>
 
-<input name="<?= $name ?>" value="<?= $value ?>"
+<input name="<?= esc_attr($name) ?>" value="<?= esc_attr($value) ?>"
     style="width: 15rem;">

@@ -5,5 +5,5 @@
     }
 ?>
 
-<textarea rows="15" cols="50" name="<?= $name ?>"
-    style="font-family: monospace; padding: .5rem;"><?= $value ?></textarea>
+<textarea rows="15" cols="50" name="<?= esc_attr($name) ?>"
+    style="font-family: monospace; padding: .5rem;"><?= esc_textarea($value) ?></textarea>

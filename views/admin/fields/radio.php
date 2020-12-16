@@ -6,8 +6,8 @@
 ?>
 
 <label>
-    <input type="radio" name="<?= $name ?>" value="<?= $value ?>"
+    <input type="radio" name="<?= esc_attr($name) ?>" value="<?= esc_attr($value) ?>"
         <?= $checked ? 'checked="checked"' : '' ?>>
 
-    <?= $label ?>
+    <?= esc_html($label) ?>
 </label>

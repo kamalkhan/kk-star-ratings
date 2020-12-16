@@ -6,7 +6,7 @@
 ?>
 
 <label>
-    <input type="checkbox" name="<?= $name ?>" value="<?= $value ?>"
+    <input type="checkbox" name="<?= esc_attr($name) ?>" value="<?= esc_attr($value) ?>"
         <?= $checked ? 'checked="checked"' : '' ?>>
-    <?= $label ?>
+    <?= esc_html($label) ?>
 </label>

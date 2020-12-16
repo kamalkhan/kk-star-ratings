@@ -9,22 +9,22 @@
     <?php settings_errors(); ?>
 
     <h1>
-        <?= $label; ?>
+        <?= esc_html($label); ?>
         <small style="
             color: gray;
             font-size: 80%;
             margin-left: .5rem;
             letter-spacing: -2px;
             font-family: monospace;">
-            <?= $version; ?>
+            <?= esc_html($version); ?>
         </small>
     </h1>
 
     <h2 class="nav-tab-wrapper">
         <?php foreach ($tabs as $tab => $label) : ?>
             <a class="nav-tab <?= $tab === $active ? 'nav-tab-active' : ''; ?>"
-                href="<?= admin_url('admin.php?page='.$_GET['page'].'&tab='.$tab); ?>">
-                <?= $label; ?>
+                href="<?= admin_url('admin.php?page='.sanitize_text_field($_GET['page']).'&tab='. esc_attr($tab)); ?>">
+                <?= esc_html($label); ?>
             </a>
         <?php endforeach; ?>
         <div style="float: left; margin-left: 10px;">

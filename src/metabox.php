@@ -91,7 +91,7 @@ add_plugin_action('save_metabox', __NAMESPACE__.'\save_default_metabox', 9);
 function save_default_metabox($id)
 {
     if (isset($_POST[meta_prefix('status')])) {
-        update_post_meta($id, meta_prefix('status'), $_POST[meta_prefix('status')]);
+        update_post_meta($id, meta_prefix('status'), sanitize_text_field($_POST[meta_prefix('status')]));
     }
 
     if (isset($_POST[meta_prefix('reset')])

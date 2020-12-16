@@ -8,7 +8,7 @@
 <div class='components-base-control__field'>
     <div style="margin-top: 1rem;">
         <label class="components-base-control__label" style="margin-top: .75rem; margin-bottom: .25rem;">
-            <input type="checkbox" name="<?= $resetFieldName; ?>" value="1">
+            <input type="checkbox" name="<?= esc_attr($resetFieldName) ?>" value="1">
             <?php _e('Reset Ratings', 'kk-star-ratings'); ?>
         </label>
     </div>
@@ -21,15 +21,15 @@
 
     <div style="margin-top: 1rem;">
         <label class="components-base-control__label" style="margin-top: .5rem; margin-bottom: .25rem;">
-            <input type="radio" name="<?= $statusFieldName; ?>" value="" <?php checked($status, ''); ?>>
+            <input type="radio" name="<?= esc_attr($statusFieldName) ?>" value="" <?php checked($status, ''); ?>>
             <?php _e('Auto', 'kk-star-ratings'); ?>
         </label>
         <label class="components-base-control__label" style="margin-top: .5rem; margin-bottom: .25rem;">
-            <input type="radio" name="<?= $statusFieldName; ?>" value="enable" <?php checked($status, 'enable'); ?>>
+            <input type="radio" name="<?= esc_attr($statusFieldName) ?>" value="enable" <?php checked($status, 'enable'); ?>>
             <?php _e('Enable', 'kk-star-ratings'); ?>
         </label>
         <label class="components-base-control__label" style="margin-top: .5rem; margin-bottom: .25rem;">
-            <input type="radio" name="<?= $statusFieldName; ?>" value="disable" <?php checked($status, 'disable'); ?>>
+            <input type="radio" name="<?= esc_attr($statusFieldName) ?>" value="disable" <?php checked($status, 'disable'); ?>>
             <?php _e('Disable', 'kk-star-ratings'); ?>
         </label>
     </div>

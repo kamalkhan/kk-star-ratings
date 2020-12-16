@@ -5,13 +5,13 @@
     }
 ?>
 
-<select name="<?= $name ?><?= (isset($multiple) && $multiple) ? '[]' : '' ?>"
+<select name="<?= esc_attr($name) ?><?= (isset($multiple) && $multiple) ? '[]' : '' ?>"
     style="min-width: 15rem; padding: .5rem;"
     <?= (isset($multiple) && $multiple) ? 'multiple="multiple"' : '' ?>>
     <?php foreach ($options as $option) : ?>
-        <option value="<?= $option['value'] ?>"
+        <option value="<?= esc_attr($option['value']) ?>"
             <?= $option['selected'] ? 'selected="selected"' : '' ?>>
-            <?= $option['label'] ?>
+            <?= esc_html($option['label']) ?>
         </option>
     <?php endforeach; ?>
 </select>

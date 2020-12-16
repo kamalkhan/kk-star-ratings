@@ -5,8 +5,8 @@
     }
 ?>
 
-<input type="number" name="<?= $name ?>" value="<?= $value ?>"
-    <?= isset($min) ? "min=\"{$min}\"" : '' ?>
-    <?= isset($max) ? "max=\"{$max}\"" : '' ?>
-    <?= isset($step) ? "step=\"{$step}\"" : '' ?>
+<input type="number" name="<?= esc_attr($name) ?>" value="<?= esc_attr($value) ?>"
+    <?= isset($min) ? ('min="'. esc_attr($min).'"') : '' ?>
+    <?= isset($max) ? ('max="'. esc_attr($max).'"') : '' ?>
+    <?= isset($step) ? ('step="'. esc_attr($step).'"') : '' ?>
     style="width: 5rem;">

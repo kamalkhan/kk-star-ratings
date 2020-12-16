@@ -22,8 +22,8 @@ function get_admin_tabs()
 {
     $tabs = apply_plugin_filters('admin_tabs', []);
     $keys = array_keys($tabs);
-    $active = (isset($_GET['tab']) && $_GET['tab']) ? $_GET['tab'] : reset($keys);
-    $active = apply_plugin_filters('active_admin_tab', $active);
+    $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : reset($keys);
+    $active = apply_plugin_filters('active_admin_tab', $tab);
 
     return [$tabs, $active];
 }
