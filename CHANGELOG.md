@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.1.5] - 2020-12-13
 
 ### Security
-- Escaped html attributes to avoid possible XSS exploits.
+- Escaped html attributes to avoid possible XSS exploits (Thanks to Toan Nguyen of Techlab Corporation).
 
 ## [4.1.4] - 2020-11-28
 
