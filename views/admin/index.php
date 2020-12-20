@@ -23,7 +23,7 @@
     <h2 class="nav-tab-wrapper">
         <?php foreach ($tabs as $tab => $label) : ?>
             <a class="nav-tab <?= $tab === $active ? 'nav-tab-active' : ''; ?>"
-                href="<?= admin_url('admin.php?page='.sanitize_text_field($_GET['page']).'&tab='. esc_attr($tab)); ?>">
+                href="<?= admin_url('admin.php?page='.esc_attr($_GET['page']).'&tab='. esc_attr($tab)); ?>">
                 <?= esc_html($label); ?>
             </a>
         <?php endforeach; ?>
