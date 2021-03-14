@@ -194,9 +194,7 @@ function structured_data()
         return;
     }
 
-    if (get_option(prefix('grs'))
-        && (is_singular() || is_page())
-    ) {
+    if (get_option(prefix('grs')) && (is_singular())) {
         $id = get_post_field('ID');
         $title = htmlentities(get_post_field('post_title'));
         $best = max((int) get_option(prefix('stars')), 1);
