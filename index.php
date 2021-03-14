@@ -63,6 +63,7 @@ HTML
     ],
 ]);
 
+require_once __DIR__.'/src/i18n.php';
 require_once __DIR__.'/src/global.php';
 require_once __DIR__.'/src/hook.php';
 require_once __DIR__.'/src/ajax.php';
