@@ -27,9 +27,9 @@ function response(array $payload = [], $validate = true)
         'valign' => null,
         'force' => true,
         'disabled' => false,
-        'size' => get_option(prefix('size')),
-        'best' => get_option(prefix('stars')),
-        'greet' => get_option(prefix('greet')),
+        'size' => get_option(prefix('size') ?: config('options')['size']),
+        'best' => get_option(prefix('stars') ?: config('options')['stars']),
+        'greet' => get_option(prefix('greet') ?: config('options')['greet']),
     ], array_filter($payload, function ($value) {
         return ! is_null($value);
     }));
