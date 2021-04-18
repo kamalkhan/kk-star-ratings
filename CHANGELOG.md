@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.9] - 2021-04-18
+
+### Fixed
+- Refactored form fields.
+- Response payload fallback to defaults.
+
+### Updated
+- Tested with WordPress 5.7.1
+
 ## [4.1.8] - 2021-03-14
 
 ### Fixed
