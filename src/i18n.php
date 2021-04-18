@@ -11,13 +11,13 @@
 
 namespace Bhittani\StarRating;
 
-if (!defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
-add_action('init', __NAMESPACE__ . '\load_textdomain');
+add_action('init', __NAMESPACE__.'\load_textdomain');
 function load_textdomain()
 {
-    load_plugin_textdomain('kk-star-ratings', false, __DIR__ . '/../languages');
+    load_plugin_textdomain('kk-star-ratings', false, __DIR__.'/../languages');
 }

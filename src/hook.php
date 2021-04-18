@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 function add_plugin_filter($tag, callable $callback, $priority = 10, $acceptedArgs = 1)

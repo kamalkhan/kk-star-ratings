@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 register_activation_hook(config('file'), __NAMESPACE__.'\activation');

@@ -16,7 +16,7 @@ use RuntimeException;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 function view($templates, array $payload = [])

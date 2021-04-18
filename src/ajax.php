@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 add_action('wp_ajax_'.config('slug'), __NAMESPACE__.'\ajax');
@@ -55,7 +55,7 @@ function ajax()
         ]));
     }
 
-    $best = isset($_POST['best']) ? sanitize_text_field($_POST['best']): get_option(prefix('stars'));
+    $best = isset($_POST['best']) ? sanitize_text_field($_POST['best']) : get_option(prefix('stars'));
     $best = max((int) $best, 1);
     $score = sanitize_text_field($_POST['score']);
     $score = min(max((int) $score, 1), $best);

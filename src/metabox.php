@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 add_action('add_meta_boxes', __NAMESPACE__.'\metabox', 10, 2);

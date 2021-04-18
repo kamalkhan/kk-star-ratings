@@ -13,7 +13,7 @@ namespace Bhittani\StarRating;
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\styles');

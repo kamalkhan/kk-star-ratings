@@ -11,7 +11,7 @@
 
 if (! defined('ABSPATH')) {
     http_response_code(404);
-    die();
+    exit();
 }
 
 if (! function_exists('kk_star_ratings')) {
