@@ -9,4 +9,4 @@
     <?= isset($min) ? ('min="'. esc_attr($min).'"') : '' ?>
     <?= isset($max) ? ('max="'. esc_attr($max).'"') : '' ?>
     <?= isset($step) ? ('step="'. esc_attr($step).'"') : '' ?>
-    style="width: 5rem;">
+    style="width: 5rem; padding-right: 0;">
