@@ -16,6 +16,8 @@
 
 namespace Bhittani\StarRating;
 
+use kkStarRatings;
+
 if (! defined('ABSPATH')) {
     http_response_code(404);
     die();
@@ -81,6 +83,10 @@ if (is_admin()) {
     require_once __DIR__.'/src/shortcode.php';
     require_once __DIR__.'/src/assets.php';
 }
+
+require_once __DIR__.'/kkStarRatings.php';
+
+new kkStarRatings('');
 
 add_action('plugins_loaded', function () {
     do_action(prefix('init'));

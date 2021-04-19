@@ -38,7 +38,7 @@ function response(array $payload = [], $validate = true)
         return '';
     }
 
-    if (! $payload['id'] && ! $payload['slug']) {
+    if (! $payload['id']/* && ! $payload['slug']*/) {
         $payload['id'] = get_post_field('ID');
     }
 

@@ -22,8 +22,9 @@ function metabox($type, $post)
     $icon = $legend = '';
 
     if ($post) {
-        $count = count_filter(null, $post->ID, null);
-        $score = score_filter(null, get_option(prefix('stars')), $post->ID, null);
+        $best = max((int) get_option(prefix('stars')), 1);
+        $count = apply_plugin_filters('count', null, $post->ID, null);
+        $score = apply_plugin_filters('score', null, $best, $post->ID, null);
 
         $icon = '<span class="dashicons dashicons-star-empty" style="margin-right: .25rem; font-size: 18px;"></span>';
 

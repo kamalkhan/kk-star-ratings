@@ -44,6 +44,7 @@
         "exclude": [
             "*",
             "!/index.php",
+            "!/kkStarRatings.php",
             "!/readme.txt",
             "!/LICENSE.txt",
             "!/freemius.php",
