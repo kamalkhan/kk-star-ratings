@@ -1,4 +1,5 @@
 /.vscode
+/*.cache
 /svn
 /bin
 /node_modules
