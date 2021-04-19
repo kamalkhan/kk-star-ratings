@@ -33,39 +33,40 @@ if (! function_exists('kk_star_ratings_get')) {
         global $wpdb;
         $postsTable = $wpdb->posts;
         $postMetaTable = $wpdb->prefix.'postmeta';
-        $base = get_option(Bhittani\StarRating\prefix('stars')) / 5;
-
-        $querySelect = "
-            SELECT
-                posts.ID,
-                ROUND(postmeta_ratings.meta_value / postmeta_count.meta_value * %f, 1) score
-            FROM {$postsTable} posts
-        ";
 
         $queryJoins = "
             JOIN {$postMetaTable} postmeta_ratings
                 ON posts.ID = postmeta_ratings.post_id
-            JOIN {$postMetaTable} postmeta_count
-                ON posts.ID = postmeta_count.post_id
+            JOIN {$postMetaTable} postmeta_casts
+                ON posts.ID = postmeta_casts.post_id
+        ";
+
+        $querySelect = "
+            SELECT
+                posts.ID,
+                postmeta_ratings.meta_value AS ratings,
+                postmeta_casts.meta_value AS casts,
+                ROUND(CAST(postmeta_ratings.meta_value AS FLOAT) / CAST(postmeta_casts.meta_value AS DOUBLE), 1) AS score
+            FROM {$postsTable} posts
         ";
 
         $queryConditions = "
             WHERE
                 posts.post_status = 'publish'
-                AND CAST(postmeta_count.meta_value AS UNSIGNED) != 0
-                AND postmeta_count.meta_key = '_kksr_casts'
+                AND CAST(postmeta_casts.meta_value AS UNSIGNED) != 0
+                AND postmeta_casts.meta_key = '_kksr_casts'
                 AND postmeta_ratings.meta_key = '_kksr_ratings'
         ";
 
         $queryOrder = '
             ORDER BY
                 score DESC,
-                CAST(postmeta_count.meta_value AS UNSIGNED) DESC
+                CAST(postmeta_casts.meta_value AS UNSIGNED) DESC
         ';
 
         $queryLimit = 'LIMIT %d, %d';
 
-        $queryArgs = [$base, $offset, $limit];
+        $queryArgs = [$offset, $limit];
 
         if ($taxonomyId) {
             $termTaxonomyTable = $wpdb->prefix.'term_taxonomy';
@@ -82,7 +83,7 @@ if (! function_exists('kk_star_ratings_get')) {
                 AND term_taxonomies.term_id=%d
             ';
 
-            $queryArgs = [$base, $taxonomyId, $offset, $limit];
+            $queryArgs = [$taxonomyId, $offset, $limit];
         }
 
         $query = $querySelect
