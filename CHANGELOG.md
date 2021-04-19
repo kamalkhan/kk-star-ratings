@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2] - 2021-04-19
+
+### Added
+- Ability to use/show custom star ratings.
+  - Example PHP Code
+  ```php
+    add_action('kksr_init', 'my_custom_star_ratings');
+    function my_custom_star_ratings() {
+        new kkStarRatings('foo');
+    }
+  ```
+
+  - Example Shortcode
+  ```html
+  <!-- 'id' will default to the current post/page id -->
+  [kkstarratings slug="foo" id=""]
+  ```
+
+### Fixed
+- Fix calculation used in `kk_star_ratings_get` function.
+
 ## [4.1.10] - 2021-04-19
 
 ### Fixed
