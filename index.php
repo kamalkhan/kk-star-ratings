@@ -14,11 +14,63 @@
  * License:         GPLv2 or later
  */
 
-namespace Bhittani\StarRating;
+use function Bhittani\StarRating\functions\autoload;
 
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     http_response_code(404);
     exit();
 }
 
-//
+if (file_exists($composer = __DIR__.'/vendor/autoload.php')) {
+    require_once $composer;
+}
+
+define('KK_STAR_RATINGS', __FILE__);
+
+require_once __DIR__.'/src/functions/autoload.php';
+
+function kk_star_ratings($keyOrItems = null, $default = null)
+{
+    static $config;
+
+    if ($config) {
+        if (is_array($keyOrItems)) {
+            $config = array_merge($config, $keyOrItems);
+        } elseif (! is_null($keyOrItems)) {
+            return $config['functions']['dot']($config, $keyOrItems, $default);
+        }
+        return $config;
+    }
+
+    $file = __FILE__;
+    $path = __DIR__.'/';
+    $src = $path.'src/';
+    $ns = 'Bhittani\StarRating';
+
+    $config = [
+        // Metadata
+        'file' => $file,
+        'url' => plugin_dir_url($file),
+        'path' => plugin_dir_path($file),
+        'signature' => plugin_basename($file),
+    ] + get_file_data($file, [
+        // Manifest
+        'version' => 'Version',
+        'name' => 'Plugin Name',
+        'slug' => 'Plugin Slug',
+        'nick' => 'Plugin Nick',
+    ]) + [
+        // Options
+        'views' => $path.'views/',
+    ] + [
+        // Source
+        'core' => autoload($ns.'\core', $src.'core'),
+        'actions' => autoload($ns.'\actions', $src.'actions'),
+        'filters' => autoload($ns.'\filters', $src.'filters'),
+        'functions' => autoload($ns.'\functions', $src.'functions'),
+    ];
+
+    return kk_star_ratings($keyOrItems, $default);
+}
+
+require_once __DIR__.'/src/index.php';

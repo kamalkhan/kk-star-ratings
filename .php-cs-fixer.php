@@ -1,6 +1,9 @@
 <?php
 
-$header = <<<HEADER
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$header = <<<'HEADER'
 This file is part of bhittani/kk-star-ratings.
 
 (c) Kamal Khan <shout@bhittani.com>
@@ -15,33 +18,23 @@ $rules = [
     'yoda_style' => false,
     'phpdoc_order' => true,
     'no_useless_else' => true,
+    'new_with_braces' => false,
     'heredoc_to_nowdoc' => true,
-    'no_short_echo_tag' => true,
     'no_useless_return' => true,
     'ordered_class_elements' => true,
     'single_line_after_imports' => true,
     'combine_consecutive_unsets' => true,
     'header_comment' => compact('header'),
+    'phpdoc_align' => ['align' => 'left'],
     'array_syntax' => ['syntax' => 'short'],
     'not_operator_with_successor_space' => true,
     'phpdoc_add_missing_param_annotation' => true,
-    'ordered_imports' => ['sortAlgorithm' => 'length'],
-    'no_extra_consecutive_blank_lines' => [
-        'use',
-        'extra',
-        'break',
-        'throw',
-        'return',
-        'continue',
-        'curly_brace_block',
-        'square_brace_block',
-        'parenthesis_brace_block',
-    ],
+    'ordered_imports' => ['sort_algorithm' => 'alpha'],
 ];
 
-$finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/src');
+$finder = (new Finder)->in(__DIR__ . '/src');
 
-return PhpCsFixer\Config::create()
-    ->setRules($rules)
-    ->setFinder($finder);
+return (new Config)
+    ->setFinder($finder)
+    ->setRiskyAllowed(true)
+    ->setRules($rules);
