@@ -15,6 +15,7 @@
  */
 
 use function Bhittani\StarRating\functions\autoload;
+use function Bhittani\StarRating\functions\dot;
 
 if (!defined('ABSPATH')) {
     http_response_code(404);
@@ -37,7 +38,7 @@ function kk_star_ratings($keyOrItems = null, $default = null)
         if (is_array($keyOrItems)) {
             $config = array_merge($config, $keyOrItems);
         } elseif (! is_null($keyOrItems)) {
-            return $config['functions']['dot']($config, $keyOrItems, $default);
+            return dot($config, $keyOrItems, $default);
         }
         return $config;
     }
@@ -45,7 +46,7 @@ function kk_star_ratings($keyOrItems = null, $default = null)
     $file = __FILE__;
     $path = __DIR__.'/';
     $src = $path.'src/';
-    $ns = 'Bhittani\StarRating';
+    $ns = 'Bhittani\StarRating\\';
 
     $config = [
         // Metadata
@@ -60,14 +61,17 @@ function kk_star_ratings($keyOrItems = null, $default = null)
         'slug' => 'Plugin Slug',
         'nick' => 'Plugin Nick',
     ]) + [
+        // Source
+        'core' => autoload($ns.'core', $src.'core'),
+        'actions' => autoload($ns.'actions', $src.'actions'),
+        'filters' => autoload($ns.'filters', $src.'filters'),
+        'functions' => autoload($ns.'functions', $src.'functions'),
+    ] + [
         // Options
         'views' => $path.'views/',
-    ] + [
-        // Source
-        'core' => autoload($ns.'\core', $src.'core'),
-        'actions' => autoload($ns.'\actions', $src.'actions'),
-        'filters' => autoload($ns.'\filters', $src.'filters'),
-        'functions' => autoload($ns.'\functions', $src.'functions'),
+        'options' => [
+            //
+        ],
     ];
 
     return kk_star_ratings($keyOrItems, $default);

@@ -5,7 +5,7 @@
     stopOnFailure="false"
 	processIsolation="false"
 	backupStaticAttributes="false"
-	bootstrap="tests/bootstrap.php"
+	bootstrap="vendor/autoload.php"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true">
