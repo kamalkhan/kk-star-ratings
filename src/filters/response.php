@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\filters;
 
 use function Bhittani\StarRating\functions\view;
+use function Bhittani\StarRating\functions\width;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -24,17 +25,14 @@ function response(string $html, array $payload): string
         return $html;
     }
 
-    $kksr = 'kk_star_ratings';
+    // Temporary...
+    $payload['score'] = $payload['score'] ?: 3.5;
+    $payload['count'] = $payload['count'] ?: 7;
+    // $payload['size'] = $payload['size'] ?: 24;
+    // $payload['best'] = $payload['best'] ?: 5;
+    // $payload['gap'] = $payload['gap'] ?: 5;
 
-    $payload['valign'] = $payload['valign'] ?? 'top';
-    $payload['align'] = $payload['align'] ?? 'left';
-    $payload['score'] = $payload['score'] ?? 3.5;
-    $payload['count'] = $payload['count'] ?? 7;
-    $payload['size'] = $payload['size'] ?? 24;
-    $payload['best'] = $payload['best'] ?? 5;
-    $payload['gap'] = $payload['gap'] ?? 5;
-
-    $payload['width'] = $kksr('functions.width')($payload['score'], $payload['size'], $payload['gap']);
+    $payload['width'] = width($payload['score'], $payload['size'], $payload['gap']);
 
     return view('response/index.php', $payload);
 }

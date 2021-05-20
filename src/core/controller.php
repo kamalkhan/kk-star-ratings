@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\core;
 
 use function Bhittani\StarRating\functions\cast;
+use function Bhittani\StarRating\functions\to_shortcode;
 use Exception;
 use function kk_star_ratings as kksr;
 
@@ -48,7 +49,10 @@ function controller()
 
         unset($payload['score'], $payload['count']);
 
-        wp_die(shortcode($payload, '', kksr('slug')), 201);
+        // $html = shortcode($payload, '', kksr('slug'));
+        $html = do_shortcode(to_shortcode(kksr('slug'), $payload));
+
+        wp_die($html, 201);
     } catch (Exception $e) {
         header('Content-Type: application/json; charset=utf-8');
 
