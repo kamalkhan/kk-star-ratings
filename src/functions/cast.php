@@ -12,7 +12,7 @@
 namespace Bhittani\StarRating\functions;
 
 /** Cast an integer to a base */
-function cast(int $value, int $to = 5, int $from = 5): float
+function cast(float $value, int $to = 5, int $from = 5): float
 {
     // 4 * 5  / 5  = 4 * 1 = 4
     // 4 * 10 / 5  = 4 * 2 = 8

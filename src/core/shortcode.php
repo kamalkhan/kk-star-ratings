@@ -11,6 +11,9 @@
 
 namespace Bhittani\StarRating\core;
 
+use function Bhittani\StarRating\functions\cast;
+use function Bhittani\StarRating\functions\option;
+use function Bhittani\StarRating\functions\width;
 use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -22,14 +25,14 @@ if (! defined('KK_STAR_RATINGS')) {
 function shortcode($attrs, string $contents, string $tag): string
 {
     $defaults = array_fill_keys([
-        'align', 'count', 'disabled', 'force',
+        'align', 'count', 'readonly', 'force',
         'id', 'score', 'slug', 'valign',
     ], '') + [
-        'best' => 5,
-        'gap' => 5,
-        'greet' => 'Rate this {post}',
-        'legend' => '{score}/{best} - ({count} {votes})',
-        'size' => 24,
+        'best' => option('stars'),
+        'gap' => option('gap'),
+        'greet' => option('greet'),
+        'legend' => option('legend'),
+        'size' => option('size'),
     ];
 
     ksort($defaults);
@@ -55,14 +58,24 @@ function shortcode($attrs, string $contents, string $tag): string
     $payload = shortcode_atts($defaults, $attrs, $tag);
 
     $payload['best'] = (int) $payload['best'];
-    $payload['count'] = (int) $payload['count'];
-    $payload['disabled'] = (bool) $payload['disabled'];
+    $payload['readonly'] = (bool) $payload['readonly'];
     $payload['force'] = (bool) $payload['force'];
     $payload['gap'] = (int) $payload['gap'];
     $payload['id'] = (int) $payload['id'];
     $payload['legend'] = $payload['legend'] ?: $contents;
-    $payload['score'] = (int) $payload['score'];
     $payload['size'] = (int) $payload['size'];
+
+    if ($payload['count'] === '') {
+        $payload['count'] = apply_filters(kksr('filters.count'), 0, $payload['id'], $payload['slug']);
+    }
+
+    if ($payload['score'] === '') {
+        $payload['score'] = apply_filters(kksr('filters.score'), 0, $payload['id'], $payload['slug']);
+    }
+
+    $payload['count'] = (int) max(0, $payload['count']);
+    $payload['score'] = max(0, min(cast($payload['score'], $payload['best']), $payload['best']));
+    $payload['width'] = width($payload['score'], $payload['size'], $payload['gap']);
 
     return apply_filters(kksr('filters.response'), '', $payload);
 }

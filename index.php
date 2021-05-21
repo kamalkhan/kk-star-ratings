@@ -70,7 +70,12 @@ function kk_star_ratings($keyOrItems = null, $default = null)
         // Options
         'views' => $path.'views/',
         'options' => [
-            //
+            // Appearance
+            'gap' => 5,
+            'greet' => 'Rate this {post}',
+            'legend' => '{score}/{best} - ({count} {votes})',
+            'size' => 24,
+            'stars' => 5,
         ],
     ];
 

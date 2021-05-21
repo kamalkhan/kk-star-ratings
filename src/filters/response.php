@@ -26,11 +26,8 @@ function response(string $html, array $payload): string
     }
 
     // Temporary...
-    $payload['score'] = $payload['score'] ?: 3.5;
-    $payload['count'] = $payload['count'] ?: 7;
-    // $payload['size'] = $payload['size'] ?: 24;
-    // $payload['best'] = $payload['best'] ?: 5;
-    // $payload['gap'] = $payload['gap'] ?: 5;
+    // $payload['score'] = $payload['score'] ?: 3.5;
+    // $payload['count'] = $payload['count'] ?: 7;
 
     $payload['width'] = width($payload['score'], $payload['size'], $payload['gap']);
 

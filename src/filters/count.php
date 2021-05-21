@@ -9,10 +9,14 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Bhittani\StarRating\functions;
+namespace Bhittani\StarRating\filters;
 
-/** Calculate the width, providing a gap */
-function width(float $score, float $size, float $gap = 0): float
+if (! defined('KK_STAR_RATINGS')) {
+    http_response_code(404);
+    exit();
+}
+
+function count(int $count, int $id, string $slug): int
 {
-    return max(0, $score * $size + $score * $gap - $gap/2);
+    return $count;
 }
