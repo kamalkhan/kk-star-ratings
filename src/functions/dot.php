@@ -12,7 +12,7 @@
 namespace Bhittani\StarRating\functions;
 
 /** Access items using dot notation */
-function dot(array $items, string $key, $default)
+function dot(array $items, string $key, $default = null)
 {
     $parts = explode('.', $key, 2);
     $head = array_shift($parts);
