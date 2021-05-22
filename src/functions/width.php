@@ -14,5 +14,5 @@ namespace Bhittani\StarRating\functions;
 /** Calculate the width, providing a gap */
 function width(float $score, float $size, float $gap = 0): float
 {
-    return max(0, $score * $size + $score * $gap - $gap/2);
+    return max(0, $score * $size + $score * $gap - $gap / 2);
 }
