@@ -11,6 +11,11 @@
 
 namespace Bhittani\StarRating\functions;
 
+if (! defined('KK_STAR_RATINGS')) {
+    http_response_code(404);
+    exit();
+}
+
 /** Cast an integer to a base */
 function cast(float $value, int $to = 5, int $from = 5): float
 {

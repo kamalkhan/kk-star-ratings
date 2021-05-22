@@ -11,12 +11,33 @@
 
 namespace Bhittani\StarRating\actions;
 
+use function kk_star_ratings as kksr;
+
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
 }
 
-function save(int $outOf5, int $id, string $slug, array $payload): void
+function save(float $outOf5, int $id, string $slug, array $payload): void
 {
-    // print_r(compact('outOf5', 'id', 'slug', 'payload'));
+    $count = (int) apply_filters(kksr('filters.count'), null, $id, $slug);
+    $ratings = (float) apply_filters(kksr('filters.ratings'), null, $id, $slug);
+
+    // For safe keeping, ensure we have not already casted this vote.
+    if ($count == ((int) $payload['count'] ?? 0)
+        && $ratings == ((float) $payload['ratings'] ?? 0)
+    ) {
+        $newCount = $count + 1;
+        $newRatings = $ratings + $outOf5;
+
+        update_post_meta($id, '_'.kksr('nick').'_count_'.$slug, $newCount);
+        update_post_meta($id, '_'.kksr('nick').'_ratings_'.$slug, $newRatings);
+
+        // TODO: Fingerprint...
+
+        // Legacy support...
+        $legacySlug = $slug == 'default' ? '' : "_{$slug}";
+        update_post_meta($id, '_'.kksr('nick').'_casts'.$legacySlug, $newCount); // v3, v4
+        update_post_meta($id, '_'.kksr('nick').'_avg'.$legacySlug, $newRatings / $newCount); // < v3
+    }
 }

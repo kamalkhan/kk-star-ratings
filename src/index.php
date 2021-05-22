@@ -20,6 +20,8 @@ if (! defined('KK_STAR_RATINGS')) {
 
 require_once __DIR__.'/hooks.php';
 
+add_action('plugins_loaded', kk_star_ratings('core.kernel'));
+
 add_action('wp_enqueue_scripts', kksr('core.assets'));
 add_action('wp_ajax_'.kksr('slug'), kksr('core.controller'));
 add_action('wp_ajax_nopriv_'.kksr('slug'), kksr('core.controller'));

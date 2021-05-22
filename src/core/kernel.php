@@ -9,14 +9,16 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Bhittani\StarRating\filters;
+namespace Bhittani\StarRating\core;
+
+use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
 }
 
-function response(string $html, array $payload): string
+function kernel()
 {
-    return $html;
+    do_action(kksr('actions.init'), kksr());
 }

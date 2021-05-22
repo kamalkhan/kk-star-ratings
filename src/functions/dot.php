@@ -11,6 +11,11 @@
 
 namespace Bhittani\StarRating\functions;
 
+if (! defined('KK_STAR_RATINGS')) {
+    http_response_code(404);
+    exit();
+}
+
 /** Access items using dot notation */
 function dot(array $items, string $key, $default = null)
 {

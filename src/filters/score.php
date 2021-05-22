@@ -16,7 +16,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function score(float $score, int $id, string $slug): float
+function score(float $score): float
 {
-    return $score;
+    return round($score, 1, PHP_ROUND_HALF_DOWN);
 }

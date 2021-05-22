@@ -11,12 +11,18 @@
 
 namespace Bhittani\StarRating\filters;
 
+use function kk_star_ratings as kksr;
+
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
 }
 
-function response(string $html, array $payload): string
+function ratings(?float $ratings, int $id, string $slug): float
 {
-    return $html;
+    if (! is_null($ratings)) {
+        return $ratings;
+    }
+
+    return (float) get_post_meta($id, '_'.kksr('nick').'_ratings_'.$slug, true);
 }

@@ -11,6 +11,11 @@
 
 namespace Bhittani\StarRating\functions;
 
+if (! defined('KK_STAR_RATINGS')) {
+    http_response_code(404);
+    exit();
+}
+
 function to_shortcode(string $tag, array $payload = [], string $contents = ''): string
 {
     $fragments = [];

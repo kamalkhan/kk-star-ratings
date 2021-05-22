@@ -47,7 +47,7 @@ function controller()
 
         do_action(kksr('actions.save'), $outOf5, $id, $slug, $payload);
 
-        unset($payload['score'], $payload['count']);
+        unset($payload['count'], $payload['ratings'], $payload['score']);
 
         // $html = shortcode($payload, '', kksr('slug'));
         $html = do_shortcode(to_shortcode(kksr('slug'), $payload));

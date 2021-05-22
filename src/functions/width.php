@@ -11,6 +11,11 @@
 
 namespace Bhittani\StarRating\functions;
 
+if (! defined('KK_STAR_RATINGS')) {
+    http_response_code(404);
+    exit();
+}
+
 /** Calculate the width, providing a gap */
 function width(float $score, float $size, float $gap = 0): float
 {
