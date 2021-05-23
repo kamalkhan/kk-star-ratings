@@ -22,7 +22,7 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function head(): void
 {
-    if (option('grs') && is_singular()) {
+    if (option('enable') && option('grs') && is_singular()) {
         $id = get_post_field('ID');
         $title = esc_html(get_post_field('post_title'));
         [$count, $score] = calculate($id, 'default');

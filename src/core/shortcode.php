@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\core;
 
 use function Bhittani\StarRating\functions\option;
+use function Bhittani\StarRating\functions\response;
 use function Bhittani\StarRating\functions\view;
 use function kk_star_ratings as kksr;
 
@@ -23,18 +24,14 @@ if (! defined('KK_STAR_RATINGS')) {
 /** @param string|array $attrs */
 function shortcode($attrs, string $contents, string $tag): string
 {
-    $defaults = array_fill_keys([
-        'align', 'count', 'force', 'id',
-        'readonly', 'score', 'slug', 'valign',
-    ], '') + [
-        'best' => option('stars'),
-        'gap' => option('gap'),
-        'greet' => option('greet'),
-        'legend' => option('legend'),
-        'size' => option('size'),
-    ];
+    if (! option('enable')) {
+        return '';
+    }
 
-    ksort($defaults);
+    $defaults = array_fill_keys([
+        'align', 'best', 'count', 'force', 'gap', 'greet', 'id',
+        'legend', 'readonly', 'score', 'size', 'slug', 'valign',
+    ], '');
 
     $attrs = (array) $attrs;
 
@@ -54,17 +51,7 @@ function shortcode($attrs, string $contents, string $tag): string
         }
     }
 
-    $payload = shortcode_atts($defaults, $attrs, $tag);
+    $payload = shortcode_atts($defaults, $attrs + ['legend' => $contents], $tag);
 
-    $payload['best'] = (int) $payload['best'];
-    $payload['force'] = (bool) $payload['force'];
-    $payload['gap'] = (int) $payload['gap'];
-    $payload['id'] = (int) $payload['id'];
-    $payload['legend'] = $payload['legend'] ?: $contents;
-    $payload['readonly'] = (bool) $payload['readonly'];
-    $payload['size'] = (int) $payload['size'];
-
-    $payload = apply_filters(kksr('filters.payload'), $payload);
-
-    return view('response/index.php', $payload);
+    return response(array_filter($payload));
 }
