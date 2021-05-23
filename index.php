@@ -76,6 +76,21 @@ function kk_star_ratings($keyOrItems = null, $default = null)
             'legend' => '{score}/{best} - ({count} {votes})',
             'size' => 24,
             'stars' => 5,
+            // Rich snippets
+            'grs' => true,
+            'sd' => '
+{
+    "@context": "https://schema.org/",
+    "@type": "CreativeWorkSeries",
+    "name": "{title}",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{score}",
+        "bestRating": "{best}",
+        "ratingCount": "{count}"
+    }
+}
+            ',
         ],
     ];
 

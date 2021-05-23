@@ -34,7 +34,7 @@ function controller()
 
         $payload = array_map('sanitize_text_field', $_POST['payload'] ?? []);
 
-        $slug = $payload['slug'] ?? '';
+        $slug = $payload['slug'] ?? 'default';
         $id = intval($payload['id'] ?? 0);
         $rating = intval($_POST['rating'] ?? 0);
         $best = intval($payload['best'] ?? 5);
@@ -45,11 +45,13 @@ function controller()
 
         $outOf5 = cast($rating, 5, $best);
 
-        do_action(kksr('actions.save'), $outOf5, $id, $slug, $payload);
+        do_action(kksr('actions.save'), $outOf5, $id, $slug, [
+            'count' => (int) apply_filters(kksr('filters.count'), null, $id, $slug),
+            'ratings' => (float) apply_filters(kksr('filters.ratings'), null, $id, $slug),
+        ] + $payload);
 
-        unset($payload['count'], $payload['ratings'], $payload['score']);
+        unset($payload['count'], $payload['score']);
 
-        // $html = shortcode($payload, '', kksr('slug'));
         $html = do_shortcode(to_shortcode(kksr('slug'), $payload));
 
         wp_die($html, 201);

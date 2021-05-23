@@ -11,6 +11,9 @@
 
 namespace Bhittani\StarRating\filters;
 
+use function Bhittani\StarRating\functions\calculate;
+use function Bhittani\StarRating\functions\width;
+
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
@@ -18,5 +21,25 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function payload(array $payload): array
 {
+    if (! $payload['id']) {
+        $payload['id'] = (int) get_post_field('ID');
+    }
+
+    if (! $payload['slug']) {
+        $payload['slug'] = 'default';
+    }
+
+    [$count, $score] = calculate($payload['id'], $payload['slug']);
+
+    if (! (is_numeric($payload['count']) || $payload['count'])) {
+        $payload['count'] = $count;
+    }
+
+    if (! (is_numeric($payload['score']) || $payload['score'])) {
+        $payload['score'] = $score;
+    }
+
+    $payload['width'] = width($payload['score'], $payload['size'], $payload['gap']);
+
     return $payload;
 }

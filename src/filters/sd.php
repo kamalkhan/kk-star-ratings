@@ -16,7 +16,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function response(string $html, array $payload): string
+function sd(string $sd): string
 {
-    return $html;
+    return $sd;
 }
