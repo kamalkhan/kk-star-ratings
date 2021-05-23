@@ -70,6 +70,7 @@ function kk_star_ratings($keyOrItems = null, $default = null)
         // Options
         'views' => $path.'views/',
         'options' => [
+            // General
             'enable' => true,
             // Appearance
             'gap' => 5,
