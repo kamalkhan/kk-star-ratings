@@ -13,7 +13,6 @@ namespace Bhittani\StarRating\core;
 
 use function Bhittani\StarRating\functions\option;
 use function Bhittani\StarRating\functions\response;
-use function Bhittani\StarRating\functions\view;
 use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -24,14 +23,12 @@ if (! defined('KK_STAR_RATINGS')) {
 /** @param string|array $attrs */
 function shortcode($attrs, string $contents, string $tag): string
 {
-    if (! option('enable')) {
-        return '';
-    }
-
     $defaults = array_fill_keys([
-        'align', 'best', 'count', 'force', 'gap', 'greet', 'id',
+        'align', 'best', 'count', 'gap', 'greet', 'id',
         'legend', 'readonly', 'score', 'size', 'slug', 'valign',
-    ], '');
+    ], '') + [
+        'explicit' => true,
+    ];
 
     $attrs = (array) $attrs;
 
@@ -53,5 +50,21 @@ function shortcode($attrs, string $contents, string $tag): string
 
     $payload = shortcode_atts($defaults, $attrs + ['legend' => $contents], $tag);
 
-    return response(array_filter($payload));
+    if (! $payload['id']) {
+        $payload['id'] = (int) get_the_ID();
+    }
+
+    if (! $payload['slug']) {
+        $payload['slug'] = 'default';
+    }
+
+    if (! apply_filters(kksr('filters.okay'), true, $payload['id'], $payload['slug'], (bool) $payload['explicit'])) {
+        return '';
+    }
+
+    unset($payload['explicit']);
+
+    return response(array_filter($payload, function ($value) {
+        return $value !== '';
+    }));
 }

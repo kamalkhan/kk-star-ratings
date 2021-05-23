@@ -21,14 +21,6 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function payload(array $payload): array
 {
-    if (! $payload['id']) {
-        $payload['id'] = (int) get_post_field('ID');
-    }
-
-    if (! $payload['slug']) {
-        $payload['slug'] = 'default';
-    }
-
     [$count, $score] = calculate($payload['id'], $payload['slug']);
 
     if (! (is_numeric($payload['count']) || $payload['count'])) {

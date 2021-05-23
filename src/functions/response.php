@@ -21,8 +21,8 @@ if (! defined('KK_STAR_RATINGS')) {
 function response(array $payload): string
 {
     $payload += array_fill_keys([
-        'align', 'count', 'force', 'id',
-        'readonly', 'score', 'slug', 'valign',
+        'align', 'count', 'id', 'readonly',
+        'score', 'slug', 'valign',
     ], '') + [
         'best' => option('stars'),
         'gap' => option('gap'),
@@ -32,7 +32,6 @@ function response(array $payload): string
     ];
 
     $payload['best'] = (int) $payload['best'];
-    $payload['force'] = (bool) $payload['force'];
     $payload['gap'] = (int) $payload['gap'];
     $payload['id'] = (int) $payload['id'];
     $payload['readonly'] = (bool) $payload['readonly'];
