@@ -18,7 +18,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function assets()
+function assets(): void
 {
     do_action(kksr('actions.style'));
     do_action(kksr('actions.script'));
