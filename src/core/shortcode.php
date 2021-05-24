@@ -60,14 +60,14 @@ function shortcode($attrs, string $contents, string $tag): string
 
     $payload['explicit'] = (bool) $payload['explicit'];
 
-    if (! apply_filters(kksr('filters.okay'), true, $payload['id'], $payload['slug'], $payload)) {
+    if (! apply_filters(kksr('filters.okay'), null, $payload['id'], $payload['slug'], $payload)) {
         return '';
     }
 
     $payload['readonly'] = (bool) $payload['readonly'];
 
     try {
-        if (kksr('filters.validate', true, $payload['id'], $payload['slug'], $payload) === false) {
+        if (apply_filters(kksr('filters.validate'), true, $payload['id'], $payload['slug'], $payload) === false) {
             throw new Exception;
         }
     } catch (Exception $e) {

@@ -20,8 +20,12 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function okay(bool $okay, int $id, string $slug, array $payload): bool
+function okay(?bool $okay, int $id, string $slug, array $payload): bool
 {
+    if (! is_null($okay)) {
+        return $okay;
+    }
+
     if (! option('enable')) {
         return false;
     }
@@ -68,9 +72,9 @@ function okay(bool $okay, int $id, string $slug, array $payload): bool
         return false;
     }
 
-    if ($status === 'enable') {
-        return true;
-    }
+    // if ($status === 'enable') {
+    //     return true;
+    // }
 
-    return $okay;
+    return true;
 }

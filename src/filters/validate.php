@@ -13,6 +13,7 @@ namespace Bhittani\StarRating\filters;
 
 use function Bhittani\StarRating\functions\option;
 use Exception;
+use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -37,6 +38,14 @@ function validate(bool $valid, int $id, string $slug, array $payload): bool
         || in_array('guests', $strategies)
     )) {
         throw new Exception(__('Only authenticated users can submit a rating.', 'kk-star-ratings', 401));
+    }
+
+    $fingerprint = apply_filters(kksr('filters.fingerprint'), null, $id, $slug);
+
+    if (in_array('unique', $strategies)
+        && ! apply_filters(kksr('filters.unique'), null, $fingerprint, $id, $slug)
+    ) {
+        return false;
     }
 
     return $valid;

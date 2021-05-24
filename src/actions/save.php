@@ -33,7 +33,8 @@ function save(float $outOf5, int $id, string $slug, array $payload): void
         update_post_meta($id, '_'.kksr('nick').'_count_'.$slug, $newCount);
         update_post_meta($id, '_'.kksr('nick').'_ratings_'.$slug, $newRatings);
 
-        // TODO: Fingerprint...
+        $fingerprint = apply_filters(kksr('filters.fingerprint'), null, $id, $slug);
+        add_post_meta($id, '_'.kksr('nick').'_fingerprint_'.$slug, $fingerprint);
 
         // Legacy support...
         $legacySlug = $slug == 'default' ? '' : "_{$slug}";
