@@ -22,7 +22,7 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function content(string $content): string
 {
-    foreach([
+    foreach ([
         kksr('slug'),
         // Legacy...
         'kkratings', // < v3

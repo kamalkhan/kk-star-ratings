@@ -11,7 +11,6 @@
 
 namespace Bhittani\StarRating\core;
 
-use function Bhittani\StarRating\functions\option;
 use function Bhittani\StarRating\functions\response;
 use function kk_star_ratings as kksr;
 
