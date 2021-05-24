@@ -28,23 +28,24 @@ function controller()
             throw new Exception(__('This action is forbidden.', 'kk-star-ratings'), 403);
         }
 
+        $payload = array_map('sanitize_text_field', $_POST['payload'] ?? []);
+
+        $id = intval($payload['id'] ?? 0);
+        $slug = $payload['slug'] ?? 'default';
+        $best = intval($payload['best'] ?? 5);
+
+        if (apply_filters(kksr('filters.validate'), null, $payload['id'], $payload['slug'], $payload) === false) {
+            throw new Exception(__('A rating can not be accepted at the moment.', 'kk-star-ratings'));
+        }
+
         if (! isset($_POST['rating'])) {
             throw new Exception(__('A rating is required to cast a vote.', 'kk-star-ratings'));
         }
 
-        $payload = array_map('sanitize_text_field', $_POST['payload'] ?? []);
-
-        $slug = $payload['slug'] ?? 'default';
-        $id = intval($payload['id'] ?? 0);
         $rating = intval($_POST['rating'] ?? 0);
-        $best = intval($payload['best'] ?? 5);
 
         if ($rating < 1 || $rating > $best) {
             throw new Exception(sprintf(__('The rating value must be between %1$d and %2$d.', 'kk-star-ratings'), 1, $best));
-        }
-
-        if (kksr('filters.validate', true, $payload['id'], $payload['slug'], $payload) === false) {
-            throw new Exception(__('A rating can not be accepted at the moment.', 'kk-star-ratings'));
         }
 
         $outOf5 = cast($rating, 5, $best);

@@ -20,8 +20,12 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function validate(bool $valid, int $id, string $slug, array $payload): bool
+function validate(?bool $valid, int $id, string $slug, array $payload): bool
 {
+    if (! is_null($valid)) {
+        return $valid;
+    }
+
     if ($payload['readonly'] ?? false) {
         throw new Exception(__('The ratings are readonly.', 'kk-star-ratings'));
     }
@@ -31,13 +35,13 @@ function validate(bool $valid, int $id, string $slug, array $payload): bool
     if (($payload['is_archive'] ?? false)
         && ! in_array('archives', $strategies)
     ) {
-        throw new Exception(__('Rating in archives is not allowed.', 'kk-star-ratings'));
+        throw new Exception(__('Casting a vote in archives is not allowed.', 'kk-star-ratings'));
     }
 
     if (! (is_user_logged_in()
         || in_array('guests', $strategies)
     )) {
-        throw new Exception(__('Only authenticated users can submit a rating.', 'kk-star-ratings', 401));
+        throw new Exception(__('You are not authenticated to cast a vote.', 'kk-star-ratings'), 401);
     }
 
     $fingerprint = apply_filters(kksr('filters.fingerprint'), null, $id, $slug);
@@ -45,8 +49,8 @@ function validate(bool $valid, int $id, string $slug, array $payload): bool
     if (in_array('unique', $strategies)
         && ! apply_filters(kksr('filters.unique'), null, $fingerprint, $id, $slug)
     ) {
-        return false;
+        throw new Exception(__('You have already casted your vote.', 'kk-star-ratings'), 403);
     }
 
-    return $valid;
+    return true;
 }

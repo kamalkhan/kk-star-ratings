@@ -67,7 +67,7 @@ function shortcode($attrs, string $contents, string $tag): string
     $payload['readonly'] = (bool) $payload['readonly'];
 
     try {
-        if (apply_filters(kksr('filters.validate'), true, $payload['id'], $payload['slug'], $payload) === false) {
+        if (apply_filters(kksr('filters.validate'), null, $payload['id'], $payload['slug'], $payload) === false) {
             throw new Exception;
         }
     } catch (Exception $e) {
