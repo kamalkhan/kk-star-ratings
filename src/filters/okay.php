@@ -20,7 +20,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function okay(bool $okay, int $id, string $slug, bool $explicit = true): bool
+function okay(bool $okay, int $id, string $slug, array $payload): bool
 {
     if (! option('enable')) {
         return false;
@@ -46,7 +46,9 @@ function okay(bool $okay, int $id, string $slug, bool $explicit = true): bool
         return false;
     }
 
-    if (! $explicit && in_array($type, (array) option('manual_control'))) {
+    if (! ($payload['explicit'] ?? false)
+        && in_array($type, (array) option('manual_control'))
+    ) {
         return false;
     }
 

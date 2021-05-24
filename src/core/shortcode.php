@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\core;
 
 use function Bhittani\StarRating\functions\response;
+use Exception;
 use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -57,11 +58,21 @@ function shortcode($attrs, string $contents, string $tag): string
         $payload['slug'] = 'default';
     }
 
-    if (! apply_filters(kksr('filters.okay'), true, $payload['id'], $payload['slug'], (bool) $payload['explicit'])) {
+    $payload['explicit'] = (bool) $payload['explicit'];
+
+    if (! apply_filters(kksr('filters.okay'), true, $payload['id'], $payload['slug'], $payload)) {
         return '';
     }
 
-    unset($payload['explicit']);
+    $payload['readonly'] = (bool) $payload['readonly'];
+
+    try {
+        if (kksr('filters.validate', true, $payload['id'], $payload['slug'], $payload) === false) {
+            throw new Exception;
+        }
+    } catch (Exception $e) {
+        $payload['readonly'] = true;
+    }
 
     return response(array_filter($payload, function ($value) {
         return $value !== '';

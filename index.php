@@ -73,9 +73,10 @@ function kk_star_ratings($keyOrItems = null, $default = null)
             // General
             'enable' => true,
             'exclude_categories' => [],
-            'exclude_locations' => ['home', 'archives'],
+            'exclude_locations' => ['archives', 'home'],
             'manual_control' => [],
             'position' => 'top-left',
+            'strategies' => ['archives', 'guests'],
             // Appearance
             'gap' => 5,
             'greet' => 'Rate this {post}',
