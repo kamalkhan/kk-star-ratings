@@ -56,6 +56,8 @@ function kk_star_ratings($keyOrItems = null, $default = null)
         'signature' => plugin_basename($file),
     ] + get_file_data($file, [
         // Manifest
+        'author' => 'Author',
+        'author_url' => 'Author URI',
         'version' => 'Version',
         'name' => 'Plugin Name',
         'slug' => 'Plugin Slug',

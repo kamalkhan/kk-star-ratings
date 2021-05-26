@@ -34,3 +34,7 @@ add_action('wp_ajax_nopriv_'.kksr('slug'), kksr('core.controller'));
 add_shortcode('kk-star-ratings', kksr('core.shortcode'));
 
 add_action('the_content', kksr('core.content'));
+
+// admin
+
+add_action('admin_menu', kksr('core.admin'));
