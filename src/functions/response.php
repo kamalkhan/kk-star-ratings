@@ -39,5 +39,9 @@ function response(array $payload): string
 
     $payload = apply_filters(kksr('filters.payload'), $payload);
 
-    return view('response/index.php', $payload);
+    ob_start();
+
+    do_action(kksr('actions.markup'), $payload);
+
+    return ob_get_clean();
 }

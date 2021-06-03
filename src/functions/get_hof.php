@@ -19,9 +19,7 @@ if (! defined('KK_STAR_RATINGS')) {
 function get_hof(?array $payload, callable $factory, string $prefix = null, array $types = []): callable
 {
     return function (string $key, $default = null) use ($payload, $factory, $prefix, $types) {
-        if (strpos($key, $prefix) === 0) {
-            $key = substr($key, strlen($prefix));
-        }
+        [$prefix, $key] = explode_prefix($key, $prefix);
 
         $value = is_array($payload)
             ? ($payload[$prefix.$key] ?? null)

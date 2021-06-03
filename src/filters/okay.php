@@ -44,17 +44,27 @@ function okay(?bool $okay, int $id, string $slug, array $payload): bool
         return false;
     }
 
+    $status = apply_filters(kksr('filters.status'), null, $id, $slug);
+
+    if ($status == 'disable') {
+        return false;
+    }
+
+    if ($status == 'enable') {
+        return true;
+    }
+
     $type = get_post_type($id);
 
     if (in_array($type, (array) $excludedLocations)) {
         return false;
     }
 
-    if (! ($payload['explicit'] ?? false)
-        && in_array($type, (array) option('manual_control'))
-    ) {
-        return false;
-    }
+    // if (! ($payload['explicit'] ?? false)
+    //     && in_array($type, (array) option('manual_control'))
+    // ) {
+    //     return false;
+    // }
 
     $categories = array_map(function ($category) {
         return $category->term_id;
@@ -65,16 +75,6 @@ function okay(?bool $okay, int $id, string $slug, array $payload): bool
     if (count($categories) != count(array_diff($categories, $excludedCategories))) {
         return false;
     }
-
-    $status = apply_filters(kksr('filters.status'), null, $id, $slug);
-
-    if ($status === 'disable') {
-        return false;
-    }
-
-    // if ($status === 'enable') {
-    //     return true;
-    // }
 
     return true;
 }

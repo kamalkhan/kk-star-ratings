@@ -18,22 +18,35 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-/** Access options */
-function option(string $key, $default = null, array $fallback = null)
+/**
+ * Get or update options.
+ *
+ * @param array|string $keyOrOptions
+ * @param mixed|null $default
+ */
+function option($keyOrOptions, $default = null, array $fallback = null)
 {
     if (is_null($fallback)) {
         $fallback = (array) kksr('options');
     }
 
-    $prefix = kksr('nick').'_';
+    if (! is_array($keyOrOptions)) {
+        [$prefix, $key] = explode_prefix($keyOrOptions);
+        $fallbackValue = $fallback[$key] ?? null;
+        $value = get_option($prefix.$key, $default ?? $fallbackValue);
 
-    if (strpos($key, $prefix) === 0) {
-        $key = substr($key, strlen($prefix));
+        return type_cast($value, gettype($fallbackValue));
     }
 
-    $fallbackValue = $fallback[$key] ?? null;
+    foreach ($keyOrOptions as $key => $value) {
+        [$prefix, $key] = explode_prefix($key);
+        update_option($prefix.$key, $value);
+    }
 
-    $value = get_option($prefix.$key, $default ?? $fallbackValue);
-
-    return type_cast($value, gettype($fallbackValue));
+    return array_combine(
+        $keys = array_keys($keyOrOptions),
+        array_map(function ($key) use ($fallback) {
+            return option($key, null, $fallback);
+        }, $keys)
+    );
 }
