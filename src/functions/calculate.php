@@ -18,7 +18,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function calculate(int $id, $slug, int $best = 5): array
+function calculate(int $id, string $slug, int $best = 5): array
 {
     $count = (int) apply_filters(kksr('filters.count'), null, $id, $slug);
     $ratings = (float) apply_filters(kksr('filters.ratings'), null, $id, $slug);
