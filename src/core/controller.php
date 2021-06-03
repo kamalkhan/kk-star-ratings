@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\core;
 
 use function Bhittani\StarRating\functions\cast;
+use function Bhittani\StarRating\functions\sanitize;
 use function Bhittani\StarRating\functions\to_shortcode;
 use Exception;
 use function kk_star_ratings as kksr;
@@ -28,7 +29,7 @@ function controller()
             throw new Exception(__('This action is forbidden.', 'kk-star-ratings'), 403);
         }
 
-        $payload = array_map('sanitize_text_field', $_POST['payload'] ?? []);
+        $payload = sanitize($_POST['payload'] ?? []);
 
         $id = intval($payload['id'] ?? 0);
         $slug = $payload['slug'] ?? 'default';
