@@ -19,17 +19,21 @@ if (! defined('KK_STAR_RATINGS')) {
 }
 
 /** Access options */
-function option(string $key, $default = null)
+function option(string $key, $default = null, array $fallback = null)
 {
+    if (is_null($fallback)) {
+        $fallback = (array) kksr('options');
+    }
+
     $prefix = kksr('nick').'_';
 
     if (strpos($key, $prefix) === 0) {
         $key = substr($key, strlen($prefix));
     }
 
-    if (is_null($default)) {
-        $default = ((array) kksr('options'))[$key] ?? null;
-    }
+    $fallbackValue = $fallback[$key] ?? null;
 
-    return get_option($prefix.$key, $default);
+    $value = get_option($prefix.$key, $default ?? $fallbackValue);
+
+    return type_cast($value, gettype($fallbackValue));
 }

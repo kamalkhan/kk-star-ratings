@@ -20,10 +20,10 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function view(string $__path, array $__payload = [], string $__base = null): string
 {
-    $__kksr = kk_star_ratings();
-    $__base = rtrim($__base ?: $__kksr['views'], '\/').'/';
-    $__view = function (string $path, array $payload = [], string $base = null) use ($__kksr, $__payload, $__base) {
-        return $__kksr['functions']['view']($path, array_merge($__payload, $payload), $base ?: $__base);
+    $__kksr = 'kk_star_ratings';
+    $__base = rtrim($__base ?: $__kksr('views'), '\/').'/';
+    $__view = function (string $path, array $payload = [], string $base = null) use ($__payload, $__base) {
+        return view($path, array_merge($__payload, $payload), $base ?: $__base);
     };
 
     $resolve = function (string $base, string $path) use ($__kksr): string {
@@ -33,7 +33,7 @@ function view(string $__path, array $__payload = [], string $__base = null): str
 
         $path = trim($path, '\/');
         $template = $base.'/'.$path;
-        $directory = $__kksr['slug'];
+        $directory = $__kksr('slug');
         $parentTheme = get_template_directory().'/'.$directory.'/'.$path;
         $childTheme = get_stylesheet_directory().'/'.$directory.'/'.$path;
 

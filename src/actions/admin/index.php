@@ -11,6 +11,7 @@
 
 namespace Bhittani\StarRating\actions\admin;
 
+use function Bhittani\StarRating\functions\sanitize;
 use function Bhittani\StarRating\functions\view;
 use InvalidArgumentException;
 use function kk_star_ratings as kksr;
@@ -27,14 +28,25 @@ function index(): void
 
     $errors = [];
     $payload = [];
+    $processed = false;
+    $nonce = kksr('functions.admin');
+    $filename = preg_replace(['/ +/', '/[^a-z0-9_]+/'], ['_', ''], strtolower($active));
 
     if (isset($_POST['submit'])) {
-        $payload = array_map('sanitize_text_field', $_POST);
-        unset($payload['submit']);
+        $processed = true;
+        $payload = sanitize($_POST);
+        unset($payload['_wpnonce'], $payload['_wp_http_referer'], $payload['submit']);
 
         try {
-            // TODO: nonce check!
+            if (wp_verify_nonce($_POST['_wpnonce'] ?? null, $nonce) === false) {
+                throw new InvalidArgumentException(__('You can only save the options via the admin.', 'kk-star-ratings'));
+            }
+
             do_action(kksr('actions.admin/save'), $payload, $active);
+
+            if ($filename) {
+                do_action(kksr('actions.admin/save/'.$filename), $payload, $active);
+            }
         } catch (InvalidArgumentException $e) {
             if (is_string($name = $e->getCode())) {
                 $errors[$name] = array_merge($errors[$name] ?? [], [$e->getMessage()]);
@@ -44,33 +56,35 @@ function index(): void
         }
     }
 
-    $content = __('No content.', 'kk-star-ratings');
+    ob_start();
+    do_action(kksr('actions.admin/content'), $errors ? $payload : null, $active);
+    $content = ob_get_clean();
 
-    if ($filename = preg_replace('/[^a-z0-9]+/', '', strtolower($active))) {
-        // $old = function (string $key = null) use ($payload) {
-        //     return is_null($key) ? $payload : ($payload[$key] ?? null);
-        // };
-
+    if ($filename) {
         ob_start();
         do_action(kksr('actions.admin/tabs/'.$filename), $errors ? $payload : null, $active);
-        $content = ob_get_clean();
+        $content .= ob_get_clean();
     }
 
-    $errorMessages = [];
+    $globalErrors = [];
 
     if ($errors) {
-        $errorMessages[] = __('There were some errors while saving the options.', 'kk-star-ratings');
+        $processed = false;
+        $globalErrors[] = __('There were some errors while saving the options.', 'kk-star-ratings');
     }
 
-    $errorMessages = array_merge($errorMessages, $errors[0] ?? []);
+    $globalErrors = array_merge($globalErrors, $errors[0] ?? []);
 
     echo view('admin/index.php', [
         'active' => $active,
         'author' => kksr('author'),
-        'author_url' => kksr('author_url'),
+        'authorUrl' => kksr('author_url'),
         'content' => $content,
-        'errors' => $errorMessages,
+        'errors' => $errors,
+        'globalErrors' => $globalErrors,
         'label' => kksr('name'),
+        'nonce' => $nonce,
+        'processed' => $processed,
         'slug' => kksr('slug'),
         'tabs' => $tabs,
         'version' => kksr('version'),

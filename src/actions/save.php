@@ -39,7 +39,7 @@ function save(float $outOf5, int $id, string $slug, array $payload): void
         // Legacy support...
         $legacySlug = $slug == 'default' ? '' : "_{$slug}";
         update_post_meta($id, '_'.kksr('nick').'_ratings'.$legacySlug, $newRatings); // < v5
-        update_post_meta($id, '_'.kksr('nick').'_casts'.$legacySlug, $newCount); // v3, v4
+        update_post_meta($id, '_'.kksr('nick').'_casts'.$legacySlug, $newCount); // < v5
         update_post_meta($id, '_'.kksr('nick').'_ref'.$legacySlug, $fingerprint); // v3, v4
         update_post_meta($id, '_'.kksr('nick').'_avg'.$legacySlug, $newRatings / $newCount); // < v3
     }

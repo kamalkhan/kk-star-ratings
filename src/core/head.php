@@ -23,18 +23,15 @@ if (! defined('KK_STAR_RATINGS')) {
 function head(): void
 {
     if (option('enable') && option('grs') && is_singular()) {
+        $best = 5;
         $id = get_post_field('ID');
         $title = esc_html(get_post_field('post_title'));
         [$count, $score] = calculate($id, 'default');
 
         if ($count && $score) {
-            $sd = '<script type="application/ld+json">'.trim(option('sd')).'</script>';
-            $sd = str_replace('{title}', $title, $sd);
-            $sd = str_replace('{best}', 5, $sd);
-            $sd = str_replace('{count}', $count, $sd);
-            $sd = str_replace('{score}', $score, $sd);
-
-            echo apply_filters(kksr('filters.sd'), $sd);
+            ob_start();
+            do_action(kksr('actions.sd'), compact('id', 'best', 'title', 'count', 'score'));
+            echo ob_get_clean();
         }
     }
 }

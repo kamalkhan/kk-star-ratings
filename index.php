@@ -76,13 +76,13 @@ function kk_star_ratings($keyOrItems = null, $default = null)
             'enable' => true,
             'exclude_categories' => [],
             'exclude_locations' => ['archives', 'home'],
-            'manual_control' => [],
-            'position' => 'top-left',
+            // 'manual_control' => [],
             'strategies' => ['archives', 'guests'],
             // Appearance
             'gap' => 5,
-            'greet' => 'Rate this {post}',
+            'greet' => 'Rate this {type}',
             'legend' => '{score}/{best} - ({count} {votes})',
+            'position' => 'top-left',
             'size' => 24,
             'stars' => 5,
             // Rich snippets

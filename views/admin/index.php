@@ -6,7 +6,17 @@
 ?>
 
 <div class="wrap">
-    <?php settings_errors(); ?>
+    <?php if ($globalErrors) : foreach ($globalErrors as $error) : ?>
+        <div class="notice notice-error">
+            <p><?= esc_html($error) ?></p>
+        </div>
+    <?php endforeach; endif; ?>
+
+    <?php if ($processed) : ?>
+        <div class="notice notice-success is-dismissible">
+            <p><?= __('Changes applied successfully.', 'kk-star-ratings') ?></p>
+        </div>
+    <?php endif; ?>
 
     <h1>
         <?= esc_html($label) ?>
@@ -15,10 +25,10 @@
             margin-left: .5rem;
             letter-spacing: -2px;
             font-family: monospace;">
-            <?= esc_html($version); ?>
+            <?= esc_html($version) ?>
         </small>
         <small>
-            by <a href="<?= $author_url ?>" target="_blank"><?= $author ?></a>
+            by <a href="<?= $authorUrl ?>" target="_blank"><?= $author ?></a>
         </small>
     </h1>
 
@@ -26,7 +36,7 @@
         <?php foreach ($tabs as $tab) : ?>
             <a class="nav-tab <?= $tab === $active ? 'nav-tab-active' : '' ?>"
                 href="<?= admin_url('admin.php?page='.esc_attr($_GET['page']).'&tab='. urlencode(esc_attr($tab))) ?>">
-                <?= esc_html($tab); ?>
+                <?= esc_html($tab) ?>
             </a>
         <?php endforeach; ?>
         <div style="float: left; margin-left: 10px;">
@@ -35,6 +45,7 @@
     </h2>
 
     <form method="POST" style="margin: 2rem;">
+        <?php wp_nonce_field($nonce) ?>
         <?= $content ?>
         <?php submit_button(); ?>
     </form>

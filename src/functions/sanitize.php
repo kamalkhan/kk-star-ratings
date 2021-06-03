@@ -9,14 +9,24 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Bhittani\StarRating\filters;
+namespace Bhittani\StarRating\functions;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
 }
 
-function sd(string $sd): string
+function sanitize($values)
 {
-    return $sd;
+    if (! is_array($values)) {
+        return sanitize_text_field($values);
+    }
+
+    $sanitized = [];
+
+    foreach ($values as $key => $value) {
+        $sanitized[sanitize($key)] = sanitize($value);
+    }
+
+    return $sanitized;
 }
