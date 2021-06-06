@@ -38,15 +38,12 @@ function option($keyOrOptions, $default = null, array $fallback = null)
         return type_cast($value, gettype($fallbackValue));
     }
 
-    foreach ($keyOrOptions as $key => $value) {
+    foreach ($keyOrOptions as $key => &$value) {
         [$prefix, $key] = explode_prefix($key);
+        $fallbackValue = $fallback[$key] ?? null;
+        $value = type_cast($value, gettype($fallbackValue));
         update_option($prefix.$key, $value);
     }
 
-    return array_combine(
-        $keys = array_keys($keyOrOptions),
-        array_map(function ($key) use ($fallback) {
-            return option($key, null, $fallback);
-        }, $keys)
-    );
+    return $keyOrOptions;
 }

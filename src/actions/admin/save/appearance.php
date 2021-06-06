@@ -18,5 +18,15 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function appearance(array $payload, string $tab): void
 {
-    // print_r(compact('tab', 'payload'));
+    $defaults = array_fill_keys([
+        'kksr_gap',
+        'kksr_greet',
+        'kksr_position',
+        'kksr_size',
+        'kksr_stars',
+    ], null);
+
+    $payload = shortcode_atts($defaults, $payload);
+
+    // option($payload);
 }

@@ -11,6 +11,8 @@
 
 namespace Bhittani\StarRating\actions\admin\save;
 
+use function Bhittani\StarRating\functions\option;
+
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
@@ -18,5 +20,14 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function general(array $payload, string $tab): void
 {
-    // print_r(compact('tab', 'payload'));
+    $defaults = array_fill_keys([
+        'kksr_enable',
+        'kksr_exclude_categories',
+        'kksr_exclude_locations',
+        'kksr_strategies',
+    ], null);
+
+    $payload = shortcode_atts($defaults, $payload);
+
+    // option($payload);
 }

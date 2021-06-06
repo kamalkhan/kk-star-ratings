@@ -14,7 +14,7 @@
 
     <?php if ($processed) : ?>
         <div class="notice notice-success is-dismissible">
-            <p><?= __('Changes applied successfully.', 'kk-star-ratings') ?></p>
+            <p><?= esc_html(__('Options saved.', 'kk-star-ratings')) ?></p>
         </div>
     <?php endif; ?>
 
@@ -28,7 +28,10 @@
             <?= esc_html($version) ?>
         </small>
         <small>
-            by <a href="<?= $authorUrl ?>" target="_blank"><?= $author ?></a>
+            by
+            <a href="<?= esc_attr($authorUrl) ?>" target="_blank">
+                <?= esc_html($author) ?>
+            </a>
         </small>
     </h1>
 

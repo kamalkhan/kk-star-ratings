@@ -22,7 +22,7 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function rich_snippets(?array $old, string $tab): void
 {
-    $get = get_hof($old, kksr('functions.option'), kksr('nick').'_');
+    $get = get_hof($old, kksr('functions.option'), kksr('nick').'_', array_map('gettype', kksr('options')));
 
     echo view('admin/tabs/rich-snippets.php', compact('old', 'tab', 'get'));
 }

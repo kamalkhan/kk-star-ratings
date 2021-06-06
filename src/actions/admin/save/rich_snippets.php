@@ -18,5 +18,12 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function rich_snippets(array $payload, string $tab): void
 {
-    // print_r(compact('tab', 'payload'));
+    $defaults = array_fill_keys([
+        'kksr_grs',
+        'kksr_sd',
+    ], null);
+
+    $payload = shortcode_atts($defaults, $payload);
+
+    // option($payload);
 }
