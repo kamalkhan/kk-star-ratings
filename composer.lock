@@ -75,16 +75,16 @@
         },
         {
             "name": "bhittani/download",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kamalkhan/download.git",
-                "reference": "241b936a505c7eb623b29d40a54905bbdb9e3457"
+                "reference": "4a8680d1355143b6f4adede9a25933ebadb6766e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kamalkhan/download/zipball/241b936a505c7eb623b29d40a54905bbdb9e3457",
-                "reference": "241b936a505c7eb623b29d40a54905bbdb9e3457",
+                "url": "https://api.github.com/repos/kamalkhan/download/zipball/4a8680d1355143b6f4adede9a25933ebadb6766e",
+                "reference": "4a8680d1355143b6f4adede9a25933ebadb6766e",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 "issues": "https://github.com/kamalkhan/download/issues",
                 "source": "https://github.com/kamalkhan/download"
             },
-            "time": "2020-04-18T11:57:22+00:00"
+            "time": "2021-06-07T09:55:25+00:00"
         },
         {
             "name": "bhittani/toaster",
@@ -138,21 +138,26 @@
             "dist": {
                 "type": "path",
                 "url": "../../../../toaster",
-                "reference": "d855be2b7952f032eb8493354ed1ba70443d7e0b"
+                "reference": "7923d8f0b792e1cfe4e639abca22c69bfc5cca35"
             },
             "require": {
                 "bhittani/container": "^0.6.0",
-                "bhittani/download": "^0.1.1",
+                "bhittani/download": "^0.2.0",
                 "bhittani/web-server": "^0.2.0",
                 "php": "^7.2",
                 "symfony/console": "^5.2"
             },
             "require-dev": {
+                "bhittani/web-browser": "^0.1.0",
                 "friendsofphp/php-cs-fixer": "^3.0",
+                "laravel/dusk": "^6.15",
                 "phpunit/phpunit": "^8.5"
             },
+            "suggest": {
+                "bhittani/web-browser": "Required for browser testing (^0.1.0)"
+            },
             "bin": [
-                "bin/install-wp-test-suite"
+                "bin/toaster"
             ],
             "type": "library",
             "extra": {
@@ -179,6 +184,21 @@
                 ],
                 "cs-check": [
                     "php-cs-fixer fix --dry-run"
+                ],
+                "install-test-suite": [
+                    "bin/toaster install:wp-test-suite"
+                ],
+                "install-chrome-driver": [
+                    "bin/toaster install:chrome-driver"
+                ],
+                "install-phantomjs-driver": [
+                    "bin/toaster install:phantomjs-driver"
+                ],
+                "install-drivers": [
+                    "bin/toaster install:chrome-driver -q & bin/toaster install:phantomjs-driver -q"
+                ],
+                "prepare": [
+                    "bin/toaster install:wp-test-suite -q & bin/toaster install:chrome-driver -q & bin/toaster install:phantomjs-driver -q"
                 ]
             },
             "license": [
