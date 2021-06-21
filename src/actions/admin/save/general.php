@@ -20,14 +20,12 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function general(array $payload, string $tab): void
 {
-    $defaults = array_fill_keys([
+    $payload += array_fill_keys([
         'kksr_enable',
         'kksr_exclude_categories',
         'kksr_exclude_locations',
         'kksr_strategies',
     ], null);
-
-    $payload = shortcode_atts($defaults, $payload);
 
     option($payload);
 }

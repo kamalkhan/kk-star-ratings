@@ -20,7 +20,7 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function appearance(array $payload, string $tab): void
 {
-    $defaults = array_fill_keys([
+    $payload += array_fill_keys([
         'kksr_gap',
         'kksr_greet',
         'kksr_legend',
@@ -28,8 +28,6 @@ function appearance(array $payload, string $tab): void
         'kksr_size',
         'kksr_stars',
     ], null);
-
-    $payload = shortcode_atts($defaults, $payload);
 
     option($payload);
 }
