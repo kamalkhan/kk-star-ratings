@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\actions\admin\save;
 
 use function Bhittani\StarRating\functions\option;
+use function Bhittani\StarRating\functions\strip_prefix;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -20,13 +21,13 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function appearance(array $payload, string $tab): void
 {
-    $payload += array_fill_keys([
-        'kksr_gap',
-        'kksr_greet',
-        'kksr_legend',
-        'kksr_position',
-        'kksr_size',
-        'kksr_stars',
+    $payload = strip_prefix($payload) + array_fill_keys([
+        'gap',
+        'greet',
+        'legend',
+        'position',
+        'size',
+        'stars',
     ], null);
 
     option($payload);
