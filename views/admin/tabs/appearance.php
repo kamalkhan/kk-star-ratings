@@ -1,6 +1,7 @@
 <?php
     $gap = $get('gap');
     $greet = $get('greet');
+    $legend = $get('legend');
     $position = $get('position');
     $size = $get('size');
     $stars = $get('stars');
@@ -21,12 +22,12 @@
         <tr>
             <th scope="row" valign="top">
                 <label for="<?= $greet[0] ?>">
-                    <?= _x('Greeting Text', 'Label', 'kk-star-ratings'); ?>
+                    <?= _x('Greeting', 'Label', 'kk-star-ratings'); ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="text" name="<?= $greet[0] ?>" id="<?= $greet[0] ?>" value="<?= $greet[1] ?>" placeholder="Rate this {type}" class="regular-text">
+                    <input type="text" name="<?= $greet[0] ?>" id="<?= $greet[0] ?>" value="<?= $greet[1] ?>" placeholder="Rate this {type}" class="regular-text" style="font-family: monospace;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
                     <?= __('Text that will be displayed when no votes have been casted.', 'kk-star-ratings') ?>
@@ -34,6 +35,33 @@
                     <?= __('The following variables are available:', 'kk-star-ratings') ?>
                     <br>
                     <?= sprintf(__('%s Post Type', 'kk-star-ratings'), '<code>{type}</code>') ?>
+                </p>
+            </td>
+        </tr>
+
+        <!-- Legend -->
+        <tr>
+            <th scope="row" valign="top">
+                <label for="<?= $legend[0] ?>">
+                    <?= _x('Legend', 'Label', 'kk-star-ratings'); ?>
+                </label>
+            </th>
+            <td>
+                <p>
+                    <input type="text" name="<?= $legend[0] ?>" id="<?= $legend[0] ?>" value="<?= $legend[1] ?>" placeholder="{score}/{best} - ({count} {votes})" class="regular-text" style="font-family: monospace;">
+                </p>
+                <p class="description" style="max-width: 22rem; margin-top: .75rem;">
+                    <?= __('Text that will be displayed when votes have been casted.', 'kk-star-ratings') ?>
+                    <br><br>
+                    <?= __('The following variables are available:', 'kk-star-ratings') ?>
+                    <br>
+                    <?= sprintf(__('%s Average ratings', 'kk-star-ratings'), '<code>{score}</code>') ?>
+                    <br>
+                    <?= sprintf(__('%s Number of votes casted', 'kk-star-ratings'), '<code>{count}</code>') ?>
+                    <br>
+                    <?= sprintf(__('%s Total amount of stars', 'kk-star-ratings'), '<code>{best} </code>') ?>
+                    <br>
+                    <?= sprintf(__('%s Votes', 'kk-star-ratings'), '<code>{votes}</code>') ?>
                 </p>
             </td>
         </tr>

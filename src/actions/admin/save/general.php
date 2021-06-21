@@ -29,5 +29,5 @@ function general(array $payload, string $tab): void
 
     $payload = shortcode_atts($defaults, $payload);
 
-    // option($payload);
+    option($payload);
 }

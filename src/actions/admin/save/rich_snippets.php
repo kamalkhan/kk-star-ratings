@@ -11,6 +11,8 @@
 
 namespace Bhittani\StarRating\actions\admin\save;
 
+use function Bhittani\StarRating\functions\option;
+
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
@@ -25,5 +27,5 @@ function rich_snippets(array $payload, string $tab): void
 
     $payload = shortcode_atts($defaults, $payload);
 
-    // option($payload);
+    option($payload);
 }

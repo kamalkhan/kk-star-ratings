@@ -31,7 +31,7 @@
             </th>
             <td>
                 <p>
-                    <textarea type="text" name="<?= $sd[0] ?>" id="<?= $sd[0] ?>" rows="12" placeholder="ld+json" class="regular-text"><?= trim($sd[1]) ?></textarea>
+                    <textarea type="text" name="<?= $sd[0] ?>" id="<?= $sd[0] ?>" rows="12" placeholder="ld+json" class="regular-text" style="font-family: monospace;"><?= trim($sd[1]) ?></textarea>
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
                     <?= __('Provide the ld+json structure.', 'kk-star-ratings') ?>

@@ -132,7 +132,7 @@
                     </p>
                 <?php endforeach ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= sprintf(__('The posts belonging to the selected categories wil not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
+                    <?= sprintf(__('The posts belonging to the selected categories will not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
                 </p>
             </td>
         </tr>
