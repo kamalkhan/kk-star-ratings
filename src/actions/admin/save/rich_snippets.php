@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\actions\admin\save;
 
 use function Bhittani\StarRating\functions\option;
+use function Bhittani\StarRating\functions\sanitize;
 use function Bhittani\StarRating\functions\strip_prefix;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -26,5 +27,9 @@ function rich_snippets(array $payload, string $tab): void
         'sd',
     ], null);
 
-    option($payload);
+    option(sanitize($payload, [
+        'sd' => function ($value) {
+            return wp_unslash(sanitize_textarea_field($value));
+        },
+    ]));
 }

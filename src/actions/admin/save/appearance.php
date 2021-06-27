@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\actions\admin\save;
 
 use function Bhittani\StarRating\functions\option;
+use function Bhittani\StarRating\functions\sanitize;
 use function Bhittani\StarRating\functions\strip_prefix;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -30,5 +31,5 @@ function appearance(array $payload, string $tab): void
         'stars',
     ], null);
 
-    option($payload);
+    option(sanitize($payload));
 }

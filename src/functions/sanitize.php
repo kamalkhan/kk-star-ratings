@@ -16,16 +16,35 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function sanitize($values)
+/** @param callable|array|null $sanitizers */
+function sanitize($values, $sanitizers = null)
 {
+    $defaultSanitizer = 'sanitize_text_field';
+
+    if (! $sanitizers) {
+        $sanitizers = 'sanitize_text_field';
+    }
+
     if (! is_array($values)) {
-        return sanitize_text_field($values);
+        $sanitizer = $sanitizers;
+
+        if (is_array($sanitizer)) {
+            $sanitizer = $defaultSanitizer;
+        }
+
+        return $sanitizer($values);
     }
 
     $sanitized = [];
 
     foreach ($values as $key => $value) {
-        $sanitized[sanitize($key)] = sanitize($value);
+        $sanitizer = $sanitizers;
+
+        if (is_array($sanitizers)) {
+            $sanitizer = $sanitizers[$key] ?? $sanitizer;
+        }
+
+        $sanitized[sanitize_text_field($key)] = sanitize($value, $sanitizer);
     }
 
     return $sanitized;

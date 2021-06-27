@@ -11,7 +11,6 @@
 
 namespace Bhittani\StarRating\actions\admin;
 
-use function Bhittani\StarRating\functions\sanitize;
 use function Bhittani\StarRating\functions\view;
 use InvalidArgumentException;
 use function kk_star_ratings as kksr;
@@ -34,7 +33,7 @@ function index(): void
 
     if (isset($_POST['submit'])) {
         $processed = true;
-        $payload = sanitize($_POST);
+        $payload = $_POST;
         unset($payload['_wpnonce'], $payload['_wp_http_referer'], $payload['submit']);
 
         try {
