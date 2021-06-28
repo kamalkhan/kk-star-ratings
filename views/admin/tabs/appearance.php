@@ -21,20 +21,20 @@
         <!-- Greet -->
         <tr>
             <th scope="row" valign="top">
-                <label for="<?= $greet[0] ?>">
-                    <?= _x('Greeting', 'Label', 'kk-star-ratings'); ?>
+                <label for="<?= esc_attr($greet[0]) ?>">
+                    <?= esc_html_x('Greeting', 'Label', 'kk-star-ratings') ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="text" name="<?= $greet[0] ?>" id="<?= $greet[0] ?>" value="<?= $greet[1] ?>" placeholder="Rate this {type}" class="regular-text" style="font-family: monospace;">
+                    <input type="text" name="<?= esc_attr($greet[0]) ?>" id="<?= esc_attr($greet[0]) ?>" value="<?= esc_attr($greet[1]) ?>" placeholder="Rate this {type}" class="regular-text" style="font-family: monospace;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Text that will be displayed when no votes have been casted.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Text that will be displayed when no votes have been casted.', 'kk-star-ratings') ?>
                     <br><br>
-                    <?= __('The following variables are available:', 'kk-star-ratings') ?>
+                    <?= esc_html__('The following variables are available:', 'kk-star-ratings') ?>
                     <br>
-                    <?= sprintf(__('%s Post Type', 'kk-star-ratings'), '<code>{type}</code>') ?>
+                    <?= sprintf(esc_html__('%s Post Type', 'kk-star-ratings'), '<code>{type}</code>') ?>
                 </p>
             </td>
         </tr>
@@ -42,26 +42,26 @@
         <!-- Legend -->
         <tr>
             <th scope="row" valign="top">
-                <label for="<?= $legend[0] ?>">
-                    <?= _x('Legend', 'Label', 'kk-star-ratings'); ?>
+                <label for="<?= esc_attr($legend[0]) ?>">
+                    <?= esc_html_x('Legend', 'Label', 'kk-star-ratings') ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="text" name="<?= $legend[0] ?>" id="<?= $legend[0] ?>" value="<?= $legend[1] ?>" placeholder="{score}/{best} - ({count} {votes})" class="regular-text" style="font-family: monospace;">
+                    <input type="text" name="<?= esc_attr($legend[0]) ?>" id="<?= esc_attr($legend[0]) ?>" value="<?= esc_attr($legend[1]) ?>" placeholder="{score}/{best} - ({count} {votes})" class="regular-text" style="font-family: monospace;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Text that will be displayed when votes have been casted.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Text that will be displayed when votes have been casted.', 'kk-star-ratings') ?>
                     <br><br>
-                    <?= __('The following variables are available:', 'kk-star-ratings') ?>
+                    <?= esc_html__('The following variables are available:', 'kk-star-ratings') ?>
                     <br>
-                    <?= sprintf(__('%s Average ratings', 'kk-star-ratings'), '<code>{score}</code>') ?>
+                    <?= sprintf(esc_html__('%s Average ratings', 'kk-star-ratings'), '<code>{score}</code>') ?>
                     <br>
-                    <?= sprintf(__('%s Number of votes casted', 'kk-star-ratings'), '<code>{count}</code>') ?>
+                    <?= sprintf(esc_html__('%s Number of votes casted', 'kk-star-ratings'), '<code>{count}</code>') ?>
                     <br>
-                    <?= sprintf(__('%s Total amount of stars', 'kk-star-ratings'), '<code>{best} </code>') ?>
+                    <?= sprintf(esc_html__('%s Total amount of stars', 'kk-star-ratings'), '<code>{best} </code>') ?>
                     <br>
-                    <?= sprintf(__('%s Votes', 'kk-star-ratings'), '<code>{votes}</code>') ?>
+                    <?= sprintf(esc_html__('%s Votes', 'kk-star-ratings'), '<code>{votes}</code>') ?>
                 </p>
             </td>
         </tr>
@@ -69,16 +69,16 @@
         <!-- Stars -->
         <tr>
             <th scope="row" valign="top">
-                <label for="<?= $stars[0] ?>">
-                    <?= _x('Stars', 'Label', 'kk-star-ratings'); ?>
+                <label for="<?= esc_attr($stars[0]) ?>">
+                    <?= esc_html_x('Stars', 'Label', 'kk-star-ratings') ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="number" name="<?= $stars[0] ?>" id="<?= $stars[0] ?>" value="<?= $stars[1] ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
+                    <input type="number" name="<?= esc_attr($stars[0]) ?>" id="<?= esc_attr($stars[0]) ?>" value="<?= esc_attr($stars[1]) ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Total number of stars.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Total number of stars.', 'kk-star-ratings') ?>
                 </p>
             </td>
         </tr>
@@ -87,15 +87,15 @@
         <tr>
             <th scope="row" valign="top">
                 <label for="<?= $gap[0] ?>">
-                    <?= _x('Gap', 'Label', 'kk-star-ratings'); ?>
+                    <?= esc_html_x('Gap', 'Label', 'kk-star-ratings'); ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="number" name="<?= $gap[0] ?>" id="<?= $gap[0] ?>" value="<?= $gap[1] ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
+                    <input type="number" name="<?= esc_attr($gap[0]) ?>" id="<?= esc_attr($gap[0]) ?>" value="<?= esc_attr($gap[1]) ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Gap between the stars.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Gap between the stars.', 'kk-star-ratings') ?>
                 </p>
             </td>
         </tr>
@@ -104,15 +104,15 @@
         <tr>
             <th scope="row" valign="top">
                 <label for="<?= $size[0] ?>">
-                    <?= _x('Size', 'Label', 'kk-star-ratings'); ?>
+                    <?= esc_html_x('Size', 'Label', 'kk-star-ratings'); ?>
                 </label>
             </th>
             <td>
                 <p>
-                    <input type="number" name="<?= $size[0] ?>" id="<?= $size[0] ?>" value="<?= $size[1] ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
+                    <input type="number" name="<?= esc_attr($size[0]) ?>" id="<?= esc_attr($size[0]) ?>" value="<?= esc_attr($size[1]) ?>" class="regular-text" style="max-width: 4rem; padding-right: 0;">
                 </p>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Size of a single star.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Size of a single star.', 'kk-star-ratings') ?>
                 </p>
             </td>
         </tr>
@@ -120,19 +120,19 @@
         <!-- Position -->
         <tr>
             <th scope="row" valign="top">
-                <?= _x('Default Position', 'Label', 'kk-star-ratings'); ?>
+                <?= esc_html_x('Default Position', 'Label', 'kk-star-ratings'); ?>
             </th>
             <td>
                 <?php foreach ($positions as $value => $label) : ?>
                     <p>
                         <label>
-                            <input type="radio" name="<?= $position[0] ?>" value="<?= $value ?>"<?= ($value ==  $position[1]) ? ' checked="checked"' : ''  ?>>
-                            <?= $label ?>
+                            <input type="radio" name="<?= esc_attr($position[0]) ?>" value="<?= esc_attr($value) ?>"<?= ($value ==  $position[1]) ? ' checked="checked"' : ''  ?>>
+                            <?= esc_html($label) ?>
                         </label>
                     </p>
                 <?php endforeach ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Choose the default position for the auto-embedded star ratings.', 'kk-star-ratings'); ?>
+                    <?= esc_html__('Choose the default position for the auto-embedded star ratings.', 'kk-star-ratings'); ?>
                 </p>
             </td>
         </tr>

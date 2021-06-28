@@ -44,15 +44,15 @@
         <!-- Status -->
         <tr>
             <th scope="row" valign="top">
-                <label for="<?= $enable[0] ?>"><?= _x('Status', 'Label', 'kk-star-ratings') ?></label>
+                <label for="<?= esc_attr($enable[0]) ?>"><?= esc_html_x('Status', 'Label', 'kk-star-ratings') ?></label>
             </th>
             <td>
                 <label>
-                    <input type="checkbox" name="<?= $enable[0] ?>" id="<?= $enable[0] ?>" value="1"<?= $enable[1] ? ' checked="checked"' : ''  ?>>
-                    <?= _x('Active', 'Label', 'kk-star-ratings') ?>
+                    <input type="checkbox" name="<?= esc_attr($enable[0]) ?>" id="<?= esc_attr($enable[0]) ?>" value="1"<?= $enable[1] ? ' checked="checked"' : ''  ?>>
+                    <?= esc_html_x('Active', 'Label', 'kk-star-ratings') ?>
                 </label>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Globally activate/deactivate the star ratings.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Globally activate/deactivate the star ratings.', 'kk-star-ratings') ?>
                 </p>
             </td>
         </tr>
@@ -60,19 +60,19 @@
         <!-- Strategies -->
         <tr>
             <th scope="row" valign="top">
-                <?= _x('Strategies', 'Label', 'kk-star-ratings') ?>
+                <?= esc_html_x('Strategies', 'Label', 'kk-star-ratings') ?>
             </th>
             <td>
                 <?php foreach ($availableStrategies as $value => $label) : ?>
                     <p>
                         <label>
-                            <input type="checkbox" name="<?= $strategies[0] ?>[]" value="<?= $value ?>"<?= (in_array($value, $strategies[1])) ? ' checked="checked"' : ''  ?>>
-                            <?= $label ?>
+                            <input type="checkbox" name="<?= esc_attr($strategies[0]) ?>[]" value="<?= esc_attr($value) ?>"<?= (in_array($value, $strategies[1])) ? ' checked="checked"' : ''  ?>>
+                            <?= esc_html($label) ?>
                         </label>
                     </p>
                 <?php endforeach; ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= __('Select the voting strategies.', 'kk-star-ratings') ?>
+                    <?= esc_html__('Select the voting strategies.', 'kk-star-ratings') ?>
                 </p>
             </td>
         </tr>
@@ -80,19 +80,19 @@
         <!-- Manual Control -->
         <!-- <tr>
             <th scope="row" valign="top">
-                <?= _x('Manual Control', 'Label', 'kk-star-ratings') ?>
+                <?= esc_html_x('Manual Control', 'Label', 'kk-star-ratings') ?>
             </th>
             <td>
                 <?php foreach ($postTypes as $type => $label) : ?>
                     <p>
                         <label>
-                            <input type="checkbox" name="<?= $manualControl[0] ?>[]" value="<?= $type ?>"<?= (in_array($type, $manualControl[1])) ? ' checked="checked"' : ''  ?>>
-                            <?= $label ?>
+                            <input type="checkbox" name="<?= esc_attr($manualControl[0]) ?>[]" value="<?= esc_attr($type) ?>"<?= (in_array($type, $manualControl[1])) ? ' checked="checked"' : ''  ?>>
+                            <?= esc_html($label) ?>
                         </label>
                     </p>
                 <?php endforeach ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= sprintf(__('Select the post types that should not auto embed the markup and will be manually controlled by the theme. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
+                    <?= sprintf(esc_html__('Select the post types that should not auto embed the markup and will be manually controlled by the theme. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
                 </p>
             </td>
         </tr> -->
@@ -100,19 +100,19 @@
         <!-- Exclude Locations -->
         <tr>
             <th scope="row" valign="top">
-                <?= _x('Exclude Locations', 'Label', 'kk-star-ratings') ?>
+                <?= esc_html_x('Exclude Locations', 'Label', 'kk-star-ratings') ?>
             </th>
             <td>
                 <?php foreach ($availableLocations as $type => $label) : ?>
                     <p>
                         <label>
-                            <input type="checkbox" name="<?= $excludeLocations[0] ?>[]" value="<?= $type ?>"<?= (in_array($type, $excludeLocations[1])) ? ' checked="checked"' : ''  ?>>
-                            <?= $label ?>
+                            <input type="checkbox" name="<?= esc_attr($excludeLocations[0]) ?>[]" value="<?= esc_attr($type) ?>"<?= (in_array($type, $excludeLocations[1])) ? ' checked="checked"' : ''  ?>>
+                            <?= esc_html($label) ?>
                         </label>
                     </p>
                 <?php endforeach ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= sprintf(__('The selected locations will not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
+                    <?= sprintf(esc_html__('The selected locations will not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
                 </p>
             </td>
         </tr>
@@ -120,19 +120,19 @@
         <!-- Exclude Categories -->
         <tr>
             <th scope="row" valign="top">
-                <?= _x('Exclude Categories', 'Label', 'kk-star-ratings') ?>
+                <?= esc_html_x('Exclude Categories', 'Label', 'kk-star-ratings') ?>
             </th>
             <td>
                 <?php foreach ($postCategories as $value => $label) : ?>
                     <p>
                         <label>
-                            <input type="checkbox" name="<?= $excludeCategories[0] ?>[]" value="<?= $value ?>"<?= (in_array($value, $excludeCategories[1])) ? ' checked="checked"' : ''  ?>>
-                            <?= $label ?>
+                            <input type="checkbox" name="<?= esc_attr($excludeCategories[0]) ?>[]" value="<?= esc_attr($value) ?>"<?= (in_array($value, $excludeCategories[1])) ? ' checked="checked"' : ''  ?>>
+                            <?= esc_html($label) ?>
                         </label>
                     </p>
                 <?php endforeach ?>
                 <p class="description" style="max-width: 22rem; margin-top: .75rem;">
-                    <?= sprintf(__('The posts belonging to the selected categories will not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
+                    <?= sprintf(esc_html__('The posts belonging to the selected categories will not auto-embed the star ratings. You may still manually show the star ratings. E.g. Using %s in your theme/template file(s).', 'kk-star-ratings'), '<code>echo kk_star_ratings();</code>') ?>
                 </p>
             </td>
         </tr>
