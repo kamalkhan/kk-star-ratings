@@ -12,6 +12,7 @@
 namespace Bhittani\StarRating\functions;
 
 use InvalidArgumentException;
+use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -20,20 +21,21 @@ if (! defined('KK_STAR_RATINGS')) {
 
 function view(string $__path, array $__payload = [], string $__base = null): string
 {
-    $__kksr = 'kk_star_ratings';
-    $__base = rtrim($__base ?: $__kksr('views'), '\/').'/';
+    $__base = rtrim($__base ?: kksr('views'), '\/').'/';
     $__view = function (string $path, array $payload = [], string $base = null) use ($__payload, $__base) {
         return view($path, array_merge($__payload, $payload), $base ?: $__base);
     };
+    $__dusk = kksr('functions.dusk_attr');
+    $__kksr = 'kk_star_ratings';
 
-    $resolve = function (string $base, string $path) use ($__kksr): string {
+    $resolve = function (string $base, string $path): string {
         if (is_file($path)) {
             return $path;
         }
 
         $path = trim($path, '\/');
         $template = $base.'/'.$path;
-        $directory = $__kksr('slug');
+        $directory = kksr('slug');
         $parentTheme = get_template_directory().'/'.$directory.'/'.$path;
         $childTheme = get_stylesheet_directory().'/'.$directory.'/'.$path;
 
