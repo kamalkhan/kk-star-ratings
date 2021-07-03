@@ -56,6 +56,8 @@ function controller()
             'ratings' => (float) apply_filters(kksr('filters.ratings'), null, $id, $slug),
         ] + $payload);
 
+        $payload['legend'] = $payload['_legend'];
+
         unset($payload['count'], $payload['score']);
 
         $html = do_shortcode(to_shortcode(kksr('slug'), $payload));

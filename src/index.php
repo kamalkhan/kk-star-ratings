@@ -29,8 +29,8 @@ add_action('wp_enqueue_scripts', kksr('core.assets'));
 add_action('wp_ajax_'.kksr('slug'), kksr('core.controller'));
 add_action('wp_ajax_nopriv_'.kksr('slug'), kksr('core.controller'));
 
-// // add_shortcode('kkratings', kksr('core.shortcode'));
-// // add_shortcode('kkstarratings', kksr('core.shortcode'));
+add_shortcode('kkratings', kksr('core.shortcode'));
+add_shortcode('kkstarratings', kksr('core.shortcode'));
 add_shortcode('kk-star-ratings', kksr('core.shortcode'));
 
 add_action('the_content', kksr('core.content'));

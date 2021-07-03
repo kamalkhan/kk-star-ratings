@@ -40,6 +40,7 @@ function response(array $payload): string
     $payload = apply_filters(kksr('filters.payload'), $payload);
 
     $payload['greet'] = str_replace('{type}', get_post_type($payload['id']) ?: 'post', $payload['greet']);
+    $payload['_legend'] = $payload['legend'];
     $payload['legend'] = str_replace('{best}', $payload['best'], $payload['legend']);
     $payload['legend'] = str_replace('{count}', $payload['count'], $payload['legend']);
     $payload['legend'] = str_replace('{score}', $payload['score'], $payload['legend']);

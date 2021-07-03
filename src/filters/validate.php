@@ -32,16 +32,16 @@ function validate(?bool $valid, int $id, string $slug, array $payload): bool
 
     $strategies = (array) option('strategies');
 
-    if (($payload['is_archive'] ?? false)
+    if (is_archive()
         && ! in_array('archives', $strategies)
     ) {
-        throw new Exception(__('Casting a vote in archives is not allowed.', 'kk-star-ratings'));
+        throw new Exception(__('You can not cast a vote in archives.', 'kk-star-ratings'));
     }
 
     if (! (is_user_logged_in()
         || in_array('guests', $strategies)
     )) {
-        throw new Exception(__('You are not authenticated to cast a vote.', 'kk-star-ratings'), 401);
+        throw new Exception(__('You need to be authenticated to cast a vote.', 'kk-star-ratings'), 401);
     }
 
     $fingerprint = apply_filters(kksr('filters.fingerprint'), null, $id, $slug);

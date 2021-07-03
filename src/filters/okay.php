@@ -44,6 +44,10 @@ function okay(?bool $okay, int $id, string $slug, array $payload): bool
         return false;
     }
 
+    if ($payload['explicit'] ?? false) {
+        return true;
+    }
+
     $status = apply_filters(kksr('filters.status'), null, $id, $slug);
 
     if ($status == 'disable') {
@@ -59,12 +63,6 @@ function okay(?bool $okay, int $id, string $slug, array $payload): bool
     if (in_array($type, (array) $excludedLocations)) {
         return false;
     }
-
-    // if (! ($payload['explicit'] ?? false)
-    //     && in_array($type, (array) option('manual_control'))
-    // ) {
-    //     return false;
-    // }
 
     $categories = array_map(function ($category) {
         return $category->term_id;
