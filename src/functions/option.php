@@ -38,13 +38,11 @@ function option($keyOrOptions, $default = null, array $fallback = null)
         return type_cast($value, gettype($fallbackValue));
     }
 
-    foreach ($keyOrOptions as $key => &$value) {
+    foreach ($keyOrOptions as $key => $value) {
         [$prefix, $key] = explode_prefix($key);
         $fallbackValue = $fallback[$key] ?? null;
         $type = gettype($fallbackValue);
         $value = type_cast($value, $type == 'boolean' ? 'integer' : $type);
         update_option($prefix.$key, $value);
     }
-
-    return $keyOrOptions;
 }

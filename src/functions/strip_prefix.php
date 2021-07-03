@@ -18,15 +18,15 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-/** @param string|array */
-function strip_prefix($keyOrItems, string $prefix = null)
+/** @param string|array $keyOrArray */
+function strip_prefix($keyOrArray, string $prefix = null)
 {
-    if (is_array($keyOrItems)) {
+    if (is_array($keyOrArray)) {
         return array_combine(
             array_map(function ($key) use ($prefix) {
                 return strip_prefix($key, $prefix);
-            }, array_keys($keyOrItems)),
-            array_values($keyOrItems)
+            }, array_keys($keyOrArray)),
+            array_values($keyOrArray)
         );
     }
 
@@ -34,7 +34,7 @@ function strip_prefix($keyOrItems, string $prefix = null)
         $prefix = kksr('nick').'_';
     }
 
-    $key = $keyOrItems;
+    $key = $keyOrArray;
 
     if (strpos($key, $prefix) !== 0) {
         return $key;

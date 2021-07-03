@@ -21,6 +21,8 @@ function type_cast($value, string $type)
     switch ($type) {
         case 'array': return (array) $value;
         case 'boolean': return (bool) $value;
+        case 'double': return (float) $value;
+        case 'float': return (float) $value;
         case 'integer': return (int) $value;
         case 'string': return (string) $value;
     }

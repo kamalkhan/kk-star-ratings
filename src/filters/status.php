@@ -11,7 +11,7 @@
 
 namespace Bhittani\StarRating\filters;
 
-use function kk_star_ratings as kksr;
+use function Bhittani\StarRating\functions\post_meta;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -24,5 +24,5 @@ function status(?string $status, int $id, string $slug): string
         return $status;
     }
 
-    return get_post_meta($id, '_'.kksr('nick').'_status_'.$slug, true);
+    return post_meta($id, "status_{$slug}");
 }

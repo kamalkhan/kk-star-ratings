@@ -11,7 +11,7 @@
 
 namespace Bhittani\StarRating\filters;
 
-use function kk_star_ratings as kksr;
+use function Bhittani\StarRating\functions\post_meta;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
@@ -24,5 +24,5 @@ function unique(?bool $bool, string $fingerprint, int $id, string $slug): bool
         return $bool;
     }
 
-    return ! in_array($fingerprint, get_post_meta($id, '_'.kksr('nick').'_fingerprint_'.$slug));
+    return ! in_array($fingerprint, post_meta($id, "fingerprint_{$slug}[]"));
 }

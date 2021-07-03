@@ -18,7 +18,7 @@ if (! defined('KK_STAR_RATINGS')) {
     exit();
 }
 
-function explode_prefix(string $key, string $prefix = null)
+function explode_prefix(string $key, string $prefix = null): array
 {
     if (is_null($prefix)) {
         $prefix = kksr('nick').'_';

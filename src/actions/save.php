@@ -11,6 +11,7 @@
 
 namespace Bhittani\StarRating\actions;
 
+use function Bhittani\StarRating\functions\post_meta;
 use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
@@ -30,17 +31,22 @@ function save(float $outOf5, int $id, string $slug, array $payload): void
         $newCount = $count + 1;
         $newRatings = $ratings + $outOf5;
 
-        update_post_meta($id, '_'.kksr('nick').'_count_'.$slug, $newCount);
-        update_post_meta($id, '_'.kksr('nick').'_ratings_'.$slug, $newRatings);
-
         $fingerprint = apply_filters(kksr('filters.fingerprint'), null, $id, $slug);
-        add_post_meta($id, '_'.kksr('nick').'_fingerprint_'.$slug, $fingerprint);
+
+        post_meta($id, [
+            "count_{$slug}" => $newCount,
+            "ratings_{$slug}" => $newRatings,
+            "fingerprint_{$slug}[]" => $fingerprint,
+        ]);
 
         // Legacy support...
         $legacySlug = $slug == 'default' ? '' : "_{$slug}";
-        update_post_meta($id, '_'.kksr('nick').'_ratings'.$legacySlug, $newRatings); // < v5
-        update_post_meta($id, '_'.kksr('nick').'_casts'.$legacySlug, $newCount); // < v5
-        update_post_meta($id, '_'.kksr('nick').'_ref'.$legacySlug, $fingerprint); // v3, v4
-        update_post_meta($id, '_'.kksr('nick').'_avg'.$legacySlug, $newRatings / $newCount); // < v3
+
+        post_meta($id, [
+            "casts{$legacySlug}" => $newCount, // < v5
+            "ratings{$legacySlug}" => $newRatings, // < v5
+            "ref{$legacySlug}[]" => $fingerprint, // v3, v4
+            "avg{$legacySlug}" => $newRatings / $newCount, // < v3
+        ]);
     }
 }

@@ -71,6 +71,12 @@ function kk_star_ratings($keyOrItems = null, $default = null)
     ] + [
         // Options
         'views' => $path.'views/',
+        'post_meta' => [
+            'count_*' => 0,
+            'fingerprint_*[]' => '',
+            'ratings_*' => 0.0,
+            'status_*' => '',
+        ],
         'options' => [
             // General
             'enable' => true,

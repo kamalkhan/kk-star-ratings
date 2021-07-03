@@ -9,20 +9,16 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Bhittani\StarRating\filters;
+namespace Bhittani\StarRating\functions;
 
-use function Bhittani\StarRating\functions\post_meta;
+use function kk_star_ratings as kksr;
 
 if (! defined('KK_STAR_RATINGS')) {
     http_response_code(404);
     exit();
 }
 
-function ratings(?float $ratings, int $id, string $slug): float
+function explode_meta_prefix(string $key, string $prefix = null): array
 {
-    if (! is_null($ratings)) {
-        return $ratings;
-    }
-
-    return (float) post_meta($id, "ratings_{$slug}");
+    return explode_prefix($key, is_null($prefix) ? ('_'.kksr('nick').'_') : $prefix);
 }
