@@ -35,8 +35,6 @@ function content(string $content): string
 
     $align = 'left';
     $explicit = false;
-    $id = get_the_ID();
-    $slug = 'default';
     $valign = 'top';
 
     $position = option('position');
@@ -44,12 +42,14 @@ function content(string $content): string
     if (strpos($position, 'top-') === 0) {
         $valign = 'top';
         $align = substr($position, 4);
-    } elseif (strpos($position, 'bottom-') === 0) {
+    }
+
+    if (strpos($position, 'bottom-') === 0) {
         $valign = 'bottom';
         $align = substr($position, 7);
     }
 
-    $starRatings = to_shortcode(kksr('slug'), compact('align', 'explicit', 'id', 'slug', 'valign'));
+    $starRatings = to_shortcode(kksr('slug'), compact('align', 'explicit', 'valign'));
 
     if ($valign == 'top') {
         return $starRatings.$content;
