@@ -20,7 +20,7 @@ if (! defined('KK_STAR_RATINGS')) {
 
 require_once __DIR__.'/hooks.php';
 
-add_action('plugins_loaded', kk_star_ratings('core.kernel'));
+add_action('plugins_loaded', kksr('core.kernel'));
 
 add_action('wp_head', kksr('core.head'));
 
