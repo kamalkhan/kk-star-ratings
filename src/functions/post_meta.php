@@ -46,11 +46,10 @@ function post_meta($id, $keyOrOptions, $default = null, array $fallback = null)
         if (is_null($default)) {
             $default = $fallbackValue;
         }
-        $value = $default; //$isSingle ? $default : ((array) $default);
+        $value = $default;
         if (get_post_meta($id, $prefix.$key)) {
             $value = get_post_meta($id, $prefix.$key, $isSingle);
         }
-
         if (! $isSingle) {
             return (array) ($value ?: null);
         }

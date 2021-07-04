@@ -28,7 +28,7 @@ function index(): void
     $errors = [];
     $payload = [];
     $processed = false;
-    $nonce = kksr('functions.admin');
+    $nonce = __FUNCTION__;
     $filename = preg_replace(['/ +/', '/[^a-z0-9_]+/'], ['_', ''], strtolower($active));
 
     if (isset($_POST['submit'])) {

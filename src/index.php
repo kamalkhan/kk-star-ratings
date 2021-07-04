@@ -38,3 +38,8 @@ add_action('the_content', kksr('core.content'));
 // admin
 
 add_action('admin_menu', kksr('core.admin'));
+
+// Metabox
+
+add_action('add_meta_boxes', kksr('core.metabox'), 10, 2);
+add_action('save_post', kksr('core.save_metabox'));
