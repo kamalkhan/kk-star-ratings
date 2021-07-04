@@ -5,13 +5,17 @@
     $manualControl = $get('manual_control');
     $strategies = $get('strategies');
 
-    $postTypes = ['post' => 'Posts', 'page' => 'Pages'];
-    foreach (get_post_types([
+    $postTypes = [
+        'post' => 'Posts',
+        'page' => 'Pages'
+    ] + array_reduce(get_post_types([
         'publicly_queryable' => true,
         '_builtin' => false,
-    ], 'objects') as $postType) {
+    ], 'objects'), function ($postTypes, $postType) {
         $postTypes[$postType->name] = $postType->labels->name;
-    }
+
+        return $postTypes;
+    }, []);
 
     $postCategories = array_reduce(get_terms([
         'taxonomy' => 'category',
