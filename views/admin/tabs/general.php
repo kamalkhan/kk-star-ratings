@@ -10,10 +10,7 @@
         'publicly_queryable' => true,
         '_builtin' => false,
     ], 'objects') as $postType) {
-        $postTypes[] = [
-            'value' => $postType->name,
-            'label' => $postType->labels->name,
-        ];
+        $postTypes[$postType->name] = $postType->labels->name;
     }
 
     $postCategories = array_reduce(get_terms([
