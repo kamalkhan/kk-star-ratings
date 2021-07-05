@@ -26,7 +26,5 @@ function index(?string $type, WP_Post $post = null): void
     do_action(kksr('actions.metabox/content'), $type, $post);
     $content = ob_get_clean();
 
-    echo view('metabox/index.php', [
-        'content' => $content,
-    ]);
+    echo view('metabox/index.php', compact('content'));
 }
