@@ -30,4 +30,19 @@ function save($id, array $payload): void
             $statusFieldName => sanitize($status),
         ]);
     }
+
+    [$resetPrefix, $resetFieldName] = explode_meta_prefix('reset');
+    $resetField = $resetPrefix.$resetFieldName;
+
+    if ($payload[$resetField] ?? false) {
+        delete_post_meta($id, implode('', explode_meta_prefix('count_default')));
+        delete_post_meta($id, implode('', explode_meta_prefix('ratings_default')));
+        delete_post_meta($id, implode('', explode_meta_prefix('fingerprint_default')));
+
+        // Legacy support
+        delete_post_meta($id, implode('', explode_meta_prefix('casts'))); // < v5
+        delete_post_meta($id, implode('', explode_meta_prefix('ratings'))); // < v5
+        delete_post_meta($id, implode('', explode_meta_prefix('ref'))); // v3, v4
+        delete_post_meta($id, implode('', explode_meta_prefix('avg'))); // < v3
+    }
 }
