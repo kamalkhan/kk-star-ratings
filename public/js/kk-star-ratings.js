@@ -64,4 +64,14 @@ jQuery(document).ready(function ($) {
     $('.kk-star-ratings').each(function () {
         apply($(this))
     });
+    
+    // Allow to be called after being load via Ajax
+    window.kkstarratings = function(el){
+	    $(el).each(function () {
+		   	if(!el.selector === '.kk-star-ratings'){
+			   	return false;
+		   	}
+	      	apply($(this))
+	    });
+    };
 });
